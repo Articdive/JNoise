@@ -3,6 +3,7 @@ version = "1.0-SNAPSHOT"
 
 plugins {
     java
+    id("maven-publish")
 }
 
 repositories {
@@ -26,4 +27,24 @@ tasks {
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "de.articdive"
+            artifactId = "jnoise"
+            version = "${project.version}"
+
+            from(components["java"])
+        }
+    }
+    repositories {
+        maven {
+            name = "Articdive-Nexus-OSS-3-Repository"
+            val releasesRepoUrl = "https://repo.articdive.de/repository/maven-releases"
+            val snapshotsRepoUrl = "https://repo.articdive.de/repository/maven-snapshots"
+            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+        }
+    }
 }
