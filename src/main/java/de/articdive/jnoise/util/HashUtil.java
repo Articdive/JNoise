@@ -21,12 +21,14 @@ package de.articdive.jnoise.util;
 /**
  * @author Lukas Mansour
  */
-public class HashUtil {
+public final class HashUtil {
     public static final int X_PRIME = 1619;
     public static final int Y_PRIME = 31337;
     public static final int Z_PRIME = 6971;
     public static final int W_PRIME = 1013;
-    
+    private HashUtil() {
+        
+    }
     
     public static int hash1D(int seed, int x) {
         int hash = seed ^ (X_PRIME * x);

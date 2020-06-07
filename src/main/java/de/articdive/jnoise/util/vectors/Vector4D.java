@@ -21,7 +21,7 @@ package de.articdive.jnoise.util.vectors;
 /**
  * @author Lukas Mansour
  */
-public class Vector4D {
+public final class Vector4D {
     private final double x;
     private final double y;
     private final double z;
