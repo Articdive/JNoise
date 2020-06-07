@@ -45,6 +45,10 @@ publishing {
             val releasesRepoUrl = "https://repo.articdive.de/repository/maven-releases"
             val snapshotsRepoUrl = "https://repo.articdive.de/repository/maven-snapshots"
             url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+            credentials {
+                username="${project.properties["repository_username"]}"
+                password="${project.properties["repository_password"]}"
+            }
         }
     }
 }
