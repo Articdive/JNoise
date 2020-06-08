@@ -19,6 +19,7 @@
 package de.articdive.jnoise.noise.value;
 
 import de.articdive.jnoise.JNoise;
+import de.articdive.jnoise.api.Interpolation;
 import de.articdive.jnoise.api.NoiseBuilder;
 import de.articdive.jnoise.interpolation.InterpolationType;
 import org.jetbrains.annotations.NotNull;
@@ -27,27 +28,27 @@ import org.jetbrains.annotations.NotNull;
  * @author Lukas Mansour
  */
 public final class ValueNoiseBuilder extends NoiseBuilder<ValueNoiseBuilder> {
-    private InterpolationType interpolationType = InterpolationType.LINEAR;
+    private Interpolation interpolation = InterpolationType.LINEAR;
     private double frequency = 1.00;
-    
+
     @NotNull
     @Override
     protected ValueNoiseBuilder self() {
         return this;
     }
-    
+
     /**
      * Sets the Interpolation for the {@link ValueNoiseGenerator}
      *
-     * @param interpolationType The new {@link InterpolationType} for the {@link ValueNoiseGenerator}
+     * @param interpolation The new {@link Interpolation} for the {@link ValueNoiseGenerator}
      * @return {@link ValueNoiseBuilder} this
      */
     @NotNull
-    public ValueNoiseBuilder setInterpolationType(@NotNull InterpolationType interpolationType) {
-        this.interpolationType = interpolationType;
+    public ValueNoiseBuilder setInterpolation(@NotNull Interpolation interpolation) {
+        this.interpolation = interpolation;
         return this;
     }
-    
+
     /**
      * Sets the frequency for the {@link ValueNoiseGenerator}.
      *
@@ -62,10 +63,10 @@ public final class ValueNoiseBuilder extends NoiseBuilder<ValueNoiseBuilder> {
         this.frequency = frequency;
         return this;
     }
-    
+
     @Override
     @NotNull
     public JNoise build() {
-        return JNoise.build(new ValueNoiseGenerator(seed, interpolationType, frequency));
+        return JNoise.build(new ValueNoiseGenerator(seed, interpolation, frequency));
     }
 }

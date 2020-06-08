@@ -30,22 +30,34 @@ public enum InterpolationType implements Interpolation {
             return a + x * (b - a);
         }
     },
-    LINEAR_PRECISE {
-        @Override
-        public double lerp(double x, double a, double b) {
-            return (1 - x) * a + x * b;
-        }
-    },
     COSINE {
         @Override
         public double lerp(double x, double a, double b) {
             return a + ((1.0 - Math.cos(x * Math.PI)) / 2.0) * (b - a);
         }
     },
-    NEAREST_NEIGHBOUR {
+    QUADRATIC {
         @Override
         public double lerp(double x, double a, double b) {
-            return x < 0.5 ? a : b;
+            return a + (b - a) * x * x;
+        }
+    },
+    CUBIC {
+        @Override
+        public double lerp(double x, double a, double b) {
+            return a + (b - a) * x * x * x;
+        }
+    },
+    QUARTIC {
+        @Override
+        public double lerp(double x, double a, double b) {
+            return a + (b - a) * x * x * x * x;
+        }
+    },
+    QUINTIC {
+        @Override
+        public double lerp(double x, double a, double b) {
+            return a + (b - a) * x * x * x * x * x;
         }
     }
 }
