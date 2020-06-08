@@ -26,40 +26,41 @@ public final class HashUtil {
     public static final int Y_PRIME = 31337;
     public static final int Z_PRIME = 6971;
     public static final int W_PRIME = 1013;
+
     private HashUtil() {
-        
+
     }
-    
+
     public static int hash1D(int seed, int x) {
         int hash = seed ^ (X_PRIME * x);
-        
+
         return finalizeHash(hash);
     }
-    
+
     public static int hash2D(int seed, int x, int y) {
         int hash = seed ^ (X_PRIME * x);
         hash ^= (Y_PRIME * y);
-        
+
         return finalizeHash(hash);
     }
-    
+
     public static int hash3D(int seed, int x, int y, int z) {
         int hash = seed ^ (X_PRIME * x);
         hash ^= (Y_PRIME * y);
         hash ^= (Z_PRIME * z);
-        
+
         return finalizeHash(hash);
     }
-    
+
     public static int hash4D(int seed, int x, int y, int z, int w) {
         int hash = seed ^ (X_PRIME * x);
         hash ^= (Y_PRIME * y);
         hash ^= (Z_PRIME * z);
         hash ^= (W_PRIME * w);
-        
+
         return finalizeHash(hash);
     }
-    
+
     private static int finalizeHash(int hash) {
         hash = hash * hash * hash * 60493;
         return (hash >> 13) ^ hash;

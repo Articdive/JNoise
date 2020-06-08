@@ -39,7 +39,7 @@ public abstract class NoiseBuilder<SELF extends NoiseBuilder<SELF>> {
         this.seed = seed;
         return self();
     }
-    
+
     /**
      * For default methods to return the correct builder this method must be defined.
      *
