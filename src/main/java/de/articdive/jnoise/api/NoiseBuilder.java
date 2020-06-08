@@ -35,7 +35,7 @@ public abstract class NoiseBuilder<SELF extends NoiseBuilder<SELF>> {
      * @return {@link NoiseBuilder}
      */
     @NotNull
-    public final SELF setSeed(int seed) {
+    public SELF setSeed(int seed) {
         this.seed = seed;
         return self();
     }

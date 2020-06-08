@@ -50,7 +50,7 @@ Normally if you are using an IDE, the code-completition is intuitive enough to u
 
 Example: Creating a Noise-Generator using Perlin Noise with Cosine Interpolation.
 ```java
-        JNoise perlinCosine = JNoise.newBuilder().perlin().setInterpolationType(InterpolationType.COSINE).setSeed(1729).build();
+        JNoise perlinCosine = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.COSINE).setSeed(1729).build();
 ```
 
 ### Getting Normal Noise Values
@@ -60,16 +60,16 @@ All Noise Implementations support 2D,3D and 4D noise.
 
 Example: Getting 1D Perlin-Noise:
 ```java
-    private double getNoise(double x) {
-        JNoise perlinLinear = JNoise.newBuilder().perlin().setInterpolationType(InterpolationType.LINEAR).setSeed(1629).build();
+    public JNoise perlinLinear = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.LINEAR).setSeed(1629).build();
+    public double getNoise(double x) {
         // 1D Noise
         return perlinLinear.getNoise(x)
     }
 ```
 Example: Getting 2D Perlin-Noise:
 ```java
-    private double getNoise(double x, double y) {
-        JNoise perlinLinear = JNoise.newBuilder().perlin().setInterpolationType(InterpolationType.LINEAR).setSeed(1629).build();
+    public JNoise perlinLinear = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.LINEAR).setSeed(1629).build();
+    public double getNoise(double x, double y) {
         // 2D Noise
         return perlinLinear.getNoise(x, y)
     }
@@ -80,7 +80,9 @@ In this case way to get Noise values is the exact same (using getNoise()), excep
 
 Example: Creating a Noise-Generator using Octavated Perlin Noise with Cosine Interpolation.
 ```java
-    JNoise perlinCosine = JNoise.newBuilder().octavePerlin().setInterpolationType(InterpolationType.COSINE).setSeed(1629).setOctaves(4).setPersistence(0.5).setLacunarity(0.5).build();
+        public JNoise octavatedPerlin = JNoise.newBuilder().octavated().setNoise(
+            JNoise.newBuilder().perlin().setInterpolation(InterpolationType.COSINE).setSeed(1629).build()
+        ).setOctaves(4).setPersistence(0.5).setLacunarity(0.5).build();
 ```
 
 ## Maintainers

@@ -30,13 +30,21 @@ public final class OctaveNoiseBuilder extends NoiseBuilder<OctaveNoiseBuilder> {
     private int octaves = 1;
     private double persistence = 1;
     private double lacunarity = 1;
-    
+
     @Override
     @NotNull
     protected OctaveNoiseBuilder self() {
         return this;
     }
-    
+
+    @NotNull
+    @Override
+    public OctaveNoiseBuilder setSeed(int seed) {
+        throw new UnsupportedOperationException(
+            "Octavted noise does not support a seed as it inherits it from the provided noise"
+        );
+    }
+
     /**
      * Sets the noise that will be octavated.
      * .
@@ -48,7 +56,7 @@ public final class OctaveNoiseBuilder extends NoiseBuilder<OctaveNoiseBuilder> {
         this.noise = noise;
         return this;
     }
-    
+
     /**
      * Sets the amount of octaves for the {@link OctaveNoiseGenerator}.
      *
@@ -63,7 +71,7 @@ public final class OctaveNoiseBuilder extends NoiseBuilder<OctaveNoiseBuilder> {
         this.octaves = octaves;
         return this;
     }
-    
+
     /**
      * Sets the persistence for the {@link OctaveNoiseGenerator}.
      *
@@ -78,7 +86,7 @@ public final class OctaveNoiseBuilder extends NoiseBuilder<OctaveNoiseBuilder> {
         this.persistence = persistence;
         return this;
     }
-    
+
     /**
      * Sets the lacunarity for the {@link OctaveNoiseGenerator}.
      *
@@ -93,11 +101,14 @@ public final class OctaveNoiseBuilder extends NoiseBuilder<OctaveNoiseBuilder> {
         this.lacunarity = lacunarity;
         return this;
     }
-    
-    
+
+
     @Override
     @NotNull
     public JNoise build() {
+        if (noise == null) {
+            throw new NullPointerException("A noise implementation to octavated has not been specified!");
+        }
         return JNoise.build(new OctaveNoiseGenerator(seed, noise, octaves, persistence, lacunarity));
     }
 }

@@ -20,6 +20,7 @@ package de.articdive.jnoise;
 
 import de.articdive.jnoise.api.NoiseGenerator;
 import de.articdive.jnoise.noise.combined.CombinedNoiseBuilder;
+import de.articdive.jnoise.noise.octaved.OctaveNoiseBuilder;
 import de.articdive.jnoise.noise.opensimplex.OpenSimplexBuilder;
 import de.articdive.jnoise.noise.perlin.PerlinNoiseBuilder;
 import de.articdive.jnoise.noise.value.ValueNoiseBuilder;
@@ -31,11 +32,11 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class JNoise {
     private final NoiseGenerator noiseGenerator;
-    
+
     private JNoise(NoiseGenerator noiseGenerator) {
         this.noiseGenerator = noiseGenerator;
     }
-    
+
     /**
      * Evaluates the noise at a 1D point.
      *
@@ -45,7 +46,7 @@ public final class JNoise {
     public double getNoise(double x) {
         return noiseGenerator.evaluateNoise(x);
     }
-    
+
     /**
      * Evaluates the noise at a 2D point.
      *
@@ -56,7 +57,7 @@ public final class JNoise {
     public double getNoise(double x, double y) {
         return noiseGenerator.evaluateNoise(x, y);
     }
-    
+
     /**
      * Evaluates the noise at a 3D point.
      *
@@ -68,7 +69,7 @@ public final class JNoise {
     public double getNoise(double x, double y, double z) {
         return noiseGenerator.evaluateNoise(x, y, z);
     }
-    
+
     /**
      * Evaluates the noise at a 4D point.
      *
@@ -81,44 +82,49 @@ public final class JNoise {
     public double getNoise(double x, double y, double z, double w) {
         return noiseGenerator.evaluateNoise(x, y, z, w);
     }
-    
+
     @NotNull
     public static JNoise build(@NotNull NoiseGenerator generator) {
         return new JNoise(generator);
     }
-    
+
     @NotNull
     public static JNoiseBuilder newBuilder() {
         return new JNoiseBuilder();
     }
-    
+
     public static final class JNoiseBuilder {
         private JNoiseBuilder() {
         }
-        
+
         @NotNull
         public PerlinNoiseBuilder perlin() {
             return new PerlinNoiseBuilder();
         }
-        
+
         @NotNull
         public WhiteNoiseBuilder white() {
             return new WhiteNoiseBuilder();
         }
-        
+
         @NotNull
         public OpenSimplexBuilder openSimplex() {
             return new OpenSimplexBuilder();
         }
-        
+
         @NotNull
         public ValueNoiseBuilder value() {
             return new ValueNoiseBuilder();
         }
-        
+
         @NotNull
         public CombinedNoiseBuilder combined() {
             return new CombinedNoiseBuilder();
+        }
+
+        @NotNull
+        public OctaveNoiseBuilder octavated() {
+            return new OctaveNoiseBuilder();
         }
     }
 }
