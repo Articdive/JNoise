@@ -6,7 +6,8 @@
 
 JNoise is a simple-to-use java-library for generating noise (including gradient noise) in Java.
 
-JNoise was created in early 2020 by Lukas Mansour (Articdive). It was created for a project in Minecraft for custom terrain generation. It works for all Java 8+ apps and is built using [Gradle](https://gradle.org/).
+JNoise was created in early 2020 by Lukas Mansour (Articdive). It was created for a project in Minecraft for custom terrain generation.
+It works for all Java 8+ apps and is built using [Gradle](https://gradle.org/).
 
 ## Table of Contents
 - [Install](#install)
@@ -55,17 +56,17 @@ dependencies {
 ## Usage
 
 ### Picking your Noise-Type.
-The JNoise library supports Perlin-, OpenSimplex-, Value- and white-noise.
+The JNoise library supports Perlin-, OpenSimplex-, Value- and white noise.
 
 It also supports octavated (fractals) versions of Perlin-, OpenSimplex-, Value- and white-noise.
 
-Every noise-type has different features, e.g. Perlin Noise supports different types of Interpolation, whereas OpenSimplex does not support Interpolation.
+Every noise-type has different features, e.g. Perlin Noise supports different types of interpolation, whereas OpenSimplex does not support interpolation.
 
 These are all documented in the respective builders/generators of the noise-type.
 
-Normally if you are using an IDE, the code-completition is intuitive enough to use this library without having to check for features.
+Normally if you are using an IDE, the code-completition is intuitive enough to use this library without having to check the source-code.
 
-Example: Creating a noise-generator using Perlin Noise with cosine Interpolation.
+Example: Creating a noise-generator using Perlin Noise with cosine interpolation.
 ```java
         JNoise perlinCosine = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.COSINE).setSeed(1729).build();
 ```
@@ -73,7 +74,7 @@ Example: Creating a noise-generator using Perlin Noise with cosine Interpolation
 ### Getting Normal Noise Values
 The Noise's dimension has to do with the amount of parameters. If you add one double after the getNoise method, you will receive 1 dimensional noise.
 
-All Noise Implementations support 2D,3D and 4D noise.
+All Noise Implementations support 2D, 3D and 4D noise.
 
 OpenSimplex Noise is the only noise-type to not support 1D noise.
 
@@ -98,7 +99,7 @@ Example: Getting 2D Perlin-Noise:
 In this case way to get noise values is the exact same (using getNoise()), except in the creation of your builder you use the octavated noise type
 and supply a noise-type to octavate.
 
-Example: Creating a noise-generator using Octavated Perlin Noise with Cosine Interpolation.
+Example: Creating a noise-generator using octavated Perlin Noise with cosine interpolation.
 ```java
         public JNoise octavatedPerlin = JNoise.newBuilder().octavated().setNoise(
             JNoise.newBuilder().perlin().setInterpolation(InterpolationType.COSINE).setSeed(1629).build()
@@ -109,7 +110,7 @@ Example: Creating a noise-generator using Octavated Perlin Noise with Cosine Int
 [@Articdive](https://www.github.com/Articdive/)
 
 ## Acknowledgements
-[@Ken Perlin](https://mrl.nyu.edu/~perlin/)'s work on Perlin Noise and Simplex Noise.
+[@Ken Perlin](https://mrl.nyu.edu/~perlin/)'s work on Perlin Noise.
 
 [@Kurt Spencer](https://www.github.com/KDotJpg)'s work on OpenSimplex Noise located [here](https://gist.github.com/KdotJPG/b1270127455a94ac5d19).
 
