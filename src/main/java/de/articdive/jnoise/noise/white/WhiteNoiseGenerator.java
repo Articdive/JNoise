@@ -28,28 +28,41 @@ import de.articdive.jnoise.util.HashUtil;
  */
 public final class WhiteNoiseGenerator extends NoiseGenerator {
     private final double[] output = new double[]{0.0, 1.0};
-    
+
     WhiteNoiseGenerator(int seed) {
         super(seed);
     }
-    
+
     @Override
     public double evaluateNoise(double x) {
         return output[HashUtil.hash1D(seed, Double.toHexString(x).hashCode()) & 1];
     }
-    
+
     @Override
     public double evaluateNoise(double x, double y) {
         return output[HashUtil.hash2D(seed, Double.toHexString(x).hashCode(), Double.toHexString(y).hashCode()) & 1];
     }
-    
+
     @Override
     public double evaluateNoise(double x, double y, double z) {
-        return output[HashUtil.hash3D(seed, Double.toHexString(x).hashCode(), Double.toHexString(y).hashCode(), Double.toHexString(z).hashCode()) & 1];
+        return output[
+            HashUtil.hash3D(
+                seed,
+                Double.toHexString(x).hashCode(),
+                Double.toHexString(y).hashCode(),
+                Double.toHexString(z).hashCode()
+            ) & 1];
     }
-    
+
     @Override
     public double evaluateNoise(double x, double y, double z, double w) {
-        return output[HashUtil.hash4D(seed, Double.toHexString(x).hashCode(), Double.toHexString(y).hashCode(), Double.toHexString(z).hashCode(), Double.toHexString(w).hashCode()) & 1];
+        return output[
+            HashUtil.hash4D(
+                seed,
+                Double.toHexString(x).hashCode(),
+                Double.toHexString(y).hashCode(),
+                Double.toHexString(z).hashCode(),
+                Double.toHexString(w).hashCode()
+            ) & 1];
     }
 }

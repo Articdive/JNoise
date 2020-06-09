@@ -2018,21 +2018,30 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
         double attn_ext0 = 2 - dx_ext0 * dx_ext0 - dy_ext0 * dy_ext0 - dz_ext0 * dz_ext0 - dw_ext0 * dw_ext0;
         if (attn_ext0 > 0) {
             attn_ext0 *= attn_ext0;
-            value += attn_ext0 * attn_ext0 * extrapolate(HashUtil.hash4D(seed, xsv_ext0, ysv_ext0, zsv_ext0, wsv_ext0), dx_ext0, dy_ext0, dz_ext0, dw_ext0);
+            value += attn_ext0 * attn_ext0 * extrapolate(
+                HashUtil.hash4D(seed, xsv_ext0, ysv_ext0, zsv_ext0, wsv_ext0),
+                dx_ext0, dy_ext0, dz_ext0, dw_ext0
+            );
         }
 
         //Second extra vertex
         double attn_ext1 = 2 - dx_ext1 * dx_ext1 - dy_ext1 * dy_ext1 - dz_ext1 * dz_ext1 - dw_ext1 * dw_ext1;
         if (attn_ext1 > 0) {
             attn_ext1 *= attn_ext1;
-            value += attn_ext1 * attn_ext1 * extrapolate(HashUtil.hash4D(seed, xsv_ext1, ysv_ext1, zsv_ext1, wsv_ext1), dx_ext1, dy_ext1, dz_ext1, dw_ext1);
+            value += attn_ext1 * attn_ext1 * extrapolate(
+                HashUtil.hash4D(seed, xsv_ext1, ysv_ext1, zsv_ext1, wsv_ext1),
+                dx_ext1, dy_ext1, dz_ext1, dw_ext1
+            );
         }
 
         //Third extra vertex
         double attn_ext2 = 2 - dx_ext2 * dx_ext2 - dy_ext2 * dy_ext2 - dz_ext2 * dz_ext2 - dw_ext2 * dw_ext2;
         if (attn_ext2 > 0) {
             attn_ext2 *= attn_ext2;
-            value += attn_ext2 * attn_ext2 * extrapolate(HashUtil.hash4D(seed, xsv_ext2, ysv_ext2, zsv_ext2, wsv_ext2), dx_ext2, dy_ext2, dz_ext2, dw_ext2);
+            value += attn_ext2 * attn_ext2 * extrapolate(
+                HashUtil.hash4D(seed, xsv_ext2, ysv_ext2, zsv_ext2, wsv_ext2),
+                dx_ext2, dy_ext2, dz_ext2, dw_ext2
+            );
         }
 
         return value / NORM_CONSTANT_4D;
