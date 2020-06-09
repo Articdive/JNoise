@@ -20,20 +20,37 @@ JNoise was created in early 2020 by Lukas Mansour (Articdive). It was created fo
 ### Maven and Gradle
 To add JNoise to your project using [Gradle](https://gradle.org/) or [Maven](http://maven.apache.org/):
 
-Repository:
+Repository (Maven):
 ```
 <repository>
     <id>articdive-nexus</id>
     <url>https://repo.articdive.de/repository/maven-public/</url>
 </repository>
 ```
-Dependency:
+Dependency (Maven):
 ```
 <dependency>
     <groupId>de.articdive</groupId>
     <artifactId>jnoise</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>VERSION</version>
 </dependency>
+```
+
+Repository (Gradle Kotlin DSL)
+```
+repositories {
+    maven {
+        name = "Articdive's nexus repository"
+        url = uri("https://repo.articdive.de/repository/maven-public/")
+    }
+}
+```
+Dependency (Gradle Kotlin DSL)
+```
+dependencies {
+    // JNoise Library
+    implementation("de.articdive:jnoise:VERSION")
+}
 ```
 ## Usage
 
