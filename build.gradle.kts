@@ -1,5 +1,5 @@
 group = "de.articdive"
-version = "1.0-SNAPSHOT"
+version = "1.0.0"
 
 plugins {
     java
@@ -42,9 +42,7 @@ publishing {
     repositories {
         maven {
             name = "Articdive-Nexus-OSS-3-Repository"
-            val releasesRepoUrl = "https://repo.articdive.de/repository/maven-releases"
-            val snapshotsRepoUrl = "https://repo.articdive.de/repository/maven-snapshots"
-            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl)
+            url = uri("https://repo.articdive.de/repository/maven-releases")
             credentials {
                 username="${project.properties["repository_username"]}"
                 password="${project.properties["repository_password"]}"
