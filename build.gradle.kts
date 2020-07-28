@@ -13,7 +13,7 @@ repositories {
 
 dependencies {
     // Jetbrains annotations
-    implementation("org.jetbrains:annotations:19.0.0")
+    compileOnly("org.jetbrains:annotations:19.0.0")
     // JUnit testing framework
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
