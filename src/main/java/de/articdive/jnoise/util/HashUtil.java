@@ -31,37 +31,31 @@ public final class HashUtil {
 
     }
 
-    public static int hash1D(int seed, int x) {
-        int hash = seed ^ (X_PRIME * x);
-
-        return finalizeHash(hash);
-    }
-
-    public static int hash2D(int seed, int x, int y) {
-        int hash = seed ^ (X_PRIME * x);
+    public static int hash2D(long seed, long x, long y) {
+        long hash = seed ^ (X_PRIME * x);
         hash ^= (Y_PRIME * y);
 
-        return finalizeHash(hash);
+        return (int) finalizeHash(hash);
     }
 
-    public static int hash3D(int seed, int x, int y, int z) {
-        int hash = seed ^ (X_PRIME * x);
+    public static int hash3D(long seed, long x, long y, long z) {
+        long hash = seed ^ (X_PRIME * x);
         hash ^= (Y_PRIME * y);
         hash ^= (Z_PRIME * z);
 
-        return finalizeHash(hash);
+        return (int) finalizeHash(hash);
     }
 
-    public static int hash4D(int seed, int x, int y, int z, int w) {
-        int hash = seed ^ (X_PRIME * x);
+    public static int hash4D(long seed, long x, long y, long z, long w) {
+        long hash = seed ^ (X_PRIME * x);
         hash ^= (Y_PRIME * y);
         hash ^= (Z_PRIME * z);
         hash ^= (W_PRIME * w);
 
-        return finalizeHash(hash);
+        return (int) finalizeHash(hash);
     }
 
-    private static int finalizeHash(int hash) {
+    private static long finalizeHash(long hash) {
         hash = hash * hash * hash * 60493;
         return (hash >> 13) ^ hash;
     }

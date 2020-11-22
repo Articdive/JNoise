@@ -18,6 +18,8 @@
 
 package de.articdive.jnoise.util.vectors;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * @author Lukas Mansour
  */
@@ -26,27 +28,31 @@ public final class Vector4D {
     private final double y;
     private final double z;
     private final double w;
-    
+
     public Vector4D(double x, double y, double z, double w) {
         this.x = x;
         this.y = y;
         this.z = z;
         this.w = w;
     }
-    
+
     public double getX() {
         return x;
     }
-    
+
     public double getY() {
         return y;
     }
-    
+
     public double getZ() {
         return z;
     }
-    
+
     public double getW() {
         return w;
+    }
+
+    public double dot(@NotNull Vector4D vector4D) {
+        return (x * vector4D.getX()) + (y * vector4D.getY()) + (z * vector4D.getZ()) + (w * vector4D.getW());
     }
 }

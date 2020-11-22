@@ -29,13 +29,8 @@ import de.articdive.jnoise.util.HashUtil;
 public final class WhiteNoiseGenerator extends NoiseGenerator {
     private final double[] output = new double[]{0.0, 1.0};
 
-    WhiteNoiseGenerator(int seed) {
+    WhiteNoiseGenerator(long seed) {
         super(seed);
-    }
-
-    @Override
-    public double evaluateNoise(double x) {
-        return output[HashUtil.hash1D(seed, Double.toHexString(x).hashCode()) & 1];
     }
 
     @Override

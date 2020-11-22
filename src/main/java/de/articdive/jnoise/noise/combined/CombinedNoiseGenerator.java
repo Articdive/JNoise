@@ -33,22 +33,13 @@ import java.util.List;
 public final class CombinedNoiseGenerator extends NoiseGenerator {
     private final List<JNoise> noises;
     private final Operator operator;
-    
-    CombinedNoiseGenerator(int seed, @NotNull List<JNoise> noises, @NotNull Operator operator) {
+
+    CombinedNoiseGenerator(long seed, @NotNull List<JNoise> noises, @NotNull Operator operator) {
         super(seed);
         this.noises = noises;
         this.operator = operator;
     }
-    
-    @Override
-    public double evaluateNoise(double x) {
-        double output = noises.get(0).getNoise(x);
-        for (int i = 1; i < noises.size(); i++) {
-            output = operator.combine(output, noises.get(i).getNoise(x));
-        }
-        return output;
-    }
-    
+
     @Override
     public double evaluateNoise(double x, double y) {
         double output = noises.get(0).getNoise(x, y);
@@ -57,7 +48,7 @@ public final class CombinedNoiseGenerator extends NoiseGenerator {
         }
         return output;
     }
-    
+
     @Override
     public double evaluateNoise(double x, double y, double z) {
         double output = noises.get(0).getNoise(x, y, z);
@@ -66,7 +57,7 @@ public final class CombinedNoiseGenerator extends NoiseGenerator {
         }
         return output;
     }
-    
+
     @Override
     public double evaluateNoise(double x, double y, double z, double w) {
         double output = noises.get(0).getNoise(x, y, z, w);

@@ -1,5 +1,5 @@
 group = "de.articdive"
-version = "1.0.0"
+version = "2.0.0-SNAPSHOT"
 
 plugins {
     java
@@ -13,10 +13,10 @@ repositories {
 
 dependencies {
     // Jetbrains annotations
-    compileOnly("org.jetbrains:annotations:19.0.0")
+    compileOnly("org.jetbrains:annotations:20.1.0")
     // JUnit testing framework
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
 }
 
 tasks {
@@ -41,11 +41,12 @@ publishing {
     }
     repositories {
         maven {
-            name = "Articdive-Nexus-OSS-3-Repository"
-            url = uri("https://repo.articdive.de/repository/maven-releases")
+            val releaseRepoUrl = "https://repo.minestom.com/repository/maven-releases"
+            val snapshotRepoUrl = "https://repo.minestom.com/repository/maven-snapshots"
+            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotRepoUrl else releaseRepoUrl)
             credentials {
-                username="${project.properties["repository_username"]}"
-                password="${project.properties["repository_password"]}"
+                username="${project.properties["MINESTOM_REPO_USERNAME"]}"
+                password="${project.properties["MINESTOM_REPO_PASSWORD"]}"
             }
         }
     }

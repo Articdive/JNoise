@@ -39,15 +39,14 @@ public final class OctaveNoiseBuilder extends NoiseBuilder<OctaveNoiseBuilder> {
 
     @NotNull
     @Override
-    public OctaveNoiseBuilder setSeed(int seed) {
+    public OctaveNoiseBuilder setSeed(long seed) {
         throw new UnsupportedOperationException(
-            "Octavted noise does not support a seed as it inherits it from the provided noise"
+            "Octavted noise does not support a seed as it inherits it from the provided noise."
         );
     }
 
     /**
      * Sets the noise that will be octavated.
-     * .
      *
      * @return {@link OctaveNoiseGenerator} this
      */

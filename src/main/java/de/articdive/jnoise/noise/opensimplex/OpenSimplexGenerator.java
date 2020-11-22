@@ -83,14 +83,9 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
     private static final double NORM_CONSTANT_4D = 30;
     private final double frequency;
 
-    OpenSimplexGenerator(int seed, double frequency) {
+    OpenSimplexGenerator(long seed, double frequency) {
         super(seed);
         this.frequency = frequency;
-    }
-
-    @Override
-    public double evaluateNoise(double x) {
-        throw new UnsupportedOperationException("OpenSimplex Noise does not have 1-Dimensional Noise!");
     }
 
     @Override
@@ -107,8 +102,8 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
         double sY = y + stretchOffset;
 
         //Floor to get grid coordinates of rhombus (stretched square) super-cell origin.
-        int isX = (int) Math.floor(sX);
-        int isY = (int) Math.floor(sY);
+        long isX = (long) Math.floor(sX);
+        long isY = (long) Math.floor(sY);
 
         //Skew out to get actual coordinates of rhombus origin. We'll need these later.
         double squishOffset = (isX + isY) * SQUISH_CONSTANT_2D;
@@ -128,7 +123,7 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
 
         //We'll be defining these inside the next block and using them afterwards.
         double dx_ext, dy_ext;
-        int xsv_ext, ysv_ext;
+        long xsv_ext, ysv_ext;
 
         double value = 0;
 
@@ -229,9 +224,9 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
         double zs = z + stretchOffset;
 
         //Floor to get simplectic honeycomb coordinates of rhombohedron (stretched cube) super-cell origin.
-        int xsb = (int) Math.floor(xs);
-        int ysb = (int) Math.floor(ys);
-        int zsb = (int) Math.floor(zs);
+        long xsb = (long) Math.floor(xs);
+        long ysb = (long) Math.floor(ys);
+        long zsb = (long) Math.floor(zs);
 
         //Skew out to get actual coordinates of rhombohedron origin. We'll need these later.
         double squishOffset = (xsb + ysb + zsb) * SQUISH_CONSTANT_3D;
@@ -255,8 +250,8 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
         //We'll be defining these inside the next block and using them afterwards.
         double dx_ext0, dy_ext0, dz_ext0;
         double dx_ext1, dy_ext1, dz_ext1;
-        int xsv_ext0, ysv_ext0, zsv_ext0;
-        int xsv_ext1, ysv_ext1, zsv_ext1;
+        long xsv_ext0, ysv_ext0, zsv_ext0;
+        long xsv_ext1, ysv_ext1, zsv_ext1;
 
         double value = 0;
         if (inSum <= 1) { //We're inside the tetrahedron (3-Simplex) at (0,0,0)
@@ -780,10 +775,10 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
         double ws = w + stretchOffset;
 
         //Floor to get simplectic honeycomb coordinates of rhombo-hypercube super-cell origin.
-        int xsb = (int) Math.floor(xs);
-        int ysb = (int) Math.floor(ys);
-        int zsb = (int) Math.floor(zs);
-        int wsb = (int) Math.floor(ws);
+        long xsb = (long) Math.floor(xs);
+        long ysb = (long) Math.floor(ys);
+        long zsb = (long) Math.floor(zs);
+        long wsb = (long) Math.floor(ws);
 
         //Skew out to get actual coordinates of stretched rhombo-hypercube origin. We'll need these later.
         double squishOffset = (xsb + ysb + zsb + wsb) * SQUISH_CONSTANT_4D;
@@ -811,9 +806,9 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
         double dx_ext0, dy_ext0, dz_ext0, dw_ext0;
         double dx_ext1, dy_ext1, dz_ext1, dw_ext1;
         double dx_ext2, dy_ext2, dz_ext2, dw_ext2;
-        int xsv_ext0, ysv_ext0, zsv_ext0, wsv_ext0;
-        int xsv_ext1, ysv_ext1, zsv_ext1, wsv_ext1;
-        int xsv_ext2, ysv_ext2, zsv_ext2, wsv_ext2;
+        long xsv_ext0, ysv_ext0, zsv_ext0, wsv_ext0;
+        long xsv_ext1, ysv_ext1, zsv_ext1, wsv_ext1;
+        long xsv_ext2, ysv_ext2, zsv_ext2, wsv_ext2;
 
         double value = 0;
         if (inSum <= 1) { //We're inside the pentachoron (4-Simplex) at (0,0,0,0)

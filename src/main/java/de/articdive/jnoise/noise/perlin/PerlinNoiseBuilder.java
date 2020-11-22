@@ -28,24 +28,12 @@ import org.jetbrains.annotations.NotNull;
  * @author Lukas Mansour
  */
 public final class PerlinNoiseBuilder extends NoiseBuilder<PerlinNoiseBuilder> {
-    private Interpolation interpolation = InterpolationType.LINEAR;
     private double frequency = 1.00;
+    private Interpolation interpolation = InterpolationType.LINEAR;
 
     @Override
     @NotNull
     protected PerlinNoiseBuilder self() {
-        return this;
-    }
-
-    /**
-     * Sets the Interpolation for the {@link PerlinNoiseGenerator}.
-     *
-     * @param interpolation The new {@link Interpolation} for the {@link PerlinNoiseGenerator}.
-     * @return {@link PerlinNoiseBuilder} this
-     */
-    @NotNull
-    public PerlinNoiseBuilder setInterpolation(@NotNull Interpolation interpolation) {
-        this.interpolation = interpolation;
         return this;
     }
 
@@ -61,6 +49,18 @@ public final class PerlinNoiseBuilder extends NoiseBuilder<PerlinNoiseBuilder> {
             throw new IllegalArgumentException("Frequency must be a non-zero positive value.");
         }
         this.frequency = frequency;
+        return this;
+    }
+
+    /**
+     * Sets the Interpolation for the {@link PerlinNoiseGenerator}.
+     *
+     * @param interpolation The new {@link Interpolation} for the {@link PerlinNoiseGenerator}.
+     * @return {@link PerlinNoiseBuilder} this
+     */
+    @NotNull
+    public PerlinNoiseBuilder setInterpolation(@NotNull Interpolation interpolation) {
+        this.interpolation = interpolation;
         return this;
     }
 

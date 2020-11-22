@@ -18,6 +18,8 @@
 
 package de.articdive.jnoise.util.vectors;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * @author Lukas Mansour
  */
@@ -25,22 +27,26 @@ public final class Vector3D {
     private final double x;
     private final double y;
     private final double z;
-    
+
     public Vector3D(double x, double y, double z) {
         this.x = x;
         this.y = y;
         this.z = z;
     }
-    
+
     public double getX() {
         return x;
     }
-    
+
     public double getY() {
         return y;
     }
-    
+
     public double getZ() {
         return z;
+    }
+
+    public double dot(@NotNull Vector3D vector3D) {
+        return (x * vector3D.getX()) + (y * vector3D.getY()) + (z * vector3D.getZ());
     }
 }

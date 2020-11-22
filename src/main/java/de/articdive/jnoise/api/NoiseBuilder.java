@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Lukas Mansour
  */
 public abstract class NoiseBuilder<SELF extends NoiseBuilder<SELF>> {
-    protected int seed = 1729;
+    protected long seed = 1729;
 
     /**
      * Sets the seed of the to-be-generated noise-generator.
@@ -35,7 +35,7 @@ public abstract class NoiseBuilder<SELF extends NoiseBuilder<SELF>> {
      * @return {@link NoiseBuilder}
      */
     @NotNull
-    public SELF setSeed(int seed) {
+    public SELF setSeed(long seed) {
         this.seed = seed;
         return self();
     }

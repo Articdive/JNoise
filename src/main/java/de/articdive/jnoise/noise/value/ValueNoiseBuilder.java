@@ -28,24 +28,12 @@ import org.jetbrains.annotations.NotNull;
  * @author Lukas Mansour
  */
 public final class ValueNoiseBuilder extends NoiseBuilder<ValueNoiseBuilder> {
-    private Interpolation interpolation = InterpolationType.LINEAR;
     private double frequency = 1.00;
+    private Interpolation interpolation = InterpolationType.LINEAR;
 
     @NotNull
     @Override
     protected ValueNoiseBuilder self() {
-        return this;
-    }
-
-    /**
-     * Sets the Interpolation for the {@link ValueNoiseGenerator}
-     *
-     * @param interpolation The new {@link Interpolation} for the {@link ValueNoiseGenerator}
-     * @return {@link ValueNoiseBuilder} this
-     */
-    @NotNull
-    public ValueNoiseBuilder setInterpolation(@NotNull Interpolation interpolation) {
-        this.interpolation = interpolation;
         return this;
     }
 
@@ -61,6 +49,18 @@ public final class ValueNoiseBuilder extends NoiseBuilder<ValueNoiseBuilder> {
             throw new IllegalArgumentException("Frequency must be a non-zero positive value.");
         }
         this.frequency = frequency;
+        return this;
+    }
+
+    /**
+     * Sets the Interpolation for the {@link ValueNoiseGenerator}
+     *
+     * @param interpolation The new {@link Interpolation} for the {@link ValueNoiseGenerator}
+     * @return {@link ValueNoiseBuilder} this
+     */
+    @NotNull
+    public ValueNoiseBuilder setInterpolation(@NotNull Interpolation interpolation) {
+        this.interpolation = interpolation;
         return this;
     }
 

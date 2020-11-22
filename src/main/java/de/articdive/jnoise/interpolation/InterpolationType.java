@@ -30,12 +30,6 @@ public enum InterpolationType implements Interpolation {
             return a + x * (b - a);
         }
     },
-    COSINE {
-        @Override
-        public double lerp(double x, double a, double b) {
-            return a + ((1.0 - Math.cos(x * Math.PI)) / 2.0) * (b - a);
-        }
-    },
     QUADRATIC {
         @Override
         public double lerp(double x, double a, double b) {
@@ -59,5 +53,11 @@ public enum InterpolationType implements Interpolation {
         public double lerp(double x, double a, double b) {
             return a + (b - a) * x * x * x * x * x;
         }
-    }
+    },
+    COSINE {
+        @Override
+        public double lerp(double x, double a, double b) {
+            return a + ((1.0 - Math.cos(x * Math.PI)) / 2.0) * (b - a);
+        }
+    },
 }

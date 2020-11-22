@@ -20,15 +20,11 @@ package de.articdive.jnoise.api;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-
 /**
  * @author Lukas Mansour
  */
 public interface Interpolation {
-    
+
     /**
      * Interpolates a value between two known values.
      *
@@ -38,7 +34,7 @@ public interface Interpolation {
      * @return an interpolated value for x.
      */
     double lerp(double x, double a, double b);
-    
+
     /**
      * Interpolates between an unknown number of values.
      * The amount of positions repsents the dimension
@@ -48,21 +44,16 @@ public interface Interpolation {
      * @param values    A list of values starting with the first stage values and going up in order.
      * @return an interpolated value between all the given positions.
      */
-    default double lerp(@NotNull LinkedList<Double> positions, @NotNull LinkedList<Double> values) {
-        if (values.size() != Math.pow(2, positions.size())) {
-            throw new IllegalArgumentException("The amount of doubles must be 2^(amount of fractals).");
+    default double lerp(@NotNull double[] positions, @NotNull double[] values) {
+        if (values.length != Math.pow(2, positions.length)) {
+            throw new IllegalArgumentException("The amount of values must be 2^(amount of fractals).");
         }
-        Map<Integer, LinkedList<Double>> map = new HashMap<>(positions.size());
-        map.put(0, values);
-        for (int i = 0; i < positions.size(); i++) {
-            LinkedList<Double> lastLevel = map.get(i);
-            LinkedList<Double> nextLevel = new LinkedList<>();
-            for (int j = 0; j < lastLevel.size(); j += 2) {
-                nextLevel.add(lerp(positions.get(i), lastLevel.get(j), lastLevel.get(j + 1)));
+        for (int i = 0; i < positions.length; i++) {
+            for (int j = 0; j < Math.pow(2, positions.length - i); j += 2) {
+                values[j / 2] = lerp(positions[i], values[j], values[j + 1]);
             }
-            map.put(i + 1, nextLevel);
         }
         // This should only have 1 element, the final value!
-        return map.get(positions.size()).get(0);
+        return values[0];
     }
 }

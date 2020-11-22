@@ -25,6 +25,7 @@ import de.articdive.jnoise.noise.opensimplex.OpenSimplexBuilder;
 import de.articdive.jnoise.noise.perlin.PerlinNoiseBuilder;
 import de.articdive.jnoise.noise.value.ValueNoiseBuilder;
 import de.articdive.jnoise.noise.white.WhiteNoiseBuilder;
+import de.articdive.jnoise.noise.worley.WorleyNoiseBuilder;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,18 +34,8 @@ import org.jetbrains.annotations.NotNull;
 public final class JNoise {
     private final NoiseGenerator noiseGenerator;
 
-    private JNoise(NoiseGenerator noiseGenerator) {
+    private JNoise(@NotNull NoiseGenerator noiseGenerator) {
         this.noiseGenerator = noiseGenerator;
-    }
-
-    /**
-     * Evaluates the noise at a 1D point.
-     *
-     * @param x The x value of the point
-     * @return A value representing the noise at the point (x), its bounds are noise-type dependant!
-     */
-    public double getNoise(double x) {
-        return noiseGenerator.evaluateNoise(x);
     }
 
     /**
@@ -125,6 +116,11 @@ public final class JNoise {
         @NotNull
         public OctaveNoiseBuilder octavated() {
             return new OctaveNoiseBuilder();
+        }
+
+        @NotNull
+        public WorleyNoiseBuilder worley() {
+            return new WorleyNoiseBuilder();
         }
     }
 }

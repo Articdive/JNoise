@@ -56,9 +56,9 @@ dependencies {
 ## Usage
 
 ### Picking your Noise-Type.
-The JNoise library supports Perlin-, OpenSimplex-, Value- and white noise.
+The JNoise library supports Perlin, OpenSimplex, Value, Worley and White noise.
 
-It also supports octavated (fractals) versions of Perlin-, OpenSimplex-, Value- and white-noise.
+It also supports octavated (fractals) versions of all noise types.
 
 Every noise-type has different features, e.g. Perlin Noise supports different types of interpolation, whereas OpenSimplex does not support interpolation.
 
@@ -72,26 +72,24 @@ Example: Creating a noise-generator using Perlin Noise with cosine interpolation
 ```
 
 ### Getting Normal Noise Values
-The Noise's dimension has to do with the amount of parameters. If you add one double after the getNoise method, you will receive 1 dimensional noise.
+The Noise's dimension has to do with the amount of parameters. If you add two doubles after the getNoise method, you will receive 2 dimensional noise.
 
 All Noise Implementations support 2D, 3D and 4D noise.
 
-OpenSimplex Noise is the only noise-type to not support 1D noise.
-
-Example: Getting 1D Perlin-Noise:
-```java
-    public JNoise perlinLinear = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.LINEAR).setSeed(1629).build();
-    public double getNoise(double x) {
-        // 1D Noise
-        return perlinLinear.getNoise(x)
-    }
-```
 Example: Getting 2D Perlin-Noise:
 ```java
     public JNoise perlinLinear = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.LINEAR).setSeed(1629).build();
     public double getNoise(double x, double y) {
-        // 2D Noise
+        // 1D Noise
         return perlinLinear.getNoise(x, y)
+    }
+```
+Example: Getting 3D Perlin-Noise:
+```java
+    public JNoise perlinLinear = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.LINEAR).setSeed(1629).build();
+    public double getNoise(double x, double y, double z) {
+        // 3D Noise
+        return perlinLinear.getNoise(x, y, z)
     }
 ```
 
@@ -113,6 +111,8 @@ Example: Creating a noise-generator using octavated Perlin Noise with cosine int
 [@Ken Perlin](https://mrl.nyu.edu/~perlin/)'s work on Perlin Noise.
 
 [@Kurt Spencer](https://www.github.com/KDotJpg)'s work on OpenSimplex Noise located [here](https://gist.github.com/KdotJPG/b1270127455a94ac5d19).
+
+[@Steve Worley](http://weber.itn.liu.se/~stegu/TNM084-2017/worley-originalpaper.pdf)'s work on Worley Noise.
 
 ## Contributing
 See [the contributing file](CONTRIBUTING.md)!

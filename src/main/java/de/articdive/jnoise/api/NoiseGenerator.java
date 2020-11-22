@@ -22,20 +22,12 @@ package de.articdive.jnoise.api;
  * @author Lukas Mansour
  */
 public abstract class NoiseGenerator {
-    protected final int seed;
-    
-    protected NoiseGenerator(int seed) {
+    protected final long seed;
+
+    protected NoiseGenerator(long seed) {
         this.seed = seed;
     }
-    
-    /**
-     * Evaluates the noise at a 1D point.
-     *
-     * @param x The x value of the point.
-     * @return A value representing the noise at the point (x), its bounds are noise-type dependant!
-     */
-    public abstract double evaluateNoise(double x);
-    
+
     /**
      * Evaluates the noise at a 2D point.
      *
@@ -44,7 +36,7 @@ public abstract class NoiseGenerator {
      * @return A value representing the noise at the point (x,y), its bounds are noise-type dependant!
      */
     public abstract double evaluateNoise(double x, double y);
-    
+
     /**
      * Evaluates the noise at a 3D point.
      *
@@ -54,7 +46,7 @@ public abstract class NoiseGenerator {
      * @return A value representing the noise at the point (x,y,z), its bounds are noise-type dependant!
      */
     public abstract double evaluateNoise(double x, double y, double z);
-    
+
     /**
      * Evaluates the noise at a 4D point.
      *
