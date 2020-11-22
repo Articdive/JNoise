@@ -43,10 +43,10 @@ publishing {
         maven {
             val releaseRepoUrl = "https://repo.minestom.com/repository/maven-releases"
             val snapshotRepoUrl = "https://repo.minestom.com/repository/maven-snapshots"
-            url = uri(if (version.toString().endsWith("SNAPSHOT")) snapshotRepoUrl else releaseRepoUrl)
+            url = uri(if (version.toString().endsWith("-SNAPSHOT")) snapshotRepoUrl else releaseRepoUrl)
             credentials {
-                username="${project.properties["MINESTOM_REPO_USERNAME"]}"
-                password="${project.properties["MINESTOM_REPO_PASSWORD"]}"
+                username= System.getenv("MINESTOM_REPO_USERNAME")
+                password= System.getenv("MINESTOM_REPO_PASSWORD")
             }
         }
     }
