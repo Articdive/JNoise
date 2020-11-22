@@ -25,6 +25,11 @@ tasks {
     }
 }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_8
 }

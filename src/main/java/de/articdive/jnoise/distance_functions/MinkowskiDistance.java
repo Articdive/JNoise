@@ -22,7 +22,7 @@ import de.articdive.jnoise.api.DistanceFunction;
 
 /**
  * Interesting distance function that will be a bit more expensive to compute (especially for large values of p)
- * Also to note: if p = 1 => Manhattan and p = 2 => EuclidianSquared, so don't use this for p = 1 and p = 2!
+ * Also to note: p = 1 is the same as Manhattan and p = 2 is the same as EuclidianSquared, so don't use this for p = 1 and p = 2!
  *
  * @author Lukas Mansour
  */

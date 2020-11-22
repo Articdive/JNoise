@@ -48,6 +48,7 @@ public final class OctaveNoiseBuilder extends NoiseBuilder<OctaveNoiseBuilder> {
     /**
      * Sets the noise that will be octavated.
      *
+     * @param noise the {@link JNoise} generator that should be octavated.
      * @return {@link OctaveNoiseGenerator} this
      */
     @NotNull

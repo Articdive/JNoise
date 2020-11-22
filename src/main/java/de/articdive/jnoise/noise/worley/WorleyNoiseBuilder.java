@@ -73,7 +73,7 @@ public final class WorleyNoiseBuilder extends NoiseBuilder<WorleyNoiseBuilder> {
      * Increasing this number can add more "features" to one area.
      * The values are clamped between 1 and 10 for performance reasons!
      *
-     * @param fpAmountFunction The new {@link LongFunction<Integer>} (feature point amount function) for the {@link WorleyNoiseGenerator}
+     * @param fpAmountFunction The new (feature point amount function) for the {@link WorleyNoiseGenerator}
      * @return {@link WorleyNoiseBuilder} this
      */
     @NotNull
