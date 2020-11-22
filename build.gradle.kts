@@ -41,9 +41,8 @@ publishing {
     }
     repositories {
         maven {
-            val releaseRepoUrl = "https://repo.minestom.com/repository/maven-releases"
-            val snapshotRepoUrl = "https://repo.minestom.com/repository/maven-snapshots"
-            url = uri(if (version.toString().endsWith("-SNAPSHOT")) snapshotRepoUrl else releaseRepoUrl)
+            name = "minestom-repo"
+            url = uri("https://repo.minestom.com/repository/maven-public")
             credentials {
                 username= System.getenv("MINESTOM_REPO_USERNAME")
                 password= System.getenv("MINESTOM_REPO_PASSWORD")
