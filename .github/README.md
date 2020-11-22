@@ -24,8 +24,8 @@ To add JNoise to your project using [Gradle](https://gradle.org/) or [Maven](htt
 Repository (Maven):
 ```
 <repository>
-    <id>articdive-nexus</id>
-    <url>https://repo.articdive.de/repository/maven-public/</url>
+    <id>minestom-repo</id>
+    <url>https://repo.minestom.com/repository/maven-public/</url>
 </repository>
 ```
 Dependency (Maven):
@@ -42,7 +42,7 @@ Repository (Gradle Kotlin DSL)
 repositories {
     maven {
         name = "Articdive's nexus repository"
-        url = uri("https://repo.articdive.de/repository/maven-public/")
+        url = uri("https://repo.minestom.com/repository/maven-public/")
     }
 }
 ```
@@ -56,7 +56,7 @@ dependencies {
 ## Usage
 
 ### Picking your Noise-Type.
-The JNoise library supports Perlin, OpenSimplex, Value, Worley and White noise.
+The JNoise library supports Perlin, OpenSimplex, value, Worley and white noise.
 
 It also supports octavated (fractals) versions of all noise types.
 

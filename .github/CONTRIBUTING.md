@@ -2,7 +2,7 @@
 #### **Did you find a bug?**
 * Open a new GitHub issue if it's not already reported.
 
-* Use the relevant bug report template to create the issue. 
+* Use the relevant bug report template to create the issue.
 
 #### **Did you write some code that fixes a bug?**
 * Open a new GitHub pull-request with the commits if it hasn't already been proposed.
@@ -20,7 +20,7 @@
 
 ## General Contribution Rules
 * By contributing to the JNoise project your code/contribution will be licensed under the [GNU GPL v3.0](../LICENSE) license.
-* Exempt from this rule are the actual algorithms e.g. OpenSimplex Noise, they keep their original licenses.
+* Exempt from this rule are the actual algorithms e.g. OpenSimplex Noise, they must keep their original licenses.
 
 JNoise is a community project. We encourage you to contribute! :)
 
