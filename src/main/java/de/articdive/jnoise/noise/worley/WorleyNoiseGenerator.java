@@ -22,8 +22,6 @@ import de.articdive.jnoise.api.DistanceFunction;
 import de.articdive.jnoise.api.NoiseGenerator;
 import de.articdive.jnoise.util.HashUtil;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.function.LongFunction;
 
@@ -37,14 +35,12 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
     private final double frequency;
     private final DistanceFunction distanceFunction;
     private final LongFunction<Integer> fpAmountFunction;
-    private final int n;
 
-    WorleyNoiseGenerator(long seed, double frequency, DistanceFunction distanceFunction, LongFunction<Integer> fpAmountFunction, int n) {
+    WorleyNoiseGenerator(long seed, double frequency, DistanceFunction distanceFunction, LongFunction<Integer> fpAmountFunction) {
         super(seed);
         this.frequency = frequency;
         this.distanceFunction = distanceFunction;
         this.fpAmountFunction = fpAmountFunction;
-        this.n = Math.max(1, Math.min(n, 9));
     }
 
     @Override
@@ -53,7 +49,7 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
         y *= frequency;
         long iX = (long) Math.floor(x);
         long iY = (long) Math.floor(y);
-        List<Double> distances = new ArrayList<>();
+        double shortestDistance = Double.MAX_VALUE;
         for (int xOffset = -1; xOffset <= 1; xOffset++) {
             long secX = iX + xOffset;
 
@@ -67,7 +63,8 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
                 Random fpRNG = new Random(hash);
 
                 for (int i = 0; i < numberFP; i++) {
-                    distances.add(
+                    shortestDistance = Math.min(
+                        shortestDistance,
                         distanceFunction.distance(
                             x,
                             y,
@@ -78,10 +75,7 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
                 }
             }
         }
-        // Skip the first (n-1) elements (If we want the closest point, we need to skip zero elements)
-        return distances.stream().sorted().skip(n - 1).findFirst()
-            // Not possible
-            .orElseThrow(() -> new IllegalStateException("Arraylist can't have zero elements!"));
+        return shortestDistance;
     }
 
     @Override
@@ -92,7 +86,7 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
         long iX = (long) Math.floor(x);
         long iY = (long) Math.floor(y);
         long iZ = (long) Math.floor(z);
-        List<Double> distances = new ArrayList<>();
+        double shortestDistance = Double.MAX_VALUE;
         for (int xOffset = -1; xOffset <= 1; xOffset++) {
             long secX = iX + xOffset;
 
@@ -107,7 +101,8 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
                     long numberFP = Math.max(1, Math.min(fpAmountFunction.apply(hash), 10));
                     Random fpRNG = new Random(hash);
                     for (int i = 0; i < numberFP; i++) {
-                        distances.add(
+                        shortestDistance = Math.min(
+                            shortestDistance,
                             distanceFunction.distance(
                                 x,
                                 y,
@@ -122,8 +117,7 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
                 }
             }
         }
-        return distances.stream().sorted().skip(n - 1).findFirst()
-            .orElseThrow(() -> new IllegalStateException("Arraylist can't have zero elements!"));
+        return shortestDistance;
     }
 
     @Override
@@ -136,7 +130,7 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
         long iY = (long) Math.floor(y);
         long iZ = (long) Math.floor(z);
         long iW = (long) Math.floor(w);
-        List<Double> distances = new ArrayList<>();
+        double shortestDistance = Double.MAX_VALUE;
         for (int xOffset = -1; xOffset <= 1; xOffset++) {
             long secX = iX + xOffset;
 
@@ -154,7 +148,8 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
                         long numberFP = Math.max(1, Math.min(fpAmountFunction.apply(hash), 10));
                         Random fpRNG = new Random(hash);
                         for (int i = 0; i < numberFP; i++) {
-                            distances.add(
+                            shortestDistance = Math.min(
+                                shortestDistance,
                                 distanceFunction.distance(
                                     x,
                                     y,
@@ -172,7 +167,6 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
                 }
             }
         }
-        return distances.stream().sorted().skip(n - 1).findFirst()
-            .orElseThrow(() -> new IllegalStateException("Arraylist can't have zero elements!"));
+        return shortestDistance;
     }
 }

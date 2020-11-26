@@ -82,23 +82,9 @@ public final class WorleyNoiseBuilder extends NoiseBuilder<WorleyNoiseBuilder> {
         return this;
     }
 
-    /**
-     * Sets the point that should be distanced to.
-     * Setting this to 1 would be the closest point, 2 the second closest, 3 the third closest and so on...
-     * N is clamped between 1 and 9 as there are only 9 *guaranteed* feature points around it.
-     *
-     * @param n The new n (distance to the nth closest point is calculated) for the {@link WorleyNoiseGenerator}.
-     * @return {@link WorleyNoiseBuilder} this
-     */
-    @NotNull
-    public WorleyNoiseBuilder setN(int n) {
-        this.n = n;
-        return this;
-    }
-
     @Override
     @NotNull
     public JNoise build() {
-        return JNoise.build(new WorleyNoiseGenerator(seed, frequency, distanceFunction, fpAmountFunction, n));
+        return JNoise.build(new WorleyNoiseGenerator(seed, frequency, distanceFunction, fpAmountFunction));
     }
 }

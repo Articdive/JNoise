@@ -45,11 +45,11 @@ public interface Interpolation {
      * @return an interpolated value between all the given positions.
      */
     default double lerp(@NotNull double[] positions, @NotNull double[] values) {
-        if (values.length != Math.pow(2, positions.length)) {
+        if (values.length != 1 << positions.length) {
             throw new IllegalArgumentException("The amount of values must be 2^(amount of fractals).");
         }
         for (int i = 0; i < positions.length; i++) {
-            for (int j = 0; j < Math.pow(2, positions.length - i); j += 2) {
+            for (int j = 0; j < ((1 << positions.length) - i); j += 2) {
                 values[j / 2] = lerp(positions[i], values[j], values[j + 1]);
             }
         }

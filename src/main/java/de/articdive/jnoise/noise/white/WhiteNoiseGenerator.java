@@ -35,29 +35,18 @@ public final class WhiteNoiseGenerator extends NoiseGenerator {
 
     @Override
     public double evaluateNoise(double x, double y) {
-        return output[HashUtil.hash2D(seed, Double.toHexString(x).hashCode(), Double.toHexString(y).hashCode()) & 1];
+        return output[HashUtil.hash2D(seed, Double.hashCode(x), Double.hashCode(y)) & 1];
     }
 
     @Override
     public double evaluateNoise(double x, double y, double z) {
         return output[
-            HashUtil.hash3D(
-                seed,
-                Double.toHexString(x).hashCode(),
-                Double.toHexString(y).hashCode(),
-                Double.toHexString(z).hashCode()
-            ) & 1];
+            HashUtil.hash3D(seed, Double.hashCode(x), Double.hashCode(y), Double.hashCode(z)) & 1];
     }
 
     @Override
     public double evaluateNoise(double x, double y, double z, double w) {
         return output[
-            HashUtil.hash4D(
-                seed,
-                Double.toHexString(x).hashCode(),
-                Double.toHexString(y).hashCode(),
-                Double.toHexString(z).hashCode(),
-                Double.toHexString(w).hashCode()
-            ) & 1];
+            HashUtil.hash4D(seed, Double.hashCode(x), Double.hashCode(y), Double.hashCode(z), Double.hashCode(w)) & 1];
     }
 }
