@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2020 Articdive (Lukas Mansour)
+ * Copyright (C) 2021 Articdive (Lukas Mansour)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ package de.articdive.jnoise.api;
 /**
  * @author Lukas Mansour
  */
-public abstract class NoiseGenerator {
+public abstract class NoiseGenerator<R extends NoiseResult> {
     protected final long seed;
 
     protected NoiseGenerator(long seed) {
@@ -35,7 +35,7 @@ public abstract class NoiseGenerator {
      * @param y The y value of the point.
      * @return A value representing the noise at the point (x,y), its bounds are noise-type dependant!
      */
-    public abstract double evaluateNoise(double x, double y);
+    public abstract R evaluateNoise(double x, double y);
 
     /**
      * Evaluates the noise at a 3D point.
@@ -45,7 +45,7 @@ public abstract class NoiseGenerator {
      * @param z The z value of the point.
      * @return A value representing the noise at the point (x,y,z), its bounds are noise-type dependant!
      */
-    public abstract double evaluateNoise(double x, double y, double z);
+    public abstract R evaluateNoise(double x, double y, double z);
 
     /**
      * Evaluates the noise at a 4D point.
@@ -56,5 +56,5 @@ public abstract class NoiseGenerator {
      * @param w The w value of the point.
      * @return A value representing the noise at the point (x,y,z,w), its bounds are noise-type dependant!
      */
-    public abstract double evaluateNoise(double x, double y, double z, double w);
+    public abstract R evaluateNoise(double x, double y, double z, double w);
 }

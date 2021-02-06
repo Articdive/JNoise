@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2020 Articdive (Lukas Mansour)
+ * Copyright (C) 2021 Articdive (Lukas Mansour)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -89,7 +89,7 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
     }
 
     @Override
-    public double evaluateNoise(double x, double y) {
+    public OpenSimplexResult evaluateNoise(double x, double y) {
         final double STRETCH_CONSTANT_2D = ((1 / Math.sqrt(2 + 1)) - 1) / 2;
         final double SQUISH_CONSTANT_2D = ((Math.sqrt(2 + 1)) - 1) / 2;
 
@@ -205,11 +205,11 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
             value += attn_ext * attn_ext * extrapolate(HashUtil.hash2D(seed, xsv_ext, ysv_ext), dx_ext, dy_ext);
         }
 
-        return value / NORM_CONSTANT_2D;
+        return new OpenSimplexResult(value / NORM_CONSTANT_2D);
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z) {
+    public OpenSimplexResult evaluateNoise(double x, double y, double z) {
         final double STRETCH_CONSTANT_3D = -1.0 / 6;
         final double SQUISH_CONSTANT_3D = 1.0 / 3;
 
@@ -754,11 +754,11 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
             value += attn_ext1 * attn_ext1 * extrapolate(HashUtil.hash3D(seed, xsv_ext1, ysv_ext1, zsv_ext1), dx_ext1, dy_ext1, dz_ext1);
         }
 
-        return value / NORM_CONSTANT_3D;
+        return new OpenSimplexResult(value / NORM_CONSTANT_3D);
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z, double w) {
+    public OpenSimplexResult evaluateNoise(double x, double y, double z, double w) {
         final double STRETCH_CONSTANT_4D = ((1 / Math.sqrt(4 + 1)) - 1) / 4;
         final double SQUISH_CONSTANT_4D = ((Math.sqrt(4 + 1)) - 1) / 4;
 
@@ -2039,7 +2039,7 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
             );
         }
 
-        return value / NORM_CONSTANT_4D;
+        return new OpenSimplexResult(value / NORM_CONSTANT_4D);
     }
 
     private double extrapolate(int hash, double x, double y) {

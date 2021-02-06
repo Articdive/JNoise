@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2020 Articdive (Lukas Mansour)
+ * Copyright (C) 2021 Articdive (Lukas Mansour)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,10 @@ package de.articdive.jnoise.noise.worley;
 import de.articdive.jnoise.api.DistanceFunction;
 import de.articdive.jnoise.api.NoiseGenerator;
 import de.articdive.jnoise.util.HashUtil;
+import de.articdive.jnoise.util.vectors.Vector;
+import de.articdive.jnoise.util.vectors.Vector2D;
+import de.articdive.jnoise.util.vectors.Vector3D;
+import de.articdive.jnoise.util.vectors.Vector4D;
 
 import java.util.Random;
 import java.util.function.LongFunction;
@@ -31,7 +35,7 @@ import java.util.function.LongFunction;
  *
  * @author Lukas Mansour
  */
-public final class WorleyNoiseGenerator extends NoiseGenerator {
+public final class WorleyNoiseGenerator extends NoiseGenerator<WorleyNoiseResult<? extends Vector>> {
     private final double frequency;
     private final DistanceFunction distanceFunction;
     private final LongFunction<Integer> fpAmountFunction;
@@ -44,12 +48,14 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
     }
 
     @Override
-    public double evaluateNoise(double x, double y) {
+    public WorleyNoiseResult<Vector2D> evaluateNoise(double x, double y) {
         x *= frequency;
         y *= frequency;
         long iX = (long) Math.floor(x);
         long iY = (long) Math.floor(y);
         double shortestDistance = Double.MAX_VALUE;
+        Vector2D closestPoint = null;
+
         for (int xOffset = -1; xOffset <= 1; xOffset++) {
             long secX = iX + xOffset;
 
@@ -63,23 +69,27 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
                 Random fpRNG = new Random(hash);
 
                 for (int i = 0; i < numberFP; i++) {
-                    shortestDistance = Math.min(
-                        shortestDistance,
-                        distanceFunction.distance(
-                            x,
-                            y,
-                            fpRNG.nextDouble() + secX,
-                            fpRNG.nextDouble() + secY
-                        )
+                    double pointX = fpRNG.nextDouble() + secX;
+                    double pointY = fpRNG.nextDouble() + secY;
+                    double distance = distanceFunction.distance(
+                        x,
+                        y,
+                        pointX,
+                        pointY
                     );
+
+                    if (distance < shortestDistance) {
+                        shortestDistance = distance;
+                        closestPoint = new Vector2D(pointX, pointY);
+                    }
                 }
             }
         }
-        return shortestDistance;
+        return new WorleyNoiseResult<>(shortestDistance, closestPoint);
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z) {
+    public WorleyNoiseResult<Vector3D> evaluateNoise(double x, double y, double z) {
         x *= frequency;
         y *= frequency;
         z *= frequency;
@@ -87,6 +97,8 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
         long iY = (long) Math.floor(y);
         long iZ = (long) Math.floor(z);
         double shortestDistance = Double.MAX_VALUE;
+        Vector3D closestPoint = null;
+
         for (int xOffset = -1; xOffset <= 1; xOffset++) {
             long secX = iX + xOffset;
 
@@ -101,27 +113,32 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
                     long numberFP = Math.max(1, Math.min(fpAmountFunction.apply(hash), 10));
                     Random fpRNG = new Random(hash);
                     for (int i = 0; i < numberFP; i++) {
-                        shortestDistance = Math.min(
-                            shortestDistance,
-                            distanceFunction.distance(
-                                x,
-                                y,
-                                z,
-                                fpRNG.nextDouble() + secX,
-                                fpRNG.nextDouble() + secY,
-                                fpRNG.nextDouble() + secZ
-                            )
+                        double pointX = fpRNG.nextDouble() + secX;
+                        double pointY = fpRNG.nextDouble() + secY;
+                        double pointZ = fpRNG.nextDouble() + secZ;
+                        double distance = distanceFunction.distance(
+                            x,
+                            y,
+                            z,
+                            pointX,
+                            pointY,
+                            pointZ
                         );
+
+                        if (distance < shortestDistance) {
+                            shortestDistance = distance;
+                            closestPoint = new Vector3D(pointX, pointY, pointZ);
+                        }
                     }
 
                 }
             }
         }
-        return shortestDistance;
+        return new WorleyNoiseResult<>(shortestDistance, closestPoint);
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z, double w) {
+    public WorleyNoiseResult<Vector4D> evaluateNoise(double x, double y, double z, double w) {
         x *= frequency;
         y *= frequency;
         z *= frequency;
@@ -131,6 +148,8 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
         long iZ = (long) Math.floor(z);
         long iW = (long) Math.floor(w);
         double shortestDistance = Double.MAX_VALUE;
+        Vector4D closestPoint = null;
+
         for (int xOffset = -1; xOffset <= 1; xOffset++) {
             long secX = iX + xOffset;
 
@@ -148,25 +167,31 @@ public final class WorleyNoiseGenerator extends NoiseGenerator {
                         long numberFP = Math.max(1, Math.min(fpAmountFunction.apply(hash), 10));
                         Random fpRNG = new Random(hash);
                         for (int i = 0; i < numberFP; i++) {
-                            shortestDistance = Math.min(
-                                shortestDistance,
-                                distanceFunction.distance(
-                                    x,
-                                    y,
-                                    z,
-                                    w,
-                                    fpRNG.nextDouble() + secX,
-                                    fpRNG.nextDouble() + secY,
-                                    fpRNG.nextDouble() + secZ,
-                                    fpRNG.nextDouble() + secW
-                                )
+                            double pointX = fpRNG.nextDouble() + secX;
+                            double pointY = fpRNG.nextDouble() + secY;
+                            double pointZ = fpRNG.nextDouble() + secZ;
+                            double pointW = fpRNG.nextDouble() + secW;
+                            double distance = distanceFunction.distance(
+                                x,
+                                y,
+                                z,
+                                w,
+                                pointX,
+                                pointY,
+                                pointZ,
+                                pointW
                             );
+
+                            if (distance < shortestDistance) {
+                                shortestDistance = distance;
+                                closestPoint = new Vector4D(pointX, pointY, pointZ, pointW);
+                            }
                         }
                     }
 
                 }
             }
         }
-        return shortestDistance;
+        return new WorleyNoiseResult<>(shortestDistance, closestPoint);
     }
 }

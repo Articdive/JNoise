@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2020 Articdive (Lukas Mansour)
+ * Copyright (C) 2021 Articdive (Lukas Mansour)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,6 +19,7 @@
 package de.articdive.jnoise;
 
 import de.articdive.jnoise.api.NoiseGenerator;
+import de.articdive.jnoise.api.NoiseResult;
 import de.articdive.jnoise.noise.octaved.OctaveNoiseBuilder;
 import de.articdive.jnoise.noise.opensimplex.OpenSimplexBuilder;
 import de.articdive.jnoise.noise.perlin.PerlinNoiseBuilder;
@@ -31,9 +32,9 @@ import org.jetbrains.annotations.NotNull;
  * @author Lukas Mansour
  */
 public final class JNoise {
-    private final NoiseGenerator noiseGenerator;
+    private final NoiseGenerator<?> noiseGenerator;
 
-    private JNoise(@NotNull NoiseGenerator noiseGenerator) {
+    private JNoise(@NotNull NoiseGenerator<?> noiseGenerator) {
         this.noiseGenerator = noiseGenerator;
     }
 
@@ -45,7 +46,7 @@ public final class JNoise {
      * @return A value representing the noise at the point (x,y), its bounds are noise-type dependant!
      */
     public double getNoise(double x, double y) {
-        return noiseGenerator.evaluateNoise(x, y);
+        return noiseGenerator.evaluateNoise(x, y).getNoiseValue();
     }
 
     /**
@@ -57,7 +58,7 @@ public final class JNoise {
      * @return A value representing the noise at the point (x,y,z), its bounds are noise-type dependant!
      */
     public double getNoise(double x, double y, double z) {
-        return noiseGenerator.evaluateNoise(x, y, z);
+        return noiseGenerator.evaluateNoise(x, y, z).getNoiseValue();
     }
 
     /**
@@ -70,11 +71,50 @@ public final class JNoise {
      * @return A value representing the noise at the point (x,y,z,w), its bounds are noise-type dependant!
      */
     public double getNoise(double x, double y, double z, double w) {
+        return noiseGenerator.evaluateNoise(x, y, z, w).getNoiseValue();
+    }
+
+    /**
+     * Evaluates the noise at a 2D point.
+     *
+     * @param x The x value of the point
+     * @param y The y value of the point
+     * @return A {@link NoiseResult} representing the noise at the point (x,y), its bounds are noise-type dependant!
+     */
+    @NotNull
+    public NoiseResult getNoiseResult(double x, double y) {
+        return noiseGenerator.evaluateNoise(x, y);
+    }
+
+    /**
+     * Evaluates the noise at a 3D point.
+     *
+     * @param x The x value of the point
+     * @param y The y value of the point
+     * @param z The z value of the point
+     * @return A {@link NoiseResult} representing the noise at the point (x,y,z), its bounds are noise-type dependant!
+     */
+    @NotNull
+    public NoiseResult getNoiseResult(double x, double y, double z) {
+        return noiseGenerator.evaluateNoise(x, y, z);
+    }
+
+    /**
+     * Evaluates the noise at a 4D point.
+     *
+     * @param x The x value of the point
+     * @param y The y value of the point
+     * @param z The z value of the point
+     * @param w The w value of the point
+     * @return A {@link NoiseResult} representing the noise at the point (x,y,z,w), its bounds are noise-type dependant!
+     */
+    @NotNull
+    public NoiseResult getNoiseResult(double x, double y, double z, double w) {
         return noiseGenerator.evaluateNoise(x, y, z, w);
     }
 
     @NotNull
-    public static JNoise build(@NotNull NoiseGenerator generator) {
+    public static JNoise build(@NotNull NoiseGenerator<?> generator) {
         return new JNoise(generator);
     }
 

@@ -16,43 +16,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.util.vectors;
+package de.articdive.jnoise.noise.worley;
 
-import org.jetbrains.annotations.NotNull;
+import de.articdive.jnoise.api.NoiseResult;
+import de.articdive.jnoise.util.vectors.Vector;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author Lukas Mansour
  */
-public final class Vector4D implements Vector {
-    private final double x;
-    private final double y;
-    private final double z;
-    private final double w;
+public final class WorleyNoiseResult<V extends Vector> implements NoiseResult {
+    private final double noiseValue;
+    private final V closestPoint;
 
-    public Vector4D(double x, double y, double z, double w) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.w = w;
+    WorleyNoiseResult(double noiseValue, @Nullable V closestPoint) {
+        this.noiseValue = noiseValue;
+        this.closestPoint = closestPoint;
     }
 
-    public double getX() {
-        return x;
+    @Override
+    public double getNoiseValue() {
+        return noiseValue;
     }
 
-    public double getY() {
-        return y;
-    }
-
-    public double getZ() {
-        return z;
-    }
-
-    public double getW() {
-        return w;
-    }
-
-    public double dot(@NotNull Vector4D vector4D) {
-        return (x * vector4D.getX()) + (y * vector4D.getY()) + (z * vector4D.getZ()) + (w * vector4D.getW());
+    @Nullable
+    public V getClosestPoint() {
+        return closestPoint;
     }
 }

@@ -16,43 +16,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.util.vectors;
+package de.articdive.jnoise.noise.opensimplex;
 
-import org.jetbrains.annotations.NotNull;
+import de.articdive.jnoise.api.NoiseResult;
 
 /**
  * @author Lukas Mansour
  */
-public final class Vector4D implements Vector {
-    private final double x;
-    private final double y;
-    private final double z;
-    private final double w;
+public class OpenSimplexResult implements NoiseResult {
+    private final double noiseValue;
 
-    public Vector4D(double x, double y, double z, double w) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.w = w;
+    OpenSimplexResult(double noiseValue) {
+        this.noiseValue = noiseValue;
     }
 
-    public double getX() {
-        return x;
+    @Override
+    public double getNoiseValue() {
+        return noiseValue;
     }
 
-    public double getY() {
-        return y;
-    }
-
-    public double getZ() {
-        return z;
-    }
-
-    public double getW() {
-        return w;
-    }
-
-    public double dot(@NotNull Vector4D vector4D) {
-        return (x * vector4D.getX()) + (y * vector4D.getY()) + (z * vector4D.getZ()) + (w * vector4D.getW());
-    }
 }

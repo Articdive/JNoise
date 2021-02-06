@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2020 Articdive (Lukas Mansour)
+ * Copyright (C) 2021 Articdive (Lukas Mansour)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Lukas Mansour
  */
-public final class PerlinNoiseGenerator extends NoiseGenerator {
+public final class PerlinNoiseGenerator extends NoiseGenerator<PerlinNoiseResult> {
     private static final Vector2D[] VECTOR_2D = new Vector2D[]{
         new Vector2D(1, 1), new Vector2D(-1, 1), new Vector2D(1, -1), new Vector2D(-1, -1),
 
@@ -86,7 +86,7 @@ public final class PerlinNoiseGenerator extends NoiseGenerator {
     }
 
     @Override
-    public double evaluateNoise(double x, double y) {
+    public PerlinNoiseResult evaluateNoise(double x, double y) {
         x *= frequency;
         y *= frequency;
         // Find unit square
@@ -109,11 +109,11 @@ public final class PerlinNoiseGenerator extends NoiseGenerator {
             new Vector2D(x - 1, y - 1).dot(VECTOR_2D[HashUtil.hash2D(seed, iX + 1, iY + 1) & 7])
         };
 
-        return interpolation.lerp(fractals, dots);
+        return new PerlinNoiseResult(interpolation.lerp(fractals, dots));
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z) {
+    public PerlinNoiseResult evaluateNoise(double x, double y, double z) {
         x *= frequency;
         y *= frequency;
         z *= frequency;
@@ -150,11 +150,11 @@ public final class PerlinNoiseGenerator extends NoiseGenerator {
             new Vector3D(x - 1, y - 1, z - 1)
                 .dot(VECTOR_3D[HashUtil.hash3D(seed, iX + 1, iY + 1, iZ + 1) & 19])
         };
-        return interpolation.lerp(fractals, dots);
+        return new PerlinNoiseResult(interpolation.lerp(fractals, dots));
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z, double w) {
+    public PerlinNoiseResult evaluateNoise(double x, double y, double z, double w) {
         x *= frequency;
         y *= frequency;
         z *= frequency;
@@ -211,7 +211,7 @@ public final class PerlinNoiseGenerator extends NoiseGenerator {
             new Vector4D(x - 1, y - 1, z - 1, w - 1)
                 .dot(VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY + 1, iZ + 1, iW + 1) & 47])
         };
-        return interpolation.lerp(fractals, dots);
+        return new PerlinNoiseResult(interpolation.lerp(fractals, dots));
     }
 
     /**

@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2020 Articdive (Lukas Mansour)
+ * Copyright (C) 2021 Articdive (Lukas Mansour)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Lukas Mansour
  */
-public final class OctaveNoiseGenerator extends NoiseGenerator {
+public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult> {
     private final JNoise noise;
     private final int octaves;
     private final double persistence;
@@ -40,24 +40,24 @@ public final class OctaveNoiseGenerator extends NoiseGenerator {
     }
 
     @Override
-    public double evaluateNoise(double x, double y) {
+    public OctaveNoiseResult evaluateNoise(double x, double y) {
         double output = 0;
         double amplitude = 1;
         double lacunarity = 1;
         double maxValue = 0;
         for (int i = 0; i < this.octaves; i++) {
-            // Frequency is already inlcuded in the PerlinNoiseGenerator!
+            // Frequency is already inlcuded in the NoiseGenerator!
             output += noise.getNoise(x * lacunarity, y * lacunarity) * amplitude;
             maxValue += amplitude;
 
             amplitude *= this.persistence;
             lacunarity *= this.lacunarity;
         }
-        return output / maxValue;
+        return new OctaveNoiseResult(output / maxValue);
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z) {
+    public OctaveNoiseResult evaluateNoise(double x, double y, double z) {
         double output = 0;
         double amplitude = 1;
         double lacunarity = 1;
@@ -70,11 +70,11 @@ public final class OctaveNoiseGenerator extends NoiseGenerator {
             amplitude *= this.persistence;
             lacunarity *= this.lacunarity;
         }
-        return output / maxValue;
+        return new OctaveNoiseResult(output / maxValue);
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z, double w) {
+    public OctaveNoiseResult evaluateNoise(double x, double y, double z, double w) {
         double output = 0;
         double amplitude = 1;
         double lacunarity = 1;
@@ -87,6 +87,6 @@ public final class OctaveNoiseGenerator extends NoiseGenerator {
             amplitude *= this.persistence;
             lacunarity *= this.lacunarity;
         }
-        return output / maxValue;
+        return new OctaveNoiseResult(output / maxValue);
     }
 }

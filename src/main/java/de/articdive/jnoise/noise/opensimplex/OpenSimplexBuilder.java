@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2020 Articdive (Lukas Mansour)
+ * Copyright (C) 2021 Articdive (Lukas Mansour)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,13 +27,13 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class OpenSimplexBuilder extends NoiseBuilder<OpenSimplexBuilder> {
     private double frequency = 1.0;
-    
+
     @NotNull
     @Override
     protected OpenSimplexBuilder self() {
         return this;
     }
-    
+
     /**
      * Sets the frequency for the {@link OpenSimplexGenerator}.
      *
@@ -48,7 +48,7 @@ public final class OpenSimplexBuilder extends NoiseBuilder<OpenSimplexBuilder> {
         this.frequency = frequency;
         return this;
     }
-    
+
     @Override
     @NotNull
     public JNoise build() {

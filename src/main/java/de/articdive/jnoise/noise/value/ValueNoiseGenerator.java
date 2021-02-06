@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2020 Articdive (Lukas Mansour)
+ * Copyright (C) 2021 Articdive (Lukas Mansour)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ import static de.articdive.jnoise.util.HashUtil.Z_PRIME;
  *
  * @author Lukas Mansour
  */
-public final class ValueNoiseGenerator extends NoiseGenerator {
+public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> {
     private final Interpolation interpolation;
     private final double frequency;
 
@@ -43,7 +43,7 @@ public final class ValueNoiseGenerator extends NoiseGenerator {
     }
 
     @Override
-    public double evaluateNoise(double x, double y) {
+    public ValueNoiseResult evaluateNoise(double x, double y) {
         x *= frequency;
         y *= frequency;
         long iX = (long) Math.floor(x);
@@ -60,11 +60,11 @@ public final class ValueNoiseGenerator extends NoiseGenerator {
             evaluateCoord2D(iX, iY + 1),
             evaluateCoord2D(iX + 1, iY + 1)
         };
-        return interpolation.lerp(fractals, vals);
+        return new ValueNoiseResult(interpolation.lerp(fractals, vals));
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z) {
+    public ValueNoiseResult evaluateNoise(double x, double y, double z) {
         x *= frequency;
         y *= frequency;
         z *= frequency;
@@ -89,11 +89,11 @@ public final class ValueNoiseGenerator extends NoiseGenerator {
             evaluateCoord3D(iX, iY + 1, iZ + 1),
             evaluateCoord3D(iX + 1, iY + 1, iZ + 1)
         };
-        return interpolation.lerp(fractals, vals);
+        return new ValueNoiseResult(interpolation.lerp(fractals, vals));
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z, double w) {
+    public ValueNoiseResult evaluateNoise(double x, double y, double z, double w) {
         x *= frequency;
         y *= frequency;
         z *= frequency;
@@ -133,7 +133,7 @@ public final class ValueNoiseGenerator extends NoiseGenerator {
             evaluateCoord4D(iX, iY + 1, iZ + 1, iW + 1),
             evaluateCoord4D(iX + 1, iY + 1, iZ + 1, iW + 1)
         };
-        return interpolation.lerp(fractals, vals);
+        return new ValueNoiseResult(interpolation.lerp(fractals, vals));
     }
 
     private double evaluateCoord2D(long x, long y) {

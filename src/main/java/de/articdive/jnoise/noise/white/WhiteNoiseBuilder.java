@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2020 Articdive (Lukas Mansour)
+ * Copyright (C) 2021 Articdive (Lukas Mansour)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,7 @@ public final class WhiteNoiseBuilder extends NoiseBuilder<WhiteNoiseBuilder> {
     protected WhiteNoiseBuilder self() {
         return this;
     }
-    
+
     @Override
     @NotNull
     public JNoise build() {

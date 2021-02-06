@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2020 Articdive (Lukas Mansour)
+ * Copyright (C) 2021 Articdive (Lukas Mansour)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Lukas Mansour
  */
-public final class Vector3D {
+public final class Vector3D implements Vector {
     private final double x;
     private final double y;
     private final double z;

@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2020 Articdive (Lukas Mansour)
+ * Copyright (C) 2021 Articdive (Lukas Mansour)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import de.articdive.jnoise.util.HashUtil;
  *
  * @author Lukas Mansour
  */
-public final class WhiteNoiseGenerator extends NoiseGenerator {
+public final class WhiteNoiseGenerator extends NoiseGenerator<WhiteNoiseResult> {
     private final double[] output = new double[]{0.0, 1.0};
 
     WhiteNoiseGenerator(long seed) {
@@ -34,19 +34,19 @@ public final class WhiteNoiseGenerator extends NoiseGenerator {
     }
 
     @Override
-    public double evaluateNoise(double x, double y) {
-        return output[HashUtil.hash2D(seed, Double.hashCode(x), Double.hashCode(y)) & 1];
+    public WhiteNoiseResult evaluateNoise(double x, double y) {
+        return new WhiteNoiseResult(output[HashUtil.hash2D(seed, Double.hashCode(x), Double.hashCode(y)) & 1]);
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z) {
-        return output[
-            HashUtil.hash3D(seed, Double.hashCode(x), Double.hashCode(y), Double.hashCode(z)) & 1];
+    public WhiteNoiseResult evaluateNoise(double x, double y, double z) {
+        return new WhiteNoiseResult(output[
+            HashUtil.hash3D(seed, Double.hashCode(x), Double.hashCode(y), Double.hashCode(z)) & 1]);
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z, double w) {
-        return output[
-            HashUtil.hash4D(seed, Double.hashCode(x), Double.hashCode(y), Double.hashCode(z), Double.hashCode(w)) & 1];
+    public WhiteNoiseResult evaluateNoise(double x, double y, double z, double w) {
+        return new WhiteNoiseResult(output[
+            HashUtil.hash4D(seed, Double.hashCode(x), Double.hashCode(y), Double.hashCode(z), Double.hashCode(w)) & 1]);
     }
 }

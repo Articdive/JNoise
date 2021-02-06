@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2020 Articdive (Lukas Mansour)
+ * Copyright (C) 2021 Articdive (Lukas Mansour)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,8 +17,6 @@
  */
 
 package de.articdive.jnoise.api;
-
-import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Lukas Mansour
@@ -44,7 +42,7 @@ public interface Interpolation {
      * @param values    A list of values starting with the first stage values and going up in order.
      * @return an interpolated value between all the given positions.
      */
-    default double lerp(@NotNull double[] positions, @NotNull double[] values) {
+    default double lerp(double[] positions, double[] values) {
         if (values.length != 1 << positions.length) {
             throw new IllegalArgumentException("The amount of values must be 2^(amount of fractals).");
         }

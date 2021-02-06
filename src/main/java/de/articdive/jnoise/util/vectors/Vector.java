@@ -18,29 +18,5 @@
 
 package de.articdive.jnoise.util.vectors;
 
-import org.jetbrains.annotations.NotNull;
-
-/**
- * @author Lukas Mansour
- */
-public final class Vector2D implements Vector {
-    private final double x;
-    private final double y;
-
-    public Vector2D(double x, double y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double dot(@NotNull Vector2D vector2D) {
-        return (x * vector2D.getX()) + (y * vector2D.getY());
-    }
+public interface Vector {
 }
