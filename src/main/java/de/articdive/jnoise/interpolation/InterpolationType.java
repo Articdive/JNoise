@@ -18,8 +18,6 @@
 
 package de.articdive.jnoise.interpolation;
 
-import de.articdive.jnoise.api.Interpolation;
-
 /**
  * @author Lukas Mansour
  */

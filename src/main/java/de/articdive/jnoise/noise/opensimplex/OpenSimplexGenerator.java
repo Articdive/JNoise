@@ -23,6 +23,7 @@ import de.articdive.jnoise.util.HashUtil;
 import de.articdive.jnoise.util.vectors.Vector2D;
 import de.articdive.jnoise.util.vectors.Vector3D;
 import de.articdive.jnoise.util.vectors.Vector4D;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Based on the OpenSimplex Implementation KurtSpencer https://gist.github.com/KdotJPG/b1270127455a94ac5d19
@@ -30,7 +31,8 @@ import de.articdive.jnoise.util.vectors.Vector4D;
  *
  * @author Lukas Mansour
  */
-public final class OpenSimplexGenerator extends NoiseGenerator {
+@Deprecated
+public final class OpenSimplexGenerator extends NoiseGenerator<OpenSimplexResult> {
     //Gradients for 2D. They approximate the directions to the
     //vertices of an octagon from the center.
     private static final Vector2D[] VECTOR_2D = new Vector2D[]{
@@ -89,7 +91,7 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
     }
 
     @Override
-    public OpenSimplexResult evaluateNoise(double x, double y) {
+    public @NotNull OpenSimplexResult evaluateNoise(double x, double y) {
         final double STRETCH_CONSTANT_2D = ((1 / Math.sqrt(2 + 1)) - 1) / 2;
         final double SQUISH_CONSTANT_2D = ((Math.sqrt(2 + 1)) - 1) / 2;
 
@@ -209,7 +211,7 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
     }
 
     @Override
-    public OpenSimplexResult evaluateNoise(double x, double y, double z) {
+    public @NotNull OpenSimplexResult evaluateNoise(double x, double y, double z) {
         final double STRETCH_CONSTANT_3D = -1.0 / 6;
         final double SQUISH_CONSTANT_3D = 1.0 / 3;
 
@@ -758,7 +760,7 @@ public final class OpenSimplexGenerator extends NoiseGenerator {
     }
 
     @Override
-    public OpenSimplexResult evaluateNoise(double x, double y, double z, double w) {
+    public @NotNull OpenSimplexResult evaluateNoise(double x, double y, double z, double w) {
         final double STRETCH_CONSTANT_4D = ((1 / Math.sqrt(4 + 1)) - 1) / 4;
         final double SQUISH_CONSTANT_4D = ((Math.sqrt(4 + 1)) - 1) / 4;
 

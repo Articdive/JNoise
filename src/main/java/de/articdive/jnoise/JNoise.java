@@ -21,7 +21,9 @@ package de.articdive.jnoise;
 import de.articdive.jnoise.api.NoiseGenerator;
 import de.articdive.jnoise.api.NoiseResult;
 import de.articdive.jnoise.noise.octaved.OctaveNoiseBuilder;
+import de.articdive.jnoise.noise.opensimplex.FastSimplexBuilder;
 import de.articdive.jnoise.noise.opensimplex.OpenSimplexBuilder;
+import de.articdive.jnoise.noise.opensimplex.SuperSimplexBuilder;
 import de.articdive.jnoise.noise.perlin.PerlinNoiseBuilder;
 import de.articdive.jnoise.noise.value.ValueNoiseBuilder;
 import de.articdive.jnoise.noise.white.WhiteNoiseBuilder;
@@ -137,9 +139,23 @@ public final class JNoise {
             return new WhiteNoiseBuilder();
         }
 
+        /**
+         * @deprecated updated: use {@link #fastSimplex()} or {@link #superSimplex()}.
+         */
+        @Deprecated
         @NotNull
         public OpenSimplexBuilder openSimplex() {
             return new OpenSimplexBuilder();
+        }
+
+        @NotNull
+        public FastSimplexBuilder fastSimplex() {
+            return new FastSimplexBuilder();
+        }
+
+        @NotNull
+        public SuperSimplexBuilder superSimplex() {
+            return new SuperSimplexBuilder();
         }
 
         @NotNull

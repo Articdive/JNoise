@@ -18,6 +18,8 @@
 
 package de.articdive.jnoise.api;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * @author Lukas Mansour
  */
@@ -35,6 +37,7 @@ public abstract class NoiseGenerator<R extends NoiseResult> {
      * @param y The y value of the point.
      * @return A value representing the noise at the point (x,y), its bounds are noise-type dependant!
      */
+    @NotNull
     public abstract R evaluateNoise(double x, double y);
 
     /**
@@ -45,6 +48,7 @@ public abstract class NoiseGenerator<R extends NoiseResult> {
      * @param z The z value of the point.
      * @return A value representing the noise at the point (x,y,z), its bounds are noise-type dependant!
      */
+    @NotNull
     public abstract R evaluateNoise(double x, double y, double z);
 
     /**
@@ -56,5 +60,6 @@ public abstract class NoiseGenerator<R extends NoiseResult> {
      * @param w The w value of the point.
      * @return A value representing the noise at the point (x,y,z,w), its bounds are noise-type dependant!
      */
+    @NotNull
     public abstract R evaluateNoise(double x, double y, double z, double w);
 }

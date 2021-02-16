@@ -19,7 +19,7 @@
 package de.articdive.jnoise.noise.value;
 
 import de.articdive.jnoise.JNoise;
-import de.articdive.jnoise.api.Interpolation;
+import de.articdive.jnoise.interpolation.Interpolation;
 import de.articdive.jnoise.api.NoiseBuilder;
 import de.articdive.jnoise.interpolation.InterpolationType;
 import org.jetbrains.annotations.NotNull;

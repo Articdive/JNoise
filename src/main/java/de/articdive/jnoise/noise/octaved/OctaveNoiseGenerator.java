@@ -40,6 +40,7 @@ public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult
     }
 
     @Override
+    @NotNull
     public OctaveNoiseResult evaluateNoise(double x, double y) {
         double output = 0;
         double amplitude = 1;
@@ -57,6 +58,7 @@ public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult
     }
 
     @Override
+    @NotNull
     public OctaveNoiseResult evaluateNoise(double x, double y, double z) {
         double output = 0;
         double amplitude = 1;
@@ -74,6 +76,7 @@ public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult
     }
 
     @Override
+    @NotNull
     public OctaveNoiseResult evaluateNoise(double x, double y, double z, double w) {
         double output = 0;
         double amplitude = 1;

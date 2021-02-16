@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.api;
+package de.articdive.jnoise.distance_functions;
 
 /**
  * @author Lukas Mansour

@@ -23,11 +23,10 @@ import de.articdive.jnoise.api.NoiseResult;
 /**
  * @author Lukas Mansour
  */
-@Deprecated
-public class OpenSimplexResult implements NoiseResult {
+public class FastSimplexResult implements NoiseResult {
     private final double noiseValue;
 
-    OpenSimplexResult(double noiseValue) {
+    FastSimplexResult(double noiseValue) {
         this.noiseValue = noiseValue;
     }
 

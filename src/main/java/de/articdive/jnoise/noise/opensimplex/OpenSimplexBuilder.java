@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Lukas Mansour
  */
+@Deprecated
 public final class OpenSimplexBuilder extends NoiseBuilder<OpenSimplexBuilder> {
     private double frequency = 1.0;
 

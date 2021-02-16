@@ -20,6 +20,7 @@ package de.articdive.jnoise.noise.white;
 
 import de.articdive.jnoise.api.NoiseGenerator;
 import de.articdive.jnoise.util.HashUtil;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * The bounds of this White Noise implementation are: {0.0, 1.1}.
@@ -34,17 +35,20 @@ public final class WhiteNoiseGenerator extends NoiseGenerator<WhiteNoiseResult> 
     }
 
     @Override
+    @NotNull
     public WhiteNoiseResult evaluateNoise(double x, double y) {
         return new WhiteNoiseResult(output[HashUtil.hash2D(seed, Double.hashCode(x), Double.hashCode(y)) & 1]);
     }
 
     @Override
+    @NotNull
     public WhiteNoiseResult evaluateNoise(double x, double y, double z) {
         return new WhiteNoiseResult(output[
             HashUtil.hash3D(seed, Double.hashCode(x), Double.hashCode(y), Double.hashCode(z)) & 1]);
     }
 
     @Override
+    @NotNull
     public WhiteNoiseResult evaluateNoise(double x, double y, double z, double w) {
         return new WhiteNoiseResult(output[
             HashUtil.hash4D(seed, Double.hashCode(x), Double.hashCode(y), Double.hashCode(z), Double.hashCode(w)) & 1]);

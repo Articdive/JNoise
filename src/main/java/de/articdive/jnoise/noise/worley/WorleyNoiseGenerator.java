@@ -18,13 +18,14 @@
 
 package de.articdive.jnoise.noise.worley;
 
-import de.articdive.jnoise.api.DistanceFunction;
+import de.articdive.jnoise.distance_functions.DistanceFunction;
 import de.articdive.jnoise.api.NoiseGenerator;
 import de.articdive.jnoise.util.HashUtil;
 import de.articdive.jnoise.util.vectors.Vector;
 import de.articdive.jnoise.util.vectors.Vector2D;
 import de.articdive.jnoise.util.vectors.Vector3D;
 import de.articdive.jnoise.util.vectors.Vector4D;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 import java.util.function.LongFunction;
@@ -48,6 +49,7 @@ public final class WorleyNoiseGenerator extends NoiseGenerator<WorleyNoiseResult
     }
 
     @Override
+    @NotNull
     public WorleyNoiseResult<Vector2D> evaluateNoise(double x, double y) {
         x *= frequency;
         y *= frequency;
@@ -89,6 +91,7 @@ public final class WorleyNoiseGenerator extends NoiseGenerator<WorleyNoiseResult
     }
 
     @Override
+    @NotNull
     public WorleyNoiseResult<Vector3D> evaluateNoise(double x, double y, double z) {
         x *= frequency;
         y *= frequency;
@@ -138,6 +141,7 @@ public final class WorleyNoiseGenerator extends NoiseGenerator<WorleyNoiseResult
     }
 
     @Override
+    @NotNull
     public WorleyNoiseResult<Vector4D> evaluateNoise(double x, double y, double z, double w) {
         x *= frequency;
         y *= frequency;

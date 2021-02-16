@@ -19,7 +19,7 @@
 package de.articdive.jnoise.noise.worley;
 
 import de.articdive.jnoise.JNoise;
-import de.articdive.jnoise.api.DistanceFunction;
+import de.articdive.jnoise.distance_functions.DistanceFunction;
 import de.articdive.jnoise.api.NoiseBuilder;
 import de.articdive.jnoise.distance_functions.DistanceFunctionType;
 import org.jetbrains.annotations.NotNull;

@@ -16,24 +16,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.noise.opensimplex;
-
-import de.articdive.jnoise.api.NoiseResult;
+package de.articdive.jnoise.simplex_variants;
 
 /**
  * @author Lukas Mansour
  */
-@Deprecated
-public class OpenSimplexResult implements NoiseResult {
-    private final double noiseValue;
-
-    OpenSimplexResult(double noiseValue) {
-        this.noiseValue = noiseValue;
-    }
-
-    @Override
-    public double getNoiseValue() {
-        return noiseValue;
-    }
-
+public enum Simplex2DVariant {
+    /**
+     * Standard 2D OpenSimplex noise.
+     */
+    CLASSIC,
+    /**
+     * 2D OpenSimplex noise, with Y pointing down the main diagonal.
+     * Might be better for a 2D sandbox style game, where Y is vertical.
+     * Probably slightly less optimal for heightmaps or continent maps.
+     */
+    X_BEFORE_Y
 }

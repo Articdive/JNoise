@@ -18,8 +18,6 @@
 
 package de.articdive.jnoise.distance_functions;
 
-import de.articdive.jnoise.api.DistanceFunction;
-
 /**
  * @author Lukas Mansour
  */

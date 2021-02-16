@@ -18,7 +18,7 @@
 
 package de.articdive.jnoise.noise.perlin;
 
-import de.articdive.jnoise.api.Interpolation;
+import de.articdive.jnoise.interpolation.Interpolation;
 import de.articdive.jnoise.api.NoiseGenerator;
 import de.articdive.jnoise.util.HashUtil;
 import de.articdive.jnoise.util.vectors.Vector2D;
@@ -86,6 +86,7 @@ public final class PerlinNoiseGenerator extends NoiseGenerator<PerlinNoiseResult
     }
 
     @Override
+    @NotNull
     public PerlinNoiseResult evaluateNoise(double x, double y) {
         x *= frequency;
         y *= frequency;
@@ -113,6 +114,7 @@ public final class PerlinNoiseGenerator extends NoiseGenerator<PerlinNoiseResult
     }
 
     @Override
+    @NotNull
     public PerlinNoiseResult evaluateNoise(double x, double y, double z) {
         x *= frequency;
         y *= frequency;
@@ -154,6 +156,7 @@ public final class PerlinNoiseGenerator extends NoiseGenerator<PerlinNoiseResult
     }
 
     @Override
+    @NotNull
     public PerlinNoiseResult evaluateNoise(double x, double y, double z, double w) {
         x *= frequency;
         y *= frequency;

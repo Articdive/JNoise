@@ -18,7 +18,7 @@
 
 package de.articdive.jnoise.noise.value;
 
-import de.articdive.jnoise.api.Interpolation;
+import de.articdive.jnoise.interpolation.Interpolation;
 import de.articdive.jnoise.api.NoiseGenerator;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,6 +43,7 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
     }
 
     @Override
+    @NotNull
     public ValueNoiseResult evaluateNoise(double x, double y) {
         x *= frequency;
         y *= frequency;
@@ -64,6 +65,7 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
     }
 
     @Override
+    @NotNull
     public ValueNoiseResult evaluateNoise(double x, double y, double z) {
         x *= frequency;
         y *= frequency;
@@ -93,6 +95,7 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
     }
 
     @Override
+    @NotNull
     public ValueNoiseResult evaluateNoise(double x, double y, double z, double w) {
         x *= frequency;
         y *= frequency;
