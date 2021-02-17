@@ -24,10 +24,8 @@ import org.jetbrains.annotations.NotNull;
  * @author Lukas Mansour
  */
 public abstract class NoiseGenerator<R extends NoiseResult> {
-    protected final long seed;
 
-    protected NoiseGenerator(long seed) {
-        this.seed = seed;
+    protected NoiseGenerator() {
     }
 
     /**

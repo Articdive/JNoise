@@ -25,25 +25,11 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Lukas Mansour
  */
-public final class OctaveNoiseBuilder extends NoiseBuilder<OctaveNoiseBuilder> {
+public final class OctaveNoiseBuilder extends NoiseBuilder {
     private JNoise noise;
     private int octaves = 1;
     private double persistence = 1;
     private double lacunarity = 1;
-
-    @Override
-    @NotNull
-    protected OctaveNoiseBuilder self() {
-        return this;
-    }
-
-    @NotNull
-    @Override
-    public OctaveNoiseBuilder setSeed(long seed) {
-        throw new UnsupportedOperationException(
-            "Octavted noise does not support a seed as it inherits it from the provided noise."
-        );
-    }
 
     /**
      * Sets the noise that will be octavated.
@@ -107,8 +93,8 @@ public final class OctaveNoiseBuilder extends NoiseBuilder<OctaveNoiseBuilder> {
     @NotNull
     public JNoise build() {
         if (noise == null) {
-            throw new NullPointerException("A noise implementation to octavated has not been specified!");
+            throw new NullPointerException("A noise implementation to octavate has not been specified!");
         }
-        return JNoise.build(new OctaveNoiseGenerator(seed, noise, octaves, persistence, lacunarity));
+        return JNoise.build(new OctaveNoiseGenerator(noise, octaves, persistence, lacunarity));
     }
 }

@@ -31,8 +31,7 @@ public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult
     private final double persistence;
     private final double lacunarity;
 
-    OctaveNoiseGenerator(long seed, @NotNull JNoise noise, int octaves, double persistence, double lacunarity) {
-        super(seed);
+    OctaveNoiseGenerator(@NotNull JNoise noise, int octaves, double persistence, double lacunarity) {
         this.noise = noise;
         this.octaves = octaves;
         this.persistence = persistence;

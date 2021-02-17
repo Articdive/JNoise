@@ -28,10 +28,11 @@ import org.jetbrains.annotations.NotNull;
  * @author Lukas Mansour
  */
 public final class WhiteNoiseGenerator extends NoiseGenerator<WhiteNoiseResult> {
+    private final long seed;
     private final double[] output = new double[]{0.0, 1.0};
 
     WhiteNoiseGenerator(long seed) {
-        super(seed);
+        this.seed = seed;
     }
 
     @Override

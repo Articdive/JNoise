@@ -20,18 +20,26 @@ package de.articdive.jnoise.noise.opensimplex;
 
 import de.articdive.jnoise.JNoise;
 import de.articdive.jnoise.api.NoiseBuilder;
+import de.articdive.jnoise.noise.worley.WorleyNoiseBuilder;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Lukas Mansour
  */
 @Deprecated
-public final class OpenSimplexBuilder extends NoiseBuilder<OpenSimplexBuilder> {
+public final class OpenSimplexBuilder extends NoiseBuilder {
+    private long seed = 1729;
     private double frequency = 1.0;
 
+    /**
+     * Sets the seed for the {@link OpenSimplexGenerator}.
+     *
+     * @param seed the new seed for the {@link OpenSimplexGenerator}.
+     * @return {@link WorleyNoiseBuilder} this
+     */
     @NotNull
-    @Override
-    protected OpenSimplexBuilder self() {
+    public OpenSimplexBuilder setSeed(long seed) {
+        this.seed = seed;
         return this;
     }
 

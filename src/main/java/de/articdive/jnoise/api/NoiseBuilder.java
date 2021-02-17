@@ -22,31 +22,9 @@ import de.articdive.jnoise.JNoise;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * @param <SELF> The Class of the extending class.
  * @author Lukas Mansour
  */
-public abstract class NoiseBuilder<SELF extends NoiseBuilder<SELF>> {
-    protected long seed = 1729;
-
-    /**
-     * Sets the seed of the to-be-generated noise-generator.
-     *
-     * @param seed an integer to seed the noise-generator.
-     * @return {@link NoiseBuilder}
-     */
-    @NotNull
-    public SELF setSeed(long seed) {
-        this.seed = seed;
-        return self();
-    }
-
-    /**
-     * For default methods to return the correct builder this method must be defined.
-     *
-     * @return The builder.
-     */
-    @NotNull
-    protected abstract SELF self();
+public abstract class NoiseBuilder {
 
     /**
      * Generates the noise-generator

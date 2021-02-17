@@ -28,8 +28,8 @@ import org.jetbrains.annotations.NotNull;
  * @author Lukas Mansour
  */
 public class FastSimplexGenerator extends NoiseGenerator<FastSimplexResult> {
-    private final double frequency;
     private final OpenSimplex2F simplex;
+    private final double frequency;
     private final Simplex2DVariant variant2D;
     private final Simplex3DVariant variant3D;
     private final Simplex4DVariant variant4D;
@@ -41,9 +41,8 @@ public class FastSimplexGenerator extends NoiseGenerator<FastSimplexResult> {
         @NotNull Simplex3DVariant variant3D,
         @NotNull Simplex4DVariant variant4D
     ) {
-        super(seed);
-        this.frequency = frequency;
         this.simplex = new OpenSimplex2F(seed);
+        this.frequency = frequency;
         this.variant2D = variant2D;
         this.variant3D = variant3D;
         this.variant4D = variant4D;

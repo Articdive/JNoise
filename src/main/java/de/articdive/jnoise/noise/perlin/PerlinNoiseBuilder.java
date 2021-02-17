@@ -19,21 +19,28 @@
 package de.articdive.jnoise.noise.perlin;
 
 import de.articdive.jnoise.JNoise;
-import de.articdive.jnoise.interpolation.Interpolation;
 import de.articdive.jnoise.api.NoiseBuilder;
+import de.articdive.jnoise.interpolation.Interpolation;
 import de.articdive.jnoise.interpolation.InterpolationType;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Lukas Mansour
  */
-public final class PerlinNoiseBuilder extends NoiseBuilder<PerlinNoiseBuilder> {
+public final class PerlinNoiseBuilder extends NoiseBuilder {
+    private long seed = 1729;
     private double frequency = 1.00;
     private Interpolation interpolation = InterpolationType.LINEAR;
 
-    @Override
+    /**
+     * Sets the seed for the {@link PerlinNoiseGenerator}.
+     *
+     * @param seed the new seed for the {@link PerlinNoiseGenerator}.
+     * @return {@link PerlinNoiseBuilder} this
+     */
     @NotNull
-    protected PerlinNoiseBuilder self() {
+    public PerlinNoiseBuilder setSeed(long seed) {
+        this.seed = seed;
         return this;
     }
 

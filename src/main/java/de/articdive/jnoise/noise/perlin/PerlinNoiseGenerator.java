@@ -18,8 +18,8 @@
 
 package de.articdive.jnoise.noise.perlin;
 
-import de.articdive.jnoise.interpolation.Interpolation;
 import de.articdive.jnoise.api.NoiseGenerator;
+import de.articdive.jnoise.interpolation.Interpolation;
 import de.articdive.jnoise.util.HashUtil;
 import de.articdive.jnoise.util.vectors.Vector2D;
 import de.articdive.jnoise.util.vectors.Vector3D;
@@ -76,11 +76,12 @@ public final class PerlinNoiseGenerator extends NoiseGenerator<PerlinNoiseResult
         new Vector4D(-1, 1, -1, 0), new Vector4D(-1, -1, -1, 0)
     };
 
+    private final long seed;
     private final Interpolation interpolation;
     private final double frequency;
 
     PerlinNoiseGenerator(long seed, @NotNull Interpolation interpolation, double frequency) {
-        super(seed);
+        this.seed = seed;
         this.interpolation = interpolation;
         this.frequency = frequency;
     }

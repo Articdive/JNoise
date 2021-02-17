@@ -28,15 +28,22 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Lukas Mansour
  */
-public class FastSimplexBuilder extends NoiseBuilder<FastSimplexBuilder> {
+public class FastSimplexBuilder extends NoiseBuilder {
+    private long seed = 1729;
     private double frequency = 1.0;
     private Simplex2DVariant variant2D = Simplex2DVariant.CLASSIC;
     private Simplex3DVariant variant3D = Simplex3DVariant.CLASSIC;
     private Simplex4DVariant variant4D = Simplex4DVariant.CLASSIC;
 
+    /**
+     * Sets the seed for the {@link FastSimplexGenerator}.
+     *
+     * @param seed the new seed for the {@link FastSimplexGenerator}.
+     * @return {@link FastSimplexBuilder} this
+     */
     @NotNull
-    @Override
-    protected FastSimplexBuilder self() {
+    public FastSimplexBuilder setSeed(long seed) {
+        this.seed = seed;
         return this;
     }
 

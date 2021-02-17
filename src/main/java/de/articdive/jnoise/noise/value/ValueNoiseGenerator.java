@@ -33,11 +33,12 @@ import static de.articdive.jnoise.util.HashUtil.Z_PRIME;
  * @author Lukas Mansour
  */
 public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> {
+    private final long seed;
     private final Interpolation interpolation;
     private final double frequency;
 
     ValueNoiseGenerator(long seed, @NotNull Interpolation interpolation, double frequency) {
-        super(seed);
+        this.seed = seed;
         this.interpolation = interpolation;
         this.frequency = frequency;
     }

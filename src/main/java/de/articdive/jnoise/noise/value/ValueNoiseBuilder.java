@@ -19,21 +19,28 @@
 package de.articdive.jnoise.noise.value;
 
 import de.articdive.jnoise.JNoise;
-import de.articdive.jnoise.interpolation.Interpolation;
 import de.articdive.jnoise.api.NoiseBuilder;
+import de.articdive.jnoise.interpolation.Interpolation;
 import de.articdive.jnoise.interpolation.InterpolationType;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Lukas Mansour
  */
-public final class ValueNoiseBuilder extends NoiseBuilder<ValueNoiseBuilder> {
+public final class ValueNoiseBuilder extends NoiseBuilder {
+    private long seed = 1729;
     private double frequency = 1.00;
     private Interpolation interpolation = InterpolationType.LINEAR;
 
+    /**
+     * Sets the seed for the {@link ValueNoiseGenerator}.
+     *
+     * @param seed the new seed for the {@link ValueNoiseGenerator}.
+     * @return {@link ValueNoiseBuilder} this
+     */
     @NotNull
-    @Override
-    protected ValueNoiseBuilder self() {
+    public ValueNoiseBuilder setSeed(long seed) {
+        this.seed = seed;
         return this;
     }
 

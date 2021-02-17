@@ -28,8 +28,8 @@ import org.jetbrains.annotations.NotNull;
  * @author Lukas Mansour
  */
 public class SuperSimplexGenerator extends NoiseGenerator<SuperSimplexResult> {
-    private final double frequency;
     private final OpenSimplex2S simplex;
+    private final double frequency;
     private final Simplex2DVariant variant2D;
     private final Simplex3DVariant variant3D;
     private final Simplex4DVariant variant4D;
@@ -41,9 +41,8 @@ public class SuperSimplexGenerator extends NoiseGenerator<SuperSimplexResult> {
         @NotNull Simplex3DVariant variant3D,
         @NotNull Simplex4DVariant variant4D
     ) {
-        super(seed);
-        this.frequency = frequency;
         this.simplex = new OpenSimplex2S(seed);
+        this.frequency = frequency;
         this.variant2D = variant2D;
         this.variant3D = variant3D;
         this.variant4D = variant4D;

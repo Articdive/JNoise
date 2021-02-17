@@ -83,10 +83,11 @@ public final class OpenSimplexGenerator extends NoiseGenerator<OpenSimplexResult
     private static final double NORM_CONSTANT_2D = 47;
     private static final double NORM_CONSTANT_3D = 103;
     private static final double NORM_CONSTANT_4D = 30;
+    private final long seed;
     private final double frequency;
 
     OpenSimplexGenerator(long seed, double frequency) {
-        super(seed);
+        this.seed = seed;
         this.frequency = frequency;
     }
 

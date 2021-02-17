@@ -25,10 +25,18 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Lukas Mansour
  */
-public final class WhiteNoiseBuilder extends NoiseBuilder<WhiteNoiseBuilder> {
+public final class WhiteNoiseBuilder extends NoiseBuilder {
+    private long seed = 1729;
+
+    /**
+     * Sets the seed for the {@link WhiteNoiseGenerator}.
+     *
+     * @param seed the new seed for the {@link WhiteNoiseGenerator}.
+     * @return {@link WhiteNoiseBuilder} this
+     */
     @NotNull
-    @Override
-    protected WhiteNoiseBuilder self() {
+    public WhiteNoiseBuilder setSeed(long seed) {
+        this.seed = seed;
         return this;
     }
 

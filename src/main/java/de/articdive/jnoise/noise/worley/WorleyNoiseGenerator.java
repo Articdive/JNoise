@@ -18,8 +18,8 @@
 
 package de.articdive.jnoise.noise.worley;
 
-import de.articdive.jnoise.distance_functions.DistanceFunction;
 import de.articdive.jnoise.api.NoiseGenerator;
+import de.articdive.jnoise.distance_functions.DistanceFunction;
 import de.articdive.jnoise.util.HashUtil;
 import de.articdive.jnoise.util.vectors.Vector;
 import de.articdive.jnoise.util.vectors.Vector2D;
@@ -37,12 +37,13 @@ import java.util.function.LongFunction;
  * @author Lukas Mansour
  */
 public final class WorleyNoiseGenerator extends NoiseGenerator<WorleyNoiseResult<? extends Vector>> {
+    private final long seed;
     private final double frequency;
     private final DistanceFunction distanceFunction;
     private final LongFunction<Integer> fpAmountFunction;
 
     WorleyNoiseGenerator(long seed, double frequency, DistanceFunction distanceFunction, LongFunction<Integer> fpAmountFunction) {
-        super(seed);
+        this.seed = seed;
         this.frequency = frequency;
         this.distanceFunction = distanceFunction;
         this.fpAmountFunction = fpAmountFunction;
