@@ -1,8 +1,10 @@
 # JNoise
 ![banner](banner.png)
 
-[![license](https://img.shields.io/github/license/articdive/JNoise.svg)](../LICENSE)
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+[![license](https://img.shields.io/github/license/articdive/JNoise.svg?style=for-the-badge)](../LICENSE)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Articdive/JNoise?style=for-the-badge)](https://github.com/Articdive/JNoise/releases)
+[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=for-the-badge)](https://github.com/RichardLitt/standard-readme)
+[![Discord](https://img.shields.io/discord/525595722859675648?label=discord&style=for-the-badge)](https://discord.gg/JCx2eV4aWC)
 
 JNoise is a simple-to-use java-library for generating noise (including gradient noise) in Java.
 
