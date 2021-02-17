@@ -110,7 +110,7 @@ Example: Creating a noise-generator using octavated Perlin Noise with cosine int
 ## Acknowledgements
 [@Ken Perlin](https://mrl.nyu.edu/~perlin/)'s work on Perlin Noise.
 
-[@Kurt Spencer](https://www.github.com/KDotJpg)'s work on OpenSimplex Noise located [here](https://gist.github.com/KdotJPG/b1270127455a94ac5d19).
+[@Kurt Spencer](https://www.github.com/KDotJpg)'s work on OpenSimplex2 located [here](https://github.com/KdotJPG/OpenSimplex2).
 
 [@Steven Worley](http://weber.itn.liu.se/~stegu/TNM084-2017/worley-originalpaper.pdf)'s work on Worley Noise.
 
