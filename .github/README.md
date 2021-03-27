@@ -5,7 +5,7 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Articdive/JNoise?style=for-the-badge)](https://github.com/Articdive/JNoise/releases)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=for-the-badge)](https://github.com/RichardLitt/standard-readme)
 [![Discord](https://img.shields.io/discord/525595722859675648?label=discord&style=for-the-badge)](https://discord.gg/JCx2eV4aWC)
-
+[![TeamCity Simple Build Status](https://img.shields.io/teamcity/build/s/JNoise_PublishJAR?server=https%3A%2F%2Fci.minestom.com&style=for-the-badge)](https://ci.minestom.com/viewType.html?buildTypeId=JNoise_PublishJAR)
 JNoise is a simple-to-use java-library for generating noise (including gradient noise) in Java.
 
 JNoise was created in early 2020 by Lukas Mansour (Articdive). It was created for a project in Minecraft for custom terrain generation.
