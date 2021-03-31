@@ -95,7 +95,7 @@ Example: Getting 3D Perlin-Noise:
     }
 ```
 
-### Getting Fractals (Octavated) Noise Values
+### Getting Octavated (Fractal) Noise Values
 In this case way to get noise values is the exact same (using getNoise()), except in the creation of your builder you use the octavated noise type
 and supply a noise-type to octavate.
 
