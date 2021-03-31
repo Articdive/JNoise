@@ -58,11 +58,11 @@ dependencies {
 ## Usage
 
 ### Picking your Noise-Type.
-The JNoise library supports Perlin, OpenSimplex, value, Worley and white noise.
+The JNoise library supports "Perlin", "OpenSimplex", "Value", "Worley" and "White" noise.
 
-It also supports octavated (fractals) versions of all noise types.
+It also supports octavated (fractal) versions of all noise types.
 
-Every noise-type has different features, e.g. Perlin Noise supports different types of interpolation, whereas OpenSimplex does not support interpolation.
+Every noise-type has different customizable features, e.g. Perlin Noise has different types of interpolation to choose from and Worley Noise's point distribution can be altered.
 
 These are all documented in the respective builders/generators of the noise-type.
 
@@ -76,7 +76,7 @@ Example: Creating a noise-generator using Perlin Noise with cosine interpolation
 ### Getting Normal Noise Values
 The Noise's dimension has to do with the amount of parameters. If you add two doubles after the getNoise method, you will receive 2 dimensional noise.
 
-All Noise Implementations support 2D, 3D and 4D noise.
+Nearly All Noise Implementations support 2D, 3D and 4D noise.
 
 Example: Getting 2D Perlin-Noise:
 ```java
