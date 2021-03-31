@@ -6,6 +6,7 @@
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=for-the-badge)](https://github.com/RichardLitt/standard-readme)
 [![Discord](https://img.shields.io/discord/525595722859675648?label=discord&style=for-the-badge)](https://discord.gg/JCx2eV4aWC)
 [![TeamCity Simple Build Status](https://img.shields.io/teamcity/build/s/JNoise_PublishJAR?server=https%3A%2F%2Fci.minestom.com&style=for-the-badge)](https://ci.minestom.com/viewType.html?buildTypeId=JNoise_PublishJAR)
+
 JNoise is a simple to use java-library for generating noise (including gradient noise) in Java.
 
 JNoise was created in early 2020 by Lukas Mansour (Articdive). It was created for a project in Minecraft for custom terrain generation.
@@ -20,7 +21,7 @@ It works for all Java 8+ apps and is built using [Gradle](https://gradle.org/).
 - [License](#license)
 
 ## Install
-### Maven and Gradle
+### Maven & Gradle
 To add JNoise to your project using [Gradle](https://gradle.org/) or [Maven](http://maven.apache.org/):
 
 Repository (Maven):
@@ -57,7 +58,7 @@ dependencies {
 ```
 ## Usage
 
-### Picking your Noise-Type.
+### Picking your Noise Algorithm.
 The JNoise library supports "Perlin", "OpenSimplex", "Value", "Worley" and "White" noise.
 
 It also supports octavated (fractal) versions of all noise types.
@@ -73,7 +74,7 @@ Example: Creating a noise-generator using Perlin Noise with cosine interpolation
         JNoise perlinCosine = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.COSINE).setSeed(1729).build();
 ```
 
-### Getting Normal Noise Values
+### Getting Noise Values
 The Noise's dimension has to do with the amount of parameters. If you add two doubles after the getNoise method, you will receive 2 dimensional noise.
 
 Nearly All Noise Implementations support 2D, 3D and 4D noise.
