@@ -53,8 +53,8 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
         x -= iX;
         y -= iY;
         double[] fractals = new double[]{
-            x,
-            y
+            x - iX,
+            y - iY
         };
         double[] vals = new double[]{
             evaluateCoord2D(iX, iY),
@@ -74,13 +74,10 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
         long iX = (long) Math.floor(x);
         long iY = (long) Math.floor(y);
         long iZ = (long) Math.floor(z);
-        x -= iX;
-        y -= iY;
-        z -= iZ;
         double[] fractals = new double[]{
-            x,
-            y,
-            z
+            x - iX,
+            y - iY,
+            z - iZ
         };
         double[] vals = new double[]{
             evaluateCoord3D(iX, iY, iZ),
@@ -106,15 +103,11 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
         long iY = (long) Math.floor(y);
         long iZ = (long) Math.floor(z);
         long iW = (long) Math.floor(w);
-        x -= iX;
-        y -= iY;
-        z -= iZ;
-        w -= iW;
         double[] fractals = new double[]{
-            x,
-            y,
-            z,
-            w
+            x - iX,
+            y - iY,
+            z - iZ,
+            w - iW
         };
         double[] vals = new double[]{
             evaluateCoord4D(iX, iY, iZ, iW),
