@@ -18,8 +18,8 @@
 
 package de.articdive.jnoise.noise.value;
 
-import de.articdive.jnoise.interpolation.Interpolation;
 import de.articdive.jnoise.api.NoiseGenerator;
+import de.articdive.jnoise.interpolation.Interpolation;
 import org.jetbrains.annotations.NotNull;
 
 import static de.articdive.jnoise.util.HashUtil.W_PRIME;
@@ -144,7 +144,7 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
         long n = seed ^ (X_PRIME * x);
         n ^= Y_PRIME * y;
 
-        return (n * n * n * 60493) / 2147483648.0;
+        return (n * n * n * 60493) / ((double) (Long.MAX_VALUE) + 1.0);
     }
 
     private double evaluateCoord3D(long x, long y, long z) {
@@ -152,7 +152,7 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
         n ^= Y_PRIME * y;
         n ^= Z_PRIME * z;
 
-        return (n * n * n * 60493) / 2147483648.0;
+        return (n * n * n * 60493) / ((double) (Long.MAX_VALUE) + 1.0);
     }
 
     private double evaluateCoord4D(long x, long y, long z, long w) {
@@ -161,7 +161,7 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
         n ^= Z_PRIME * z;
         n ^= W_PRIME * w;
 
-        return (n * n * n * 60493) / 2147483648.0;
+        return (n * n * n * 60493) / ((double) (Long.MAX_VALUE) + 1.0);
     }
 
 }
