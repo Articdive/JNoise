@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Lukas Mansour
  */
-public class FastSimplexGenerator extends NoiseGenerator<FastSimplexResult> {
+public final class FastSimplexGenerator extends NoiseGenerator<FastSimplexResult> {
     private final OpenSimplex2F simplex;
     private final double frequency;
     private final Simplex2DVariant variant2D;

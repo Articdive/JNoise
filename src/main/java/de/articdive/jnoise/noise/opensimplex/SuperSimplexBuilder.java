@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Lukas Mansour
  */
-public class SuperSimplexBuilder extends NoiseBuilder {
+public final class SuperSimplexBuilder extends NoiseBuilder {
     private long seed = 1729;
     private double frequency = 1.0;
     private Simplex2DVariant variant2D = Simplex2DVariant.CLASSIC;

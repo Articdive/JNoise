@@ -23,7 +23,7 @@ import de.articdive.jnoise.api.NoiseResult;
 /**
  * @author Lukas Mansour
  */
-public class PerlinNoiseResult implements NoiseResult {
+public final class PerlinNoiseResult implements NoiseResult {
     private final double noiseValue;
 
     PerlinNoiseResult(double noiseValue) {

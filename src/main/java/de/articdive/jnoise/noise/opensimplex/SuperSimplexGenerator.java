@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Lukas Mansour
  */
-public class SuperSimplexGenerator extends NoiseGenerator<SuperSimplexResult> {
+public final class SuperSimplexGenerator extends NoiseGenerator<SuperSimplexResult> {
     private final OpenSimplex2S simplex;
     private final double frequency;
     private final Simplex2DVariant variant2D;
