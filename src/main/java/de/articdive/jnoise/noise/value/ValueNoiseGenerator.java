@@ -29,6 +29,7 @@ import static de.articdive.jnoise.util.HashUtil.Z_PRIME;
 
 /**
  * The bounds of this Value Noise implementation are: [-1, 1].
+ * Please note that this implementation roughly repeats every 2*{@link Integer#MAX_VALUE} values.
  *
  * @author Lukas Mansour
  */
@@ -55,10 +56,10 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
             y - iY
         };
         double[] vals = new double[]{
-            evaluateCoord2D(iX, iY),
-            evaluateCoord2D(iX + 1, iY),
-            evaluateCoord2D(iX, iY + 1),
-            evaluateCoord2D(iX + 1, iY + 1)
+            evaluateCoord2D((int) iX, (int) iY),
+            evaluateCoord2D((int) iX + 1, (int) iY),
+            evaluateCoord2D((int) iX, (int) iY + 1),
+            evaluateCoord2D((int) iX + 1, (int) iY + 1)
         };
         return new ValueNoiseResult(interpolation.lerp(fractals, vals));
     }
@@ -132,27 +133,27 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
     }
 
     private double evaluateCoord2D(long x, long y) {
-        long n = seed ^ (X_PRIME * x);
+        int n = (((int) seed) ^ (X_PRIME * ((int) x)));
         n ^= Y_PRIME * y;
 
-        return (n * n * n * 60493) / ((double) (Long.MAX_VALUE) + 1.0);
+        return (n * n * n * 60493) / 2147483648.0;
     }
 
     private double evaluateCoord3D(long x, long y, long z) {
-        long n = seed ^ (X_PRIME * x);
+        int n = (((int) seed) ^ (X_PRIME * ((int) x)));
         n ^= Y_PRIME * y;
         n ^= Z_PRIME * z;
 
-        return (n * n * n * 60493) / ((double) (Long.MAX_VALUE) + 1.0);
+        return (n * n * n * 60493) / 2147483648.0;
     }
 
     private double evaluateCoord4D(long x, long y, long z, long w) {
-        long n = seed ^ (X_PRIME * x);
+        int n = (((int) seed) ^ (X_PRIME * ((int) x)));
         n ^= Y_PRIME * y;
         n ^= Z_PRIME * z;
         n ^= W_PRIME * w;
 
-        return (n * n * n * 60493) / ((double) (Long.MAX_VALUE) + 1.0);
+        return (n * n * n * 60493) / 2147483648.0;
     }
 
 }

@@ -141,6 +141,7 @@ public final class JNoise {
 
         /**
          * @deprecated updated: use {@link #fastSimplex()} or {@link #superSimplex()}.
+         * @return {@link OpenSimplexBuilder}
          */
         @Deprecated
         @NotNull
