@@ -50,8 +50,6 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
         y *= frequency;
         long iX = (long) Math.floor(x);
         long iY = (long) Math.floor(y);
-        x -= iX;
-        y -= iY;
         double[] fractals = new double[]{
             x - iX,
             y - iY
