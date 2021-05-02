@@ -14,7 +14,6 @@ final class PerlinNoiseTests {
     private final JNoise perlinQuadratic = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.QUADRATIC).build();
     private final JNoise perlinCubic = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.CUBIC).build();
     private final JNoise perlinQuartic = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.QUARTIC).build();
-    private final JNoise perlinQuintic = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.QUINTIC).build();
 
     @Test
     @DisplayName("Linear Perlin Noise Zero Equality")
@@ -63,16 +62,6 @@ final class PerlinNoiseTests {
             assertEquals(0.0, Math.abs(perlinQuartic.getNoise(i, i)));
             assertEquals(0.0, Math.abs(perlinQuartic.getNoise(i, i, i)));
             assertEquals(0.0, Math.abs(perlinQuartic.getNoise(i, i, i, i)));
-        }
-    }
-
-    @Test
-    @DisplayName("Quintic Perlin Noise Zero Equality")
-    void testQuinticZeroEquality() {
-        for (int i = 0; i < 10; i++) {
-            assertEquals(0.0, Math.abs(perlinQuintic.getNoise(i, i)));
-            assertEquals(0.0, Math.abs(perlinQuintic.getNoise(i, i, i)));
-            assertEquals(0.0, Math.abs(perlinQuintic.getNoise(i, i, i, i)));
         }
     }
 
@@ -156,22 +145,6 @@ final class PerlinNoiseTests {
     }
 
     @Test
-    @DisplayName("Quintic Perlin Noise 2D")
-    void testQuintic2D() {
-        assertEquals(-0.30004646432719710, perlinQuintic.getNoise(20.20, 20.30));
-        assertEquals(-0.29003262580739770, perlinQuintic.getNoise(20.21, 20.29));
-        assertEquals(-0.28002288425545446, perlinQuintic.getNoise(20.22, 20.28));
-        assertEquals(-0.27001648507533116, perlinQuintic.getNoise(20.23, 20.27));
-        assertEquals(-0.26001290712421155, perlinQuintic.getNoise(20.24, 20.26));
-        assertEquals(-0.25001188565419590, perlinQuintic.getNoise(20.25, 20.25));
-        assertEquals(-0.24001343905492714, perlinQuintic.getNoise(20.26, 20.24));
-        assertEquals(-0.23001790441357792, perlinQuintic.getNoise(20.27, 20.23));
-        assertEquals(-0.22002598616831054, perlinQuintic.getNoise(20.28, 20.22));
-        assertEquals(-0.21003882135548507, perlinQuintic.getNoise(20.29, 20.21));
-        assertEquals(-0.20005806414488353, perlinQuintic.getNoise(20.30, 20.20));
-    }
-
-    @Test
     @DisplayName("Linear Perlin Noise 3D")
     void testLinear3D() {
         assertEquals(0.2152149951701008400, perlinLinear.getNoise(20.20, 20.30, 20.20));
@@ -251,22 +224,6 @@ final class PerlinNoiseTests {
     }
 
     @Test
-    @DisplayName("Quintic Perlin Noise 3D")
-    void testQuintic3D() {
-        assertEquals(0.30002176553662685, perlinQuintic.getNoise(20.20, 20.30, 20.20));
-        assertEquals(0.29001358102717170, perlinQuintic.getNoise(20.21, 20.29, 20.21));
-        assertEquals(0.28000652980766194, perlinQuintic.getNoise(20.22, 20.28, 20.22));
-        assertEquals(0.26999968995741870, perlinQuintic.getNoise(20.23, 20.27, 20.23));
-        assertEquals(0.25999199835322845, perlinQuintic.getNoise(20.24, 20.26, 20.24));
-        assertEquals(0.24998217121850355, perlinQuintic.getNoise(20.25, 20.25, 20.25));
-        assertEquals(0.23996860675860912, perlinQuintic.getNoise(20.26, 20.24, 20.26));
-        assertEquals(0.22994927215393046, perlinQuintic.getNoise(20.27, 20.23, 20.27));
-        assertEquals(0.21992157827722870, perlinQuintic.getNoise(20.28, 20.22, 20.28));
-        assertEquals(0.20988224696299568, perlinQuintic.getNoise(20.29, 20.21, 20.29));
-        assertEquals(0.19982717744958975, perlinQuintic.getNoise(20.30, 20.20, 20.30));
-    }
-
-    @Test
     @DisplayName("Linear Perlin Noise 4D")
     void testLinear4D() {
         assertEquals(-0.250273277659262770, perlinLinear.getNoise(20.20, 20.30, 20.20, 20.30));
@@ -343,21 +300,5 @@ final class PerlinNoiseTests {
         assertEquals(-0.15977960727201806, perlinQuartic.getNoise(20.28, 20.22, 20.28, 20.22));
         assertEquals(-0.12971814131729548, perlinQuartic.getNoise(20.29, 20.21, 20.29, 20.21));
         assertEquals(-0.09964483282283966, perlinQuartic.getNoise(20.30, 20.20, 20.30, 20.20));
-    }
-
-    @Test
-    @DisplayName("Quintic Perlin Noise 4D")
-    void testQuintic4D() {
-        assertEquals(-0.39995319113955075, perlinQuintic.getNoise(20.20, 20.30, 20.20, 20.30));
-        assertEquals(-0.36997061728777697, perlinQuintic.getNoise(20.21, 20.29, 20.21, 20.29));
-        assertEquals(-0.33998113967607010, perlinQuintic.getNoise(20.22, 20.28, 20.22, 20.28));
-        assertEquals(-0.30998679964635810, perlinQuintic.getNoise(20.23, 20.27, 20.23, 20.27));
-        assertEquals(-0.27998888588962156, perlinQuintic.getNoise(20.24, 20.26, 20.24, 20.26));
-        assertEquals(-0.24998811402794116, perlinQuintic.getNoise(20.25, 20.25, 20.25, 20.25));
-        assertEquals(-0.21998476696317120, perlinQuintic.getNoise(20.26, 20.24, 20.26, 20.24));
-        assertEquals(-0.18997880862690084, perlinQuintic.getNoise(20.27, 20.23, 20.27, 20.23));
-        assertEquals(-0.15996998446767900, perlinQuintic.getNoise(20.28, 20.22, 20.28, 20.22));
-        assertEquals(-0.12995792271274510, perlinQuintic.getNoise(20.29, 20.21, 20.29, 20.21));
-        assertEquals(-0.09994225111692662, perlinQuintic.getNoise(20.30, 20.20, 20.30, 20.20));
     }
 }

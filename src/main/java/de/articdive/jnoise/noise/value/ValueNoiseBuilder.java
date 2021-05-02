@@ -20,6 +20,8 @@ package de.articdive.jnoise.noise.value;
 
 import de.articdive.jnoise.JNoise;
 import de.articdive.jnoise.api.NoiseBuilder;
+import de.articdive.jnoise.fade_functions.FadeFunction;
+import de.articdive.jnoise.fade_functions.FadeFunctionType;
 import de.articdive.jnoise.interpolation.Interpolation;
 import de.articdive.jnoise.interpolation.InterpolationType;
 import org.jetbrains.annotations.NotNull;
@@ -31,6 +33,7 @@ public final class ValueNoiseBuilder extends NoiseBuilder {
     private long seed = 1729;
     private double frequency = 1.00;
     private Interpolation interpolation = InterpolationType.LINEAR;
+    private FadeFunction fadeFunction = FadeFunctionType.NONE;
 
     /**
      * Sets the seed for the {@link ValueNoiseGenerator}.
@@ -71,9 +74,21 @@ public final class ValueNoiseBuilder extends NoiseBuilder {
         return this;
     }
 
+    /**
+     * Sets the FadeFunction for the {@link ValueNoiseGenerator}.
+     *
+     * @param fadeFunction the new {@link FadeFunction} for the {@link ValueNoiseGenerator}.
+     * @return {@link ValueNoiseBuilder} this
+     */
+    @NotNull
+    public ValueNoiseBuilder setFadeFunction(@NotNull FadeFunction fadeFunction) {
+        this.fadeFunction = fadeFunction;
+        return this;
+    }
+
     @Override
     @NotNull
     public JNoise build() {
-        return JNoise.build(new ValueNoiseGenerator(seed, interpolation, frequency));
+        return JNoise.build(new ValueNoiseGenerator(seed, interpolation, fadeFunction, frequency));
     }
 }

@@ -16,40 +16,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.interpolation;
+package de.articdive.jnoise.fade_functions;
 
 /**
  * @author Lukas Mansour
  */
-public enum InterpolationType implements Interpolation {
-    LINEAR {
+public enum FadeFunctionType implements FadeFunction {
+    NONE {
         @Override
-        public double lerp(double x, double a, double b) {
-            return a + x * (b - a);
+        public double fade(double t) {
+            return t;
         }
     },
-    QUADRATIC {
+    SMOOTHSTEP {
         @Override
-        public double lerp(double x, double a, double b) {
-            return a + (b - a) * x * x;
+        public double fade(double t) {
+            return t * t * (3 - 2 * t); // -(2t^3) + 3t^2
         }
     },
-    CUBIC {
+    IMPROVED_PERLIN_NOISE {
         @Override
-        public double lerp(double x, double a, double b) {
-            return a + (b - a) * x * x * x;
+        public double fade(double t) {
+            return t * t * t * (t * (t * 6 - 15) + 10); // 6t^5 - (15t^4) + 10t^3
         }
-    },
-    QUARTIC {
-        @Override
-        public double lerp(double x, double a, double b) {
-            return a + (b - a) * x * x * x * x;
-        }
-    },
-    COSINE {
-        @Override
-        public double lerp(double x, double a, double b) {
-            return a + ((1.0 - Math.cos(x * Math.PI)) / 2.0) * (b - a);
-        }
-    },
+    }
 }

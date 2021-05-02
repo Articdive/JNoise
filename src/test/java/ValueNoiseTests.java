@@ -14,7 +14,6 @@ final class ValueNoiseTests {
     private final JNoise valueQuadratic = JNoise.newBuilder().value().setInterpolation(InterpolationType.QUADRATIC).build();
     private final JNoise valueCubic = JNoise.newBuilder().value().setInterpolation(InterpolationType.CUBIC).build();
     private final JNoise valueQuartic = JNoise.newBuilder().value().setInterpolation(InterpolationType.QUARTIC).build();
-    private final JNoise valueQuintic = JNoise.newBuilder().value().setInterpolation(InterpolationType.QUINTIC).build();
 
     @Test
     @DisplayName("Linear Value Noise 2D")
@@ -37,13 +36,13 @@ final class ValueNoiseTests {
     void testCosine2D() {
         assertEquals(0.5425376394926695, valueCosine.getNoise(20.20, 20.30));
         assertEquals(0.5576478831576213, valueCosine.getNoise(20.21, 20.29));
-        assertEquals(0.5722875802570215, valueCosine.getNoise(20.22, 20.28));
+        assertEquals(0.5722875802570216, valueCosine.getNoise(20.22, 20.28));
         assertEquals(0.5864377843974118, valueCosine.getNoise(20.23, 20.27));
         assertEquals(0.6000813048792091, valueCosine.getNoise(20.24, 20.26));
         assertEquals(0.6132027363940580, valueCosine.getNoise(20.25, 20.25));
         assertEquals(0.6257884818874290, valueCosine.getNoise(20.26, 20.24));
         assertEquals(0.6378267685338003, valueCosine.getNoise(20.27, 20.23));
-        assertEquals(0.6493076567985127, valueCosine.getNoise(20.28, 20.22));
+        assertEquals(0.6493076567985125, valueCosine.getNoise(20.28, 20.22));
         assertEquals(0.6602230425874057, valueCosine.getNoise(20.29, 20.21));
     }
 
@@ -96,22 +95,6 @@ final class ValueNoiseTests {
     }
 
     @Test
-    @DisplayName("Quintic Value Noise 2D")
-    void testQuintic2D() {
-        assertEquals(0.7624030949467910, valueQuintic.getNoise(20.20, 20.30));
-        assertEquals(0.7628432217016551, valueQuintic.getNoise(20.21, 20.29));
-        assertEquals(0.7632264905937898, valueQuintic.getNoise(20.22, 20.28));
-        assertEquals(0.7635585535732952, valueQuintic.getNoise(20.23, 20.27));
-        assertEquals(0.7638446709154072, valueQuintic.getNoise(20.24, 20.26));
-        assertEquals(0.7640897251684802, valueQuintic.getNoise(20.25, 20.25));
-        assertEquals(0.7642982350794885, valueQuintic.getNoise(20.26, 20.24));
-        assertEquals(0.7644743694954046, valueQuintic.getNoise(20.27, 20.23));
-        assertEquals(0.7646219612399004, valueQuintic.getNoise(20.28, 20.22));
-        assertEquals(0.7647445209659212, valueQuintic.getNoise(20.29, 20.21));
-        assertEquals(0.7648452509857832, valueQuintic.getNoise(20.30, 20.20));
-    }
-
-    @Test
     @DisplayName("Linear Value Noise 3D")
     void testLinear3D() {
         assertEquals(-0.015465804846957712, valueLinear.getNoise(20.20, 20.30, 20.20));
@@ -132,7 +115,7 @@ final class ValueNoiseTests {
     void testCosine3D() {
         assertEquals(-0.20313094737075510, valueCosine.getNoise(20.20, 20.30, 20.20));
         assertEquals(-0.19822045346639680, valueCosine.getNoise(20.21, 20.29, 20.21));
-        assertEquals(-0.19202802608709920, valueCosine.getNoise(20.22, 20.28, 20.22));
+        assertEquals(-0.19202802608709912, valueCosine.getNoise(20.22, 20.28, 20.22));
         assertEquals(-0.18458748613176700, valueCosine.getNoise(20.23, 20.27, 20.23));
         assertEquals(-0.17593984376814492, valueCosine.getNoise(20.24, 20.26, 20.24));
         assertEquals(-0.16613300239752368, valueCosine.getNoise(20.25, 20.25, 20.25));
@@ -191,22 +174,6 @@ final class ValueNoiseTests {
     }
 
     @Test
-    @DisplayName("Quintic Value Noise 3D")
-    void testQuintic3D() {
-        assertEquals(-0.5714900170413222, valueQuintic.getNoise(20.20, 20.30, 20.20));
-        assertEquals(-0.5716765706203079, valueQuintic.getNoise(20.21, 20.29, 20.21));
-        assertEquals(-0.5717667779735468, valueQuintic.getNoise(20.22, 20.28, 20.22));
-        assertEquals(-0.5717590950042164, valueQuintic.getNoise(20.23, 20.27, 20.23));
-        assertEquals(-0.5716509953959923, valueQuintic.getNoise(20.24, 20.26, 20.24));
-        assertEquals(-0.5714389573272936, valueQuintic.getNoise(20.25, 20.25, 20.25));
-        assertEquals(-0.5711184507870978, valueQuintic.getNoise(20.26, 20.24, 20.26));
-        assertEquals(-0.5706839256130837, valueQuintic.getNoise(20.27, 20.23, 20.27));
-        assertEquals(-0.5701288003938713, valueQuintic.getNoise(20.28, 20.22, 20.28));
-        assertEquals(-0.5694454523996617, valueQuintic.getNoise(20.29, 20.21, 20.29));
-        assertEquals(-0.5686252087295275, valueQuintic.getNoise(20.30, 20.20, 20.30));
-    }
-
-    @Test
     @DisplayName("Linear Value Noise 4D")
     void testLinear4D() {
         assertEquals(-0.27155371284820107, valueLinear.getNoise(20.20, 20.30, 20.20, 20.30));
@@ -227,13 +194,13 @@ final class ValueNoiseTests {
     void testCosine4D() {
         assertEquals(-0.44794587009341924, valueCosine.getNoise(20.20, 20.30, 20.20, 20.30));
         assertEquals(-0.45792778866370615, valueCosine.getNoise(20.21, 20.29, 20.21, 20.29));
-        assertEquals(-0.46720196172111650, valueCosine.getNoise(20.22, 20.28, 20.22, 20.28));
+        assertEquals(-0.46720196172111633, valueCosine.getNoise(20.22, 20.28, 20.22, 20.28));
         assertEquals(-0.47572269105491805, valueCosine.getNoise(20.23, 20.27, 20.23, 20.27));
         assertEquals(-0.48344754878030720, valueCosine.getNoise(20.24, 20.26, 20.24, 20.26));
         assertEquals(-0.49033766570427710, valueCosine.getNoise(20.25, 20.25, 20.25, 20.25));
         assertEquals(-0.49635798082828700, valueCosine.getNoise(20.26, 20.24, 20.26, 20.24));
         assertEquals(-0.50147744978187660, valueCosine.getNoise(20.27, 20.23, 20.27, 20.23));
-        assertEquals(-0.50566921062627180, valueCosine.getNoise(20.28, 20.22, 20.28, 20.22));
+        assertEquals(-0.50566921062627170, valueCosine.getNoise(20.28, 20.22, 20.28, 20.22));
         assertEquals(-0.50891070612672750, valueCosine.getNoise(20.29, 20.21, 20.29, 20.21));
     }
 
@@ -283,21 +250,5 @@ final class ValueNoiseTests {
         assertEquals(-0.8419462854411555, valueQuartic.getNoise(20.28, 20.22, 20.28, 20.22));
         assertEquals(-0.8417637500151618, valueQuartic.getNoise(20.29, 20.21, 20.29, 20.21));
         assertEquals(-0.841382623211427, valueQuartic.getNoise(20.30, 20.20, 20.30, 20.20));
-    }
-
-    @Test
-    @DisplayName("Quintic Value Noise 4D")
-    void testQuintic4D() {
-        assertEquals(-0.8475484399314703, valueQuintic.getNoise(20.20, 20.30, 20.20, 20.30));
-        assertEquals(-0.8481644271044300, valueQuintic.getNoise(20.21, 20.29, 20.21, 20.29));
-        assertEquals(-0.8486715590279789, valueQuintic.getNoise(20.22, 20.28, 20.22, 20.28));
-        assertEquals(-0.8490760368986171, valueQuintic.getNoise(20.23, 20.27, 20.23, 20.27));
-        assertEquals(-0.8493832004044602, valueQuintic.getNoise(20.24, 20.26, 20.24, 20.26));
-        assertEquals(-0.8495975333102798, valueQuintic.getNoise(20.25, 20.25, 20.25, 20.25));
-        assertEquals(-0.8497226698474615, valueQuintic.getNoise(20.26, 20.24, 20.26, 20.24));
-        assertEquals(-0.8497614017892918, valueQuintic.getNoise(20.27, 20.23, 20.27, 20.23));
-        assertEquals(-0.8497156861073099, valueQuintic.getNoise(20.28, 20.22, 20.28, 20.22));
-        assertEquals(-0.8495866531188780, valueQuintic.getNoise(20.29, 20.21, 20.29, 20.21));
-        assertEquals(-0.8493746150495843, valueQuintic.getNoise(20.30, 20.20, 20.30, 20.20));
     }
 }

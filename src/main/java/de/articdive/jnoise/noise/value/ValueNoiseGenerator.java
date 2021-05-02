@@ -19,6 +19,7 @@
 package de.articdive.jnoise.noise.value;
 
 import de.articdive.jnoise.api.NoiseGenerator;
+import de.articdive.jnoise.fade_functions.FadeFunction;
 import de.articdive.jnoise.interpolation.Interpolation;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,11 +37,13 @@ import static de.articdive.jnoise.util.HashUtil.Z_PRIME;
 public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> {
     private final long seed;
     private final Interpolation interpolation;
+    private final FadeFunction fadeFunction;
     private final double frequency;
 
-    ValueNoiseGenerator(long seed, @NotNull Interpolation interpolation, double frequency) {
+    ValueNoiseGenerator(long seed, @NotNull Interpolation interpolation, @NotNull FadeFunction fadeFunction, double frequency) {
         this.seed = seed;
         this.interpolation = interpolation;
+        this.fadeFunction = fadeFunction;
         this.frequency = frequency;
     }
 
@@ -52,8 +55,8 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
         long iX = (long) Math.floor(x);
         long iY = (long) Math.floor(y);
         double[] fractals = new double[]{
-            x - iX,
-            y - iY
+            fadeFunction.fade(x - iX),
+            fadeFunction.fade(y - iY)
         };
         double[] vals = new double[]{
             evaluateCoord2D((int) iX, (int) iY),
@@ -74,9 +77,9 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
         long iY = (long) Math.floor(y);
         long iZ = (long) Math.floor(z);
         double[] fractals = new double[]{
-            x - iX,
-            y - iY,
-            z - iZ
+            fadeFunction.fade(x - iX),
+            fadeFunction.fade(y - iY),
+            fadeFunction.fade(z - iZ)
         };
         double[] vals = new double[]{
             evaluateCoord3D(iX, iY, iZ),
@@ -103,10 +106,10 @@ public final class ValueNoiseGenerator extends NoiseGenerator<ValueNoiseResult> 
         long iZ = (long) Math.floor(z);
         long iW = (long) Math.floor(w);
         double[] fractals = new double[]{
-            x - iX,
-            y - iY,
-            z - iZ,
-            w - iW
+            fadeFunction.fade(x - iX),
+            fadeFunction.fade(y - iY),
+            fadeFunction.fade(z - iZ),
+            fadeFunction.fade(w - iW)
         };
         double[] vals = new double[]{
             evaluateCoord4D(iX, iY, iZ, iW),

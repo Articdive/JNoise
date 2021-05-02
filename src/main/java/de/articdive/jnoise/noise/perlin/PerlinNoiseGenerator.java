@@ -19,6 +19,7 @@
 package de.articdive.jnoise.noise.perlin;
 
 import de.articdive.jnoise.api.NoiseGenerator;
+import de.articdive.jnoise.fade_functions.FadeFunction;
 import de.articdive.jnoise.interpolation.Interpolation;
 import de.articdive.jnoise.util.HashUtil;
 import de.articdive.jnoise.util.vectors.Vector2D;
@@ -78,11 +79,13 @@ public final class PerlinNoiseGenerator extends NoiseGenerator<PerlinNoiseResult
 
     private final long seed;
     private final Interpolation interpolation;
+    private final FadeFunction fadeFunction;
     private final double frequency;
 
-    PerlinNoiseGenerator(long seed, @NotNull Interpolation interpolation, double frequency) {
+    PerlinNoiseGenerator(long seed, @NotNull Interpolation interpolation, @NotNull FadeFunction fadeFunction, double frequency) {
         this.seed = seed;
         this.interpolation = interpolation;
+        this.fadeFunction = fadeFunction;
         this.frequency = frequency;
     }
 
@@ -100,8 +103,8 @@ public final class PerlinNoiseGenerator extends NoiseGenerator<PerlinNoiseResult
         y -= Math.floor(y);
         // Compute fade values (fractal values for interpolation to remove artifacts)
         double[] fractals = new double[]{
-            fade(x),
-            fade(y)
+            fadeFunction.fade(x),
+            fadeFunction.fade(y)
         };
         double[] dots = new double[]{
             // (VECTOR_2D.length - 1) = 7.
@@ -130,9 +133,9 @@ public final class PerlinNoiseGenerator extends NoiseGenerator<PerlinNoiseResult
         z -= iZ;
         // Compute fade values (fractal values for interpolation to remove artifacts)
         double[] fractals = new double[]{
-            fade(x),
-            fade(y),
-            fade(z)
+            fadeFunction.fade(x),
+            fadeFunction.fade(y),
+            fadeFunction.fade(z)
         };
         double[] dots = new double[]{
             // (VECTOR_3D.length - 1) = 19.
@@ -175,10 +178,10 @@ public final class PerlinNoiseGenerator extends NoiseGenerator<PerlinNoiseResult
         w -= iW;
         // Compute fade values (fractal values for interpolation to remove artifacts)
         double[] fractals = new double[]{
-            fade(x),
-            fade(y),
-            fade(z),
-            fade(w)
+            fadeFunction.fade(x),
+            fadeFunction.fade(y),
+            fadeFunction.fade(z),
+            fadeFunction.fade(w)
         };
         double[] dots = new double[]{
             // (VECTOR_4D.length - 1) = 19.
@@ -216,15 +219,5 @@ public final class PerlinNoiseGenerator extends NoiseGenerator<PerlinNoiseResult
                 .dot(VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY + 1, iZ + 1, iW + 1) & 47])
         };
         return new PerlinNoiseResult(interpolation.lerp(fractals, dots));
-    }
-
-    /**
-     * Fade method used to remove interpolation artifacts.
-     *
-     * @param t value to fade.
-     * @return faded t value.
-     */
-    private static double fade(double t) {
-        return t * t * t * (t * (t * 6 - 15) + 10);
     }
 }
