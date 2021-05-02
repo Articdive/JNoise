@@ -26,6 +26,7 @@ public interface FadeFunction {
      * Specifies a value to fade, this is used to remove interpolation artefacts.
      *
      * @param t value (position) in the unit cube to fade.
+     * @return the faded value at t.
      */
     double fade(double t);
 }
