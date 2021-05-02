@@ -16,24 +16,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.noise.opensimplex;
+package de.articdive.jnoise.api.builders;
 
-import de.articdive.jnoise.api.NoiseResult;
+import de.articdive.jnoise.api.NoiseBuilder;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Lukas Mansour
  */
-@Deprecated
-public class OpenSimplexResult implements NoiseResult {
-    private final double noiseValue;
-
-    OpenSimplexResult(double noiseValue) {
-        this.noiseValue = noiseValue;
-    }
-
-    @Override
-    public double getNoiseValue() {
-        return noiseValue;
-    }
-
+public interface Seeded<T extends NoiseBuilder> {
+    @NotNull T setSeed(long seed);
 }

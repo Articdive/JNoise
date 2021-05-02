@@ -19,6 +19,13 @@
 package de.articdive.jnoise.api;
 
 import de.articdive.jnoise.JNoise;
+import de.articdive.jnoise.api.builders.Seeded;
+import de.articdive.jnoise.noise.opensimplex.FastSimplexBuilder;
+import de.articdive.jnoise.noise.opensimplex.SuperSimplexBuilder;
+import de.articdive.jnoise.noise.perlin.PerlinNoiseBuilder;
+import de.articdive.jnoise.noise.value.ValueNoiseBuilder;
+import de.articdive.jnoise.noise.white.WhiteNoiseBuilder;
+import de.articdive.jnoise.noise.worley.WorleyNoiseBuilder;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -33,5 +40,24 @@ public abstract class NoiseBuilder {
      */
     @NotNull
     public abstract JNoise build();
+
+    public static Long getSeed(NoiseBuilder builder) {
+        if (!(builder instanceof Seeded)) {
+            return null;
+        } else if (builder instanceof WorleyNoiseBuilder) {
+            return WorleyNoiseBuilder.getSeed((WorleyNoiseBuilder) builder);
+        } else if (builder instanceof SuperSimplexBuilder) {
+            return SuperSimplexBuilder.getSeed((SuperSimplexBuilder) builder);
+        } else if (builder instanceof FastSimplexBuilder) {
+            return FastSimplexBuilder.getSeed((FastSimplexBuilder) builder);
+        } else if (builder instanceof PerlinNoiseBuilder) {
+            return PerlinNoiseBuilder.getSeed((PerlinNoiseBuilder) builder);
+        } else if (builder instanceof ValueNoiseBuilder) {
+            return ValueNoiseBuilder.getSeed((ValueNoiseBuilder) builder);
+        } else if (builder instanceof WhiteNoiseBuilder) {
+            return WhiteNoiseBuilder.getSeed((WhiteNoiseBuilder) builder);
+        }
+        return null;
+    }
 
 }

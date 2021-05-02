@@ -20,6 +20,7 @@ package de.articdive.jnoise.noise.perlin;
 
 import de.articdive.jnoise.JNoise;
 import de.articdive.jnoise.api.NoiseBuilder;
+import de.articdive.jnoise.api.builders.Seeded;
 import de.articdive.jnoise.fade_functions.FadeFunction;
 import de.articdive.jnoise.fade_functions.FadeFunctionType;
 import de.articdive.jnoise.interpolation.Interpolation;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Lukas Mansour
  */
-public final class PerlinNoiseBuilder extends NoiseBuilder {
+public final class PerlinNoiseBuilder extends NoiseBuilder implements Seeded<PerlinNoiseBuilder> {
     private long seed = 1729;
     private double frequency = 1.00;
     private Interpolation interpolation = InterpolationType.LINEAR;
@@ -41,6 +42,7 @@ public final class PerlinNoiseBuilder extends NoiseBuilder {
      * @param seed the new seed for the {@link PerlinNoiseGenerator}.
      * @return {@link PerlinNoiseBuilder} this
      */
+    @Override
     @NotNull
     public PerlinNoiseBuilder setSeed(long seed) {
         this.seed = seed;
@@ -90,5 +92,9 @@ public final class PerlinNoiseBuilder extends NoiseBuilder {
     @NotNull
     public JNoise build() {
         return JNoise.build(new PerlinNoiseGenerator(seed, interpolation, fadeFunction, frequency));
+    }
+
+    public static long getSeed(PerlinNoiseBuilder builder) {
+        return builder.seed;
     }
 }

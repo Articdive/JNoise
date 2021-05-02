@@ -28,11 +28,12 @@ import org.jetbrains.annotations.NotNull;
  * @author Lukas Mansour
  */
 public final class OctaveNoiseBuilder extends NoiseBuilder {
-    private JNoise noise;
+    private NoiseBuilder noise;
     private int octaves = 1;
     private double persistence = 1;
     private double lacunarity = 1;
     private FractalFunction fractalFunction = FractalFunctionType.FBM;
+    private boolean incrementSeed = true;
 
     /**
      * Sets the noise that will be octavated.
@@ -41,7 +42,7 @@ public final class OctaveNoiseBuilder extends NoiseBuilder {
      * @return {@link OctaveNoiseGenerator} this
      */
     @NotNull
-    public OctaveNoiseBuilder setNoise(@NotNull JNoise noise) {
+    public OctaveNoiseBuilder setNoise(@NotNull NoiseBuilder noise) {
         this.noise = noise;
         return this;
     }
@@ -94,12 +95,24 @@ public final class OctaveNoiseBuilder extends NoiseBuilder {
     /**
      * Sets the FractalFunction for the {@link OctaveNoiseGenerator}.
      *
-     * @param fractalFunction the new {@link FractalFunction} for the {@link OctaveNoiseGenerator}
+     * @param fractalFunction the new {@link FractalFunction} for the {@link OctaveNoiseGenerator}.
      * @return {@link OctaveNoiseBuilder} this
      */
     @NotNull
     public OctaveNoiseBuilder setFractalFunction(@NotNull FractalFunction fractalFunction) {
         this.fractalFunction = fractalFunction;
+        return this;
+    }
+
+    /**
+     * Should the Noise Generator increment the seed with each octave?
+     *
+     * @param incrementSeed true if seed should increment each octave for the {@link OctaveNoiseGenerator}.
+     * @return {@link OctaveNoiseBuilder} this
+     */
+    @NotNull
+    public OctaveNoiseBuilder setIncrementSeed(boolean incrementSeed) {
+        this.incrementSeed = incrementSeed;
         return this;
     }
 
@@ -109,6 +122,6 @@ public final class OctaveNoiseBuilder extends NoiseBuilder {
         if (noise == null) {
             throw new NullPointerException("A noise implementation to octavate has not been specified!");
         }
-        return JNoise.build(new OctaveNoiseGenerator(noise, octaves, persistence, lacunarity, fractalFunction));
+        return JNoise.build(new OctaveNoiseGenerator(noise, octaves, persistence, lacunarity, fractalFunction, incrementSeed));
     }
 }

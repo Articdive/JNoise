@@ -20,6 +20,7 @@ package de.articdive.jnoise.noise.worley;
 
 import de.articdive.jnoise.JNoise;
 import de.articdive.jnoise.api.NoiseBuilder;
+import de.articdive.jnoise.api.builders.Seeded;
 import de.articdive.jnoise.distance_functions.DistanceFunction;
 import de.articdive.jnoise.distance_functions.DistanceFunctionType;
 import org.jetbrains.annotations.NotNull;
@@ -29,8 +30,8 @@ import java.util.function.LongFunction;
 /**
  * @author Lukas Mansour
  */
-public final class WorleyNoiseBuilder extends NoiseBuilder {
-    private long seed = 1729;
+public final class WorleyNoiseBuilder extends NoiseBuilder implements Seeded<WorleyNoiseBuilder> {
+    protected long seed = 1729;
     private double frequency = 1.00;
     private DistanceFunction distanceFunction = DistanceFunctionType.EUCLIDEAN_SQUARED;
     private LongFunction<Integer> fpAmountFunction = i -> 1;
@@ -41,6 +42,7 @@ public final class WorleyNoiseBuilder extends NoiseBuilder {
      * @param seed the new seed for the {@link WorleyNoiseGenerator}.
      * @return {@link WorleyNoiseBuilder} this
      */
+    @Override
     @NotNull
     public WorleyNoiseBuilder setSeed(long seed) {
         this.seed = seed;
@@ -92,5 +94,9 @@ public final class WorleyNoiseBuilder extends NoiseBuilder {
     @NotNull
     public JNoise build() {
         return JNoise.build(new WorleyNoiseGenerator(seed, frequency, distanceFunction, fpAmountFunction));
+    }
+
+    public static long getSeed(WorleyNoiseBuilder builder) {
+        return builder.seed;
     }
 }

@@ -103,7 +103,7 @@ and supply a noise-type to octavate.
 Example: Creating a noise-generator using octavated Perlin Noise with cosine interpolation.
 ```java
         public JNoise octavatedPerlin = JNoise.newBuilder().octavated().setNoise(
-            JNoise.newBuilder().perlin().setInterpolation(InterpolationType.COSINE).setSeed(1629).build()
+            JNoise.newBuilder().perlin().setInterpolation(InterpolationType.COSINE).setSeed(1629)
         ).setOctaves(4).setPersistence(0.5).setLacunarity(0.5).build();
 ```
 

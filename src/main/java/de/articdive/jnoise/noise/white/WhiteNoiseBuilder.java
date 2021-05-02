@@ -20,12 +20,13 @@ package de.articdive.jnoise.noise.white;
 
 import de.articdive.jnoise.JNoise;
 import de.articdive.jnoise.api.NoiseBuilder;
+import de.articdive.jnoise.api.builders.Seeded;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Lukas Mansour
  */
-public final class WhiteNoiseBuilder extends NoiseBuilder {
+public final class WhiteNoiseBuilder extends NoiseBuilder implements Seeded<WhiteNoiseBuilder> {
     private long seed = 1729;
 
     /**
@@ -34,6 +35,7 @@ public final class WhiteNoiseBuilder extends NoiseBuilder {
      * @param seed the new seed for the {@link WhiteNoiseGenerator}.
      * @return {@link WhiteNoiseBuilder} this
      */
+    @Override
     @NotNull
     public WhiteNoiseBuilder setSeed(long seed) {
         this.seed = seed;
@@ -44,5 +46,9 @@ public final class WhiteNoiseBuilder extends NoiseBuilder {
     @NotNull
     public JNoise build() {
         return JNoise.build(new WhiteNoiseGenerator(seed));
+    }
+
+    public static long getSeed(WhiteNoiseBuilder builder) {
+        return builder.seed;
     }
 }
