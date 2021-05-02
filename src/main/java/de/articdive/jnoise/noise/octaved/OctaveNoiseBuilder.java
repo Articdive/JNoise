@@ -20,6 +20,8 @@ package de.articdive.jnoise.noise.octaved;
 
 import de.articdive.jnoise.JNoise;
 import de.articdive.jnoise.api.NoiseBuilder;
+import de.articdive.jnoise.fractal_functions.FractalFunction;
+import de.articdive.jnoise.fractal_functions.FractalFunctionType;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -30,6 +32,7 @@ public final class OctaveNoiseBuilder extends NoiseBuilder {
     private int octaves = 1;
     private double persistence = 1;
     private double lacunarity = 1;
+    private FractalFunction fractalFunction = FractalFunctionType.FBM;
 
     /**
      * Sets the noise that will be octavated.
@@ -88,6 +91,17 @@ public final class OctaveNoiseBuilder extends NoiseBuilder {
         return this;
     }
 
+    /**
+     * Sets the FractalFunction for the {@link OctaveNoiseGenerator}.
+     *
+     * @param fractalFunction the new {@link FractalFunction} for the {@link OctaveNoiseGenerator}
+     * @return {@link OctaveNoiseBuilder} this
+     */
+    @NotNull
+    public OctaveNoiseBuilder setFractalFunction(@NotNull FractalFunction fractalFunction) {
+        this.fractalFunction = fractalFunction;
+        return this;
+    }
 
     @Override
     @NotNull
@@ -95,6 +109,6 @@ public final class OctaveNoiseBuilder extends NoiseBuilder {
         if (noise == null) {
             throw new NullPointerException("A noise implementation to octavate has not been specified!");
         }
-        return JNoise.build(new OctaveNoiseGenerator(noise, octaves, persistence, lacunarity));
+        return JNoise.build(new OctaveNoiseGenerator(noise, octaves, persistence, lacunarity, fractalFunction));
     }
 }

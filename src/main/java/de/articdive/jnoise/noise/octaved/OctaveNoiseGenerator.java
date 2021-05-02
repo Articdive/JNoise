@@ -20,6 +20,7 @@ package de.articdive.jnoise.noise.octaved;
 
 import de.articdive.jnoise.JNoise;
 import de.articdive.jnoise.api.NoiseGenerator;
+import de.articdive.jnoise.fractal_functions.FractalFunction;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -30,12 +31,20 @@ public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult
     private final int octaves;
     private final double persistence;
     private final double lacunarity;
+    private final FractalFunction fractalFunction;
 
-    OctaveNoiseGenerator(@NotNull JNoise noise, int octaves, double persistence, double lacunarity) {
+    OctaveNoiseGenerator(
+        @NotNull JNoise noise,
+        int octaves,
+        double persistence,
+        double lacunarity,
+        @NotNull FractalFunction fractalFunction
+    ) {
         this.noise = noise;
         this.octaves = octaves;
         this.persistence = persistence;
         this.lacunarity = lacunarity;
+        this.fractalFunction = fractalFunction;
     }
 
     @Override
@@ -44,10 +53,10 @@ public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult
         double output = 0;
         double amplitude = 1;
         double lacunarity = 1;
-        double maxValue = 0;
+        double maxValue = 0; // Bounding value
         for (int i = 0; i < this.octaves; i++) {
             // Frequency is already inlcuded in the NoiseGenerator!
-            output += noise.getNoise(x * lacunarity, y * lacunarity) * amplitude;
+            output += fractalFunction.fractalize(noise.getNoise(x * lacunarity, y * lacunarity)) * amplitude;
             maxValue += amplitude;
 
             amplitude *= this.persistence;
@@ -65,7 +74,7 @@ public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult
         double maxValue = 0;
         for (int i = 0; i < this.octaves; i++) {
             // Frequency is already inlcuded in the PerlinNoiseGenerator!
-            output += noise.getNoise(x * lacunarity, y * lacunarity, z * lacunarity) * amplitude;
+            output += fractalFunction.fractalize(noise.getNoise(x * lacunarity, y * lacunarity, z * lacunarity)) * amplitude;
             maxValue += amplitude;
 
             amplitude *= this.persistence;
@@ -83,7 +92,8 @@ public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult
         double maxValue = 0;
         for (int i = 0; i < this.octaves; i++) {
             // Frequency is already inlcuded in the PerlinNoiseGenerator!
-            output += noise.getNoise(x * lacunarity, y * lacunarity, z * lacunarity, w * lacunarity) * amplitude;
+            output +=
+                fractalFunction.fractalize(noise.getNoise(x * lacunarity, y * lacunarity, z * lacunarity, w * lacunarity)) * amplitude;
             maxValue += amplitude;
 
             amplitude *= this.persistence;
