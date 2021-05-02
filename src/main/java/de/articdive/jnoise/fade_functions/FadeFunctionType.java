@@ -24,20 +24,20 @@ package de.articdive.jnoise.fade_functions;
 public enum FadeFunctionType implements FadeFunction {
     NONE {
         @Override
-        public double fade(double t) {
+        public double fade(double t) { // basically linear; f(t) = t
             return t;
         }
     },
     SMOOTHSTEP {
         @Override
         public double fade(double t) {
-            return t * t * (3 - 2 * t); // -(2t^3) + 3t^2
+            return t * t * (3 - 2 * t); // f(t) = -(2t^3) + 3t^2
         }
     },
     IMPROVED_PERLIN_NOISE {
         @Override
         public double fade(double t) {
-            return t * t * t * (t * (t * 6 - 15) + 10); // 6t^5 - (15t^4) + 10t^3
+            return t * t * t * (t * (t * 6 - 15) + 10); // f(t) = 6t^5 - (15t^4) + 10t^3
         }
     }
 }

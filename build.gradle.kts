@@ -1,5 +1,5 @@
 group = "de.articdive"
-version = "2.1.0-SNAPSHOT"
+version = "2.1.0"
 
 plugins {
     java
