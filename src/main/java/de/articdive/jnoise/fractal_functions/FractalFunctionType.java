@@ -34,7 +34,7 @@ public enum FractalFunctionType implements FractalFunction {
             return Math.abs(a) * 2 - 1;
         }
     },
-    RIGID_MULTI {
+    RIDGED_MULTI {
         @Override
         public double fractalize(double a) {
             return 1 - Math.abs(a);

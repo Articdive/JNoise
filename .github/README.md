@@ -65,8 +65,6 @@ It also supports octavated (fractal) versions of all noise types.
 
 Every noise-type has different customizable features, e.g. Perlin Noise has different types of interpolation to choose from and Worley Noise's point distribution can be altered.
 
-These are all documented in the respective builders/generators of the noise-type.
-
 Normally if you are using an IDE, the code-completition is intuitive enough to use this library without having to check the source-code.
 
 Example: Creating a noise-generator using Perlin Noise with cosine interpolation.
@@ -106,6 +104,25 @@ Example: Creating a noise-generator using octavated Perlin Noise with cosine int
             JNoise.newBuilder().perlin().setInterpolation(InterpolationType.COSINE).setSeed(1629)
         ).setOctaves(4).setPersistence(0.5).setLacunarity(0.5).build();
 ```
+
+### Customizable Features
+All noise types have a customizable seed and frequency.
+#### Perlin & Value Noise
+- Interpolation function
+- Fade function
+#### Worley Noise
+- Distance function
+- Feature point amount
+#### OpenSimplex Noise
+- Fast & SuperSimplex algorithms
+- Simplex variants
+#### Octavated Noise
+- The underlying noise type to be octavated
+- Amount of octaves
+- Lacunarity
+- Persistance / Gain
+- Fractal functions
+- Seed incrementation per octave (Increases the seed by 1 each octave)
 
 ## Maintainers
 [@Articdive](https://www.github.com/Articdive/)
