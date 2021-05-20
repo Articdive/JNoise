@@ -35,8 +35,9 @@ public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult
     private final double lacunarity;
     private final FractalFunction fractalFunction;
     private final boolean incrementSeed;
-    // Special cached value
+    // Special values
     private final long seed;
+    private final double fractalBounding;
 
     OctaveNoiseGenerator(
         @NotNull NoiseBuilder noiseBuilder,
@@ -53,6 +54,12 @@ public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult
         this.fractalFunction = fractalFunction;
         this.incrementSeed = incrementSeed;
         seed = NoiseBuilder.getSeed(noiseBuilder);
+        double fractalBounding = 0;
+        double amplitude = 1;
+        for (int i = 0; i < this.octaves; i++) {
+            fractalBounding += amplitude;
+        }
+        this.fractalBounding = fractalBounding;
     }
 
     @Override
@@ -61,21 +68,19 @@ public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult
         JNoise noise = noiseBuilder.build();
         double output = 0;
         double amplitude = 1;
-        double lacunarity = 1;
-        double maxValue = 0; // Bounding value
         long seedIncrement = 0;
         for (int i = 0; i < this.octaves; i++) {
             if (noiseBuilder instanceof Seeded && incrementSeed) {
                 noise = ((Seeded<?>) noiseBuilder).setSeed(seed + seedIncrement++).build();
             }
             // Frequency is already inlcuded in the NoiseGenerator!
-            output += fractalFunction.fractalize(noise.getNoise(x * lacunarity, y * lacunarity)) * amplitude;
-            maxValue += amplitude;
+            output += fractalFunction.fractalize(noise.getNoise(x, y)) * amplitude;
 
             amplitude *= this.persistence;
-            lacunarity *= this.lacunarity;
+            x *= lacunarity;
+            y *= lacunarity;
         }
-        return new OctaveNoiseResult(output / maxValue);
+        return new OctaveNoiseResult(output / fractalBounding);
     }
 
     @Override
@@ -84,21 +89,20 @@ public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult
         JNoise noise = noiseBuilder.build();
         double output = 0;
         double amplitude = 1;
-        double lacunarity = 1;
-        double maxValue = 0;
         long seedIncrement = 0;
         for (int i = 0; i < this.octaves; i++) {
             if (noiseBuilder instanceof Seeded && incrementSeed) {
                 noise = ((Seeded<?>) noiseBuilder).setSeed(seed + seedIncrement++).build();
             }
-            // Frequency is already inlcuded in the PerlinNoiseGenerator!
-            output += fractalFunction.fractalize(noise.getNoise(x * lacunarity, y * lacunarity, z * lacunarity)) * amplitude;
-            maxValue += amplitude;
+
+            output += fractalFunction.fractalize(noise.getNoise(x, y, z)) * amplitude;
 
             amplitude *= this.persistence;
-            lacunarity *= this.lacunarity;
+            x *= lacunarity;
+            y *= lacunarity;
+            z *= lacunarity;
         }
-        return new OctaveNoiseResult(output / maxValue);
+        return new OctaveNoiseResult(output / fractalBounding);
     }
 
     @Override
@@ -107,21 +111,20 @@ public final class OctaveNoiseGenerator extends NoiseGenerator<OctaveNoiseResult
         JNoise noise = noiseBuilder.build();
         double output = 0;
         double amplitude = 1;
-        double lacunarity = 1;
-        double maxValue = 0;
         long seedIncrement = 0;
         for (int i = 0; i < this.octaves; i++) {
             if (noiseBuilder instanceof Seeded && incrementSeed) {
                 noise = ((Seeded<?>) noiseBuilder).setSeed(seed + seedIncrement++).build();
             }
-            // Frequency is already inlcuded in the PerlinNoiseGenerator!
-            output +=
-                fractalFunction.fractalize(noise.getNoise(x * lacunarity, y * lacunarity, z * lacunarity, w * lacunarity)) * amplitude;
-            maxValue += amplitude;
+
+            output += fractalFunction.fractalize(noise.getNoise(x, y, z, w)) * amplitude;
 
             amplitude *= this.persistence;
-            lacunarity *= this.lacunarity;
+            x *= lacunarity;
+            y *= lacunarity;
+            z *= lacunarity;
+            w *= lacunarity;
         }
-        return new OctaveNoiseResult(output / maxValue);
+        return new OctaveNoiseResult(output / fractalBounding);
     }
 }
