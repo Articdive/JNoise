@@ -19,7 +19,7 @@ jobs:
                   java-version: '16'
                   distribution: 'adopt'
             - name: Publish to Minestom Repository
-              run: gradle :DataPublisher:publish
+              run: gradle publish
               env:
                   MINESTOM_REPO_CREDS_USR: ${{ secrets.MINESTOM_REPO_CREDS_USR }}
                   MINESTOM_REPO_CREDS_PSW: ${{ secrets.MINESTOM_REPO_CREDS_PSW }}
