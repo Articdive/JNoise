@@ -1,0 +1,25 @@
+name: Publish (Minestom Repo)
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    publish:
+        runs-on: ubuntu-latest
+        permissions:
+            contents: read
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Set up JDK 16
+              uses: actions/setup-java@v2
+              with:
+                  java-version: '16'
+                  distribution: 'adopt'
+            - name: Publish to Minestom Repository
+              run: gradle :DataPublisher:publish
+              env:
+                  MINESTOM_REPO_CREDS_USR: ${{ secrets.MINESTOM_REPO_CREDS_USR }}
+                  MINESTOM_REPO_CREDS_PSW: ${{ secrets.MINESTOM_REPO_CREDS_PSW }}
