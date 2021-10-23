@@ -32,6 +32,11 @@ public final class MinkowskiDistance implements DistanceFunction {
     }
 
     @Override
+    public double distance(double x0, double x1) {
+        return Math.abs(x0 - x1);
+    }
+
+    @Override
     public double distance(double x0, double y0, double x1, double y1) {
         return Math.pow(
             Math.pow(Math.abs(x0 - x1), p) + Math.pow(Math.abs(y0 - y1), p),

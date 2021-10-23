@@ -24,11 +24,15 @@ import de.articdive.jnoise.simplex_variants.Simplex3DVariant;
 import de.articdive.jnoise.simplex_variants.Simplex4DVariant;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @author Articdive
  */
-public final class FastSimplexGenerator extends NoiseGenerator<FastSimplexResult> {
-    private final OpenSimplex2F simplex;
+public final class FastSimplexGenerator implements NoiseGenerator<FastSimplexResult> {
+    private static final Map<Long, OpenSimplex2F> simplexInstances = new HashMap<>();
+    private final long seed;
     private final double frequency;
     private final Simplex2DVariant variant2D;
     private final Simplex3DVariant variant3D;
@@ -41,7 +45,7 @@ public final class FastSimplexGenerator extends NoiseGenerator<FastSimplexResult
         @NotNull Simplex3DVariant variant3D,
         @NotNull Simplex4DVariant variant4D
     ) {
-        this.simplex = new OpenSimplex2F(seed);
+        this.seed = seed;
         this.frequency = frequency;
         this.variant2D = variant2D;
         this.variant3D = variant3D;
@@ -49,10 +53,18 @@ public final class FastSimplexGenerator extends NoiseGenerator<FastSimplexResult
     }
 
     @Override
-    @NotNull
-    public FastSimplexResult evaluateNoise(double x, double y) {
+    public double evaluateNoise(double x, long seed) {
+        x *= frequency;
+        OpenSimplex2F simplex = simplexInstances.computeIfAbsent(seed, OpenSimplex2F::new);
+
+        return simplex.noise2(x, 1.0);
+    }
+
+    @Override
+    public double evaluateNoise(double x, double y, long seed) {
         x *= frequency;
         y *= frequency;
+        OpenSimplex2F simplex = simplexInstances.computeIfAbsent(seed, OpenSimplex2F::new);
 
         double result;
         switch (variant2D) {
@@ -66,15 +78,15 @@ public final class FastSimplexGenerator extends NoiseGenerator<FastSimplexResult
             }
         }
 
-        return new FastSimplexResult(result);
+        return result;
     }
 
     @Override
-    @NotNull
-    public FastSimplexResult evaluateNoise(double x, double y, double z) {
+    public double evaluateNoise(double x, double y, double z, long seed) {
         x *= frequency;
         y *= frequency;
         z *= frequency;
+        OpenSimplex2F simplex = simplexInstances.computeIfAbsent(seed, OpenSimplex2F::new);
 
         double result;
         switch (variant3D) {
@@ -92,16 +104,16 @@ public final class FastSimplexGenerator extends NoiseGenerator<FastSimplexResult
             }
         }
 
-        return new FastSimplexResult(result);
+        return result;
     }
 
     @Override
-    @NotNull
-    public FastSimplexResult evaluateNoise(double x, double y, double z, double w) {
+    public double evaluateNoise(double x, double y, double z, double w, long seed) {
         x *= frequency;
         y *= frequency;
         z *= frequency;
         w *= frequency;
+        OpenSimplex2F simplex = simplexInstances.computeIfAbsent(seed, OpenSimplex2F::new);
 
         double result;
         switch (variant4D) {
@@ -123,6 +135,80 @@ public final class FastSimplexGenerator extends NoiseGenerator<FastSimplexResult
             }
         }
 
-        return new FastSimplexResult(result);
+        return result;
+    }
+
+    @Override
+    public double evaluateNoise(double x) {
+        return evaluateNoise(x, seed);
+    }
+
+    @Override
+    public double evaluateNoise(double x, double y) {
+        return evaluateNoise(x, y, seed);
+
+    }
+
+    @Override
+    public double evaluateNoise(double x, double y, double z) {
+        return evaluateNoise(x, y, z, seed);
+    }
+
+    @Override
+    public double evaluateNoise(double x, double y, double z, double w) {
+        return evaluateNoise(x, y, z, w, seed);
+    }
+
+    @Override
+    @NotNull
+    public FastSimplexResult evaluateNoiseResult(double x, long seed) {
+        return new FastSimplexResult(evaluateNoise(x, seed));
+    }
+
+    @Override
+    @NotNull
+    public FastSimplexResult evaluateNoiseResult(double x, double y, long seed) {
+        return new FastSimplexResult(evaluateNoise(x, y, seed));
+    }
+
+    @Override
+    @NotNull
+    public FastSimplexResult evaluateNoiseResult(double x, double y, double z, long seed) {
+        return new FastSimplexResult(evaluateNoise(x, y, z, seed));
+    }
+
+    @Override
+    @NotNull
+    public FastSimplexResult evaluateNoiseResult(double x, double y, double z, double w, long seed) {
+        return new FastSimplexResult(evaluateNoise(x, y, z, w, seed));
+    }
+
+    @Override
+    @NotNull
+    public FastSimplexResult evaluateNoiseResult(double x) {
+        return new FastSimplexResult(evaluateNoise(x, seed));
+    }
+
+    @Override
+    @NotNull
+    public FastSimplexResult evaluateNoiseResult(double x, double y) {
+        return new FastSimplexResult(evaluateNoise(x, y, seed));
+    }
+
+    @Override
+    @NotNull
+    public FastSimplexResult evaluateNoiseResult(double x, double y, double z) {
+        return new FastSimplexResult(evaluateNoise(x, y, z, seed));
+    }
+
+    @Override
+    @NotNull
+    public FastSimplexResult evaluateNoiseResult(double x, double y, double z, double w) {
+        return new FastSimplexResult(evaluateNoise(x, y, z, w, seed));
+    }
+
+    @Override
+    public long getSeed() {
+        return seed;
     }
 }

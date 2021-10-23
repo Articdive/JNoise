@@ -31,6 +31,12 @@ public final class HashUtil {
 
     }
 
+    public static int hash1D(long seed, long x) {
+        long hash = seed ^ (X_PRIME * x);
+
+        return (int) finalizeHash(hash);
+    }
+
     public static int hash2D(long seed, long x, long y) {
         long hash = seed ^ (X_PRIME * x);
         hash ^= (Y_PRIME * y);

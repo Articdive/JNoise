@@ -16,23 +16,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.noise.octaved;
+package de.articdive.jnoise.modules.combination;
 
-import de.articdive.jnoise.api.NoiseResult;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.function.BiFunction;
 
 /**
  * @author Articdive
  */
-public final class OctaveNoiseResult implements NoiseResult {
-    private final double noiseValue;
-
-    OctaveNoiseResult(double noiseValue) {
-        this.noiseValue = noiseValue;
-    }
-
-    @Override
-    public double getNoiseValue() {
-        return noiseValue;
-    }
+@FunctionalInterface
+public interface Combiner extends BiFunction<@NotNull Double, @NotNull Double, @NotNull Double> {
 
 }

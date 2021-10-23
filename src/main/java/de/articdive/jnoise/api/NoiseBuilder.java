@@ -19,45 +19,46 @@
 package de.articdive.jnoise.api;
 
 import de.articdive.jnoise.JNoise;
-import de.articdive.jnoise.api.builders.Seeded;
-import de.articdive.jnoise.noise.opensimplex.FastSimplexBuilder;
-import de.articdive.jnoise.noise.opensimplex.SuperSimplexBuilder;
-import de.articdive.jnoise.noise.perlin.PerlinNoiseBuilder;
-import de.articdive.jnoise.noise.value.ValueNoiseBuilder;
-import de.articdive.jnoise.noise.white.WhiteNoiseBuilder;
-import de.articdive.jnoise.noise.worley.WorleyNoiseBuilder;
+import de.articdive.jnoise.api.module.NoiseModuleBuilder;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Articdive
  */
-public abstract class NoiseBuilder {
+public abstract class NoiseBuilder<NR extends NoiseResult, B extends NoiseBuilder<? extends NoiseResult, B>> {
+    private final List<NoiseModuleBuilder<?>> noiseModules = new ArrayList<>();
+    protected long seed = 1729;
+
+    @NotNull
+    public B addModule(@NotNull NoiseModuleBuilder<?> module) {
+        noiseModules.add(module);
+        return (B) this;
+    }
 
     /**
-     * Generates the noise-generator
+     * Sets the seed for the {@link NoiseGenerator}.
+     *
+     * @param seed the new seed for the {@link NoiseGenerator}.
+     * @return {@link B} this
+     */
+    public @NotNull B setSeed(long seed) {
+        this.seed = seed;
+        return (B) this;
+    }
+
+    /**
+     * Generates the noise generator.
      *
      * @return {@link JNoise}
      */
     @NotNull
-    public abstract JNoise build();
-
-    public static Long getSeed(NoiseBuilder builder) {
-        if (!(builder instanceof Seeded)) {
-            return null;
-        } else if (builder instanceof WorleyNoiseBuilder) {
-            return WorleyNoiseBuilder.getSeed((WorleyNoiseBuilder) builder);
-        } else if (builder instanceof SuperSimplexBuilder) {
-            return SuperSimplexBuilder.getSeed((SuperSimplexBuilder) builder);
-        } else if (builder instanceof FastSimplexBuilder) {
-            return FastSimplexBuilder.getSeed((FastSimplexBuilder) builder);
-        } else if (builder instanceof PerlinNoiseBuilder) {
-            return PerlinNoiseBuilder.getSeed((PerlinNoiseBuilder) builder);
-        } else if (builder instanceof ValueNoiseBuilder) {
-            return ValueNoiseBuilder.getSeed((ValueNoiseBuilder) builder);
-        } else if (builder instanceof WhiteNoiseBuilder) {
-            return WhiteNoiseBuilder.getSeed((WhiteNoiseBuilder) builder);
-        }
-        return null;
+    public final JNoise build() {
+        return JNoise.JNoiseBuilder.build(createGenerator(), noiseModules);
     }
 
+    @NotNull
+    protected abstract NoiseGenerator<NR> createGenerator();
 }

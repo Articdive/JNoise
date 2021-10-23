@@ -18,9 +18,7 @@
 
 package de.articdive.jnoise.noise.opensimplex;
 
-import de.articdive.jnoise.JNoise;
 import de.articdive.jnoise.api.NoiseBuilder;
-import de.articdive.jnoise.api.builders.Seeded;
 import de.articdive.jnoise.simplex_variants.Simplex2DVariant;
 import de.articdive.jnoise.simplex_variants.Simplex3DVariant;
 import de.articdive.jnoise.simplex_variants.Simplex4DVariant;
@@ -29,25 +27,11 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Articdive
  */
-public final class SuperSimplexBuilder extends NoiseBuilder implements Seeded<SuperSimplexBuilder> {
-    private long seed = 1729;
+public final class SuperSimplexBuilder extends NoiseBuilder<SuperSimplexResult, SuperSimplexBuilder> {
     private double frequency = 1.0;
     private Simplex2DVariant variant2D = Simplex2DVariant.CLASSIC;
     private Simplex3DVariant variant3D = Simplex3DVariant.CLASSIC;
     private Simplex4DVariant variant4D = Simplex4DVariant.CLASSIC;
-
-    /**
-     * Sets the seed for the {@link SuperSimplexGenerator}.
-     *
-     * @param seed the new seed for the {@link SuperSimplexGenerator}.
-     * @return {@link SuperSimplexBuilder} this
-     */
-    @Override
-    @NotNull
-    public SuperSimplexBuilder setSeed(long seed) {
-        this.seed = seed;
-        return this;
-    }
 
     /**
      * Sets the frequency for the {@link SuperSimplexGenerator}.
@@ -102,11 +86,7 @@ public final class SuperSimplexBuilder extends NoiseBuilder implements Seeded<Su
 
     @Override
     @NotNull
-    public JNoise build() {
-        return JNoise.build(new SuperSimplexGenerator(seed, frequency, variant2D, variant3D, variant4D));
-    }
-
-    public static long getSeed(SuperSimplexBuilder builder) {
-        return builder.seed;
+    protected SuperSimplexGenerator createGenerator() {
+        return new SuperSimplexGenerator(seed, frequency, variant2D, variant3D, variant4D);
     }
 }

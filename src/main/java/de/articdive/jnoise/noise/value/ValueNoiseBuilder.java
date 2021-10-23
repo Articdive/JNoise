@@ -18,9 +18,7 @@
 
 package de.articdive.jnoise.noise.value;
 
-import de.articdive.jnoise.JNoise;
 import de.articdive.jnoise.api.NoiseBuilder;
-import de.articdive.jnoise.api.builders.Seeded;
 import de.articdive.jnoise.fade_functions.FadeFunction;
 import de.articdive.jnoise.fade_functions.FadeFunctionType;
 import de.articdive.jnoise.interpolation.Interpolation;
@@ -30,24 +28,10 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Articdive
  */
-public final class ValueNoiseBuilder extends NoiseBuilder implements Seeded<ValueNoiseBuilder> {
-    private long seed = 1729;
+public final class ValueNoiseBuilder extends NoiseBuilder<ValueNoiseResult, ValueNoiseBuilder> {
     private double frequency = 1.00;
     private Interpolation interpolation = InterpolationType.LINEAR;
     private FadeFunction fadeFunction = FadeFunctionType.NONE;
-
-    /**
-     * Sets the seed for the {@link ValueNoiseGenerator}.
-     *
-     * @param seed the new seed for the {@link ValueNoiseGenerator}.
-     * @return {@link ValueNoiseBuilder} this
-     */
-    @Override
-    @NotNull
-    public ValueNoiseBuilder setSeed(long seed) {
-        this.seed = seed;
-        return this;
-    }
 
     /**
      * Sets the frequency for the {@link ValueNoiseGenerator}.
@@ -90,11 +74,7 @@ public final class ValueNoiseBuilder extends NoiseBuilder implements Seeded<Valu
 
     @Override
     @NotNull
-    public JNoise build() {
-        return JNoise.build(new ValueNoiseGenerator(seed, interpolation, fadeFunction, frequency));
-    }
-
-    public static long getSeed(ValueNoiseBuilder builder) {
-        return builder.seed;
+    protected ValueNoiseGenerator createGenerator() {
+        return new ValueNoiseGenerator(seed, interpolation, fadeFunction, frequency);
     }
 }

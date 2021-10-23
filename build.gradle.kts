@@ -1,21 +1,21 @@
 group = "de.articdive"
-version = "2.2.0-SNAPSHOT"
+version = "3.0.0-SNAPSHOT"
 
 plugins {
-    java
+    `java-library`
+    `maven-publish`
 }
 
 repositories {
-    jcenter()
     mavenCentral()
 }
 
 dependencies {
     // Jetbrains annotations
-    compileOnly("org.jetbrains:annotations:20.1.0")
+    compileOnly("org.jetbrains:annotations:22.0.0")
     // JUnit testing framework
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
 }
 
 tasks {
@@ -25,10 +25,20 @@ tasks {
 }
 
 java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
     withJavadocJar()
     withSourcesJar()
 }
 
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_8
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "de.articdive"
+            artifactId = "jnoise"
+            version = project.version as String
+
+            from(components["java"])
+        }
+    }
 }

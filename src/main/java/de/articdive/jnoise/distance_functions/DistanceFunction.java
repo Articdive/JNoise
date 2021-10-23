@@ -23,6 +23,16 @@ package de.articdive.jnoise.distance_functions;
  */
 public interface DistanceFunction {
     /**
+     * Gets the distance from a 1D point to another 1D point.
+     *
+     * @param x0 X-Coordinate of the first point.
+     * @param x1 X-Coordinate of the second point.
+     * @return a positive distance between P(x0) and Q(x1)
+     */
+    double distance(double x0, double x1);
+
+
+    /**
      * Gets the distance from a 2D point to another 2D point.
      *
      * @param x0 X-Coordinate of the first point.

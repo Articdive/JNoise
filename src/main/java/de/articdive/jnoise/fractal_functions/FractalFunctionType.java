@@ -25,7 +25,7 @@ public enum FractalFunctionType implements FractalFunction {
     FBM {
         @Override
         public double fractalize(double a) {
-            return a; // FBM is actually the base layout for OctaveNoiseGenerator
+            return a; // FBM is actually the base layout for the OctavationModule
         }
     },
     BILLOW {

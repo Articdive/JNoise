@@ -16,14 +16,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.api.builders;
+package de.articdive.jnoise.util.vectors;
 
-import de.articdive.jnoise.api.NoiseBuilder;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Articdive
  */
-public interface Seeded<T extends NoiseBuilder> {
-    @NotNull T setSeed(long seed);
+public final class Vector1D implements Vector {
+    private final double x;
+
+    public Vector1D(double x) {
+        this.x = x;
+    }
+
+    public double getX() {
+        return x;
+    }
+
+    public double dot(@NotNull Vector1D vector1D) {
+        return (x * vector1D.getX());
+    }
 }

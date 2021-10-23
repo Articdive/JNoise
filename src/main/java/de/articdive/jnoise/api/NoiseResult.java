@@ -19,8 +19,14 @@
 package de.articdive.jnoise.api;
 
 /**
+ * This interface denotes the NoiseResult class, which is used to store Noise Results.
+ * Useful when there are multiple ways of receiveing a "Result" not only a mathematical value but e.g. the closest feature.
+ *
  * @author Articdive
  */
 public interface NoiseResult {
-    double getNoiseValue();
+    /**
+     * @return double denoting the pure mathematical value of the noise result.
+     */
+    double getPureValue();
 }

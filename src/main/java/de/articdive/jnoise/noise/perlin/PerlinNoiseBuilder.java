@@ -18,9 +18,7 @@
 
 package de.articdive.jnoise.noise.perlin;
 
-import de.articdive.jnoise.JNoise;
 import de.articdive.jnoise.api.NoiseBuilder;
-import de.articdive.jnoise.api.builders.Seeded;
 import de.articdive.jnoise.fade_functions.FadeFunction;
 import de.articdive.jnoise.fade_functions.FadeFunctionType;
 import de.articdive.jnoise.interpolation.Interpolation;
@@ -30,24 +28,10 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Articdive
  */
-public final class PerlinNoiseBuilder extends NoiseBuilder implements Seeded<PerlinNoiseBuilder> {
-    private long seed = 1729;
+public final class PerlinNoiseBuilder extends NoiseBuilder<PerlinNoiseResult, PerlinNoiseBuilder> {
     private double frequency = 1.00;
     private Interpolation interpolation = InterpolationType.LINEAR;
     private FadeFunction fadeFunction = FadeFunctionType.IMPROVED_PERLIN_NOISE;
-
-    /**
-     * Sets the seed for the {@link PerlinNoiseGenerator}.
-     *
-     * @param seed the new seed for the {@link PerlinNoiseGenerator}.
-     * @return {@link PerlinNoiseBuilder} this
-     */
-    @Override
-    @NotNull
-    public PerlinNoiseBuilder setSeed(long seed) {
-        this.seed = seed;
-        return this;
-    }
 
     /**
      * Sets the frequency for the {@link PerlinNoiseGenerator}.
@@ -90,11 +74,7 @@ public final class PerlinNoiseBuilder extends NoiseBuilder implements Seeded<Per
 
     @Override
     @NotNull
-    public JNoise build() {
-        return JNoise.build(new PerlinNoiseGenerator(seed, interpolation, fadeFunction, frequency));
-    }
-
-    public static long getSeed(PerlinNoiseBuilder builder) {
-        return builder.seed;
+    protected PerlinNoiseGenerator createGenerator() {
+        return new PerlinNoiseGenerator(seed, interpolation, fadeFunction, frequency);
     }
 }

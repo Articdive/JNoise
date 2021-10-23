@@ -21,18 +21,19 @@ package de.articdive.jnoise.noise.perlin;
 import de.articdive.jnoise.api.NoiseResult;
 
 /**
+ * This class denotes the extended Result of Perlin Noise.
+ *
  * @author Articdive
  */
-public final class PerlinNoiseResult implements NoiseResult {
-    private final double noiseValue;
+public class PerlinNoiseResult implements NoiseResult {
+    private final double pureValue;
 
-    PerlinNoiseResult(double noiseValue) {
-        this.noiseValue = noiseValue;
+    PerlinNoiseResult(double pureValue) {
+        this.pureValue = pureValue;
     }
 
     @Override
-    public double getNoiseValue() {
-        return noiseValue;
+    public double getPureValue() {
+        return pureValue;
     }
-
 }

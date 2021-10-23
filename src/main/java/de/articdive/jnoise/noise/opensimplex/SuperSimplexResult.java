@@ -24,15 +24,15 @@ import de.articdive.jnoise.api.NoiseResult;
  * @author Articdive
  */
 public final class SuperSimplexResult implements NoiseResult {
-    private final double noiseValue;
+    private final double pureValue;
 
-    SuperSimplexResult(double noiseValue) {
-        this.noiseValue = noiseValue;
+    SuperSimplexResult(double pureValue) {
+        this.pureValue = pureValue;
     }
 
     @Override
-    public double getNoiseValue() {
-        return noiseValue;
+    public double getPureValue() {
+        return pureValue;
     }
 
 }

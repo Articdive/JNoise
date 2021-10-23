@@ -18,37 +18,32 @@
 
 package de.articdive.jnoise.noise.white;
 
-import de.articdive.jnoise.JNoise;
 import de.articdive.jnoise.api.NoiseBuilder;
-import de.articdive.jnoise.api.builders.Seeded;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author Articdive
  */
-public final class WhiteNoiseBuilder extends NoiseBuilder implements Seeded<WhiteNoiseBuilder> {
-    private long seed = 1729;
+public final class WhiteNoiseBuilder extends NoiseBuilder<WhiteNoiseResult, WhiteNoiseBuilder> {
+    private double frequency = 1.00;
 
     /**
-     * Sets the seed for the {@link WhiteNoiseGenerator}.
+     * Sets the frequency for the {@link WhiteNoiseGenerator}.
      *
-     * @param seed the new seed for the {@link WhiteNoiseGenerator}.
+     * @param frequency the new frequency for the {@link WhiteNoiseGenerator}.
      * @return {@link WhiteNoiseBuilder} this
      */
-    @Override
     @NotNull
-    public WhiteNoiseBuilder setSeed(long seed) {
-        this.seed = seed;
+    public WhiteNoiseBuilder setFrequency(double frequency) {
+        if (frequency <= 0) {
+            throw new IllegalArgumentException("Frequency must be a non-zero positive value.");
+        }
+        this.frequency = frequency;
         return this;
     }
 
     @Override
-    @NotNull
-    public JNoise build() {
-        return JNoise.build(new WhiteNoiseGenerator(seed));
-    }
-
-    public static long getSeed(WhiteNoiseBuilder builder) {
-        return builder.seed;
+    protected @NotNull WhiteNoiseGenerator createGenerator() {
+        return new WhiteNoiseGenerator(seed, frequency);
     }
 }

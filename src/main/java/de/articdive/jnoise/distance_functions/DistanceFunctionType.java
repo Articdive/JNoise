@@ -24,6 +24,11 @@ package de.articdive.jnoise.distance_functions;
 public enum DistanceFunctionType implements DistanceFunction {
     EUCLIDEAN {
         @Override
+        public double distance(double x0, double x1) {
+            return Math.sqrt(EUCLIDEAN_SQUARED.distance(x0, x1));
+        }
+
+        @Override
         public double distance(double x0, double y0, double x1, double y1) {
             return Math.sqrt(EUCLIDEAN_SQUARED.distance(x0, y0, x1, y1));
         }
@@ -39,6 +44,11 @@ public enum DistanceFunctionType implements DistanceFunction {
         }
     },
     EUCLIDEAN_SQUARED {
+        @Override
+        public double distance(double x0, double x1) {
+            return (x0 - x1) * (x0 - x1);
+        }
+
         @Override
         public double distance(double x0, double y0, double x1, double y1) {
             return (x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1);
@@ -56,6 +66,11 @@ public enum DistanceFunctionType implements DistanceFunction {
     },
     MANHATTAN {
         @Override
+        public double distance(double x0, double x1) {
+            return Math.abs(x0 - x1);
+        }
+
+        @Override
         public double distance(double x0, double y0, double x1, double y1) {
             return Math.abs(x0 - x1) + Math.abs(y0 - y1);
         }
@@ -71,6 +86,11 @@ public enum DistanceFunctionType implements DistanceFunction {
         }
     },
     CHEBYSHEV {
+        @Override
+        public double distance(double x0, double x1) {
+            return Math.abs(x0 - x1);
+        }
+
         @Override
         public double distance(double x0, double y0, double x1, double y1) {
             return Math.max(Math.abs(x0 - x1), Math.abs(y0 - y1));

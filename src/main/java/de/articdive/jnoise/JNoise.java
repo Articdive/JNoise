@@ -20,7 +20,8 @@ package de.articdive.jnoise;
 
 import de.articdive.jnoise.api.NoiseGenerator;
 import de.articdive.jnoise.api.NoiseResult;
-import de.articdive.jnoise.noise.octaved.OctaveNoiseBuilder;
+import de.articdive.jnoise.api.module.NoiseModule;
+import de.articdive.jnoise.api.module.NoiseModuleBuilder;
 import de.articdive.jnoise.noise.opensimplex.FastSimplexBuilder;
 import de.articdive.jnoise.noise.opensimplex.SuperSimplexBuilder;
 import de.articdive.jnoise.noise.perlin.PerlinNoiseBuilder;
@@ -29,14 +30,35 @@ import de.articdive.jnoise.noise.white.WhiteNoiseBuilder;
 import de.articdive.jnoise.noise.worley.WorleyNoiseBuilder;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * @author Articdive
+ * This is the main entrypoint class for JNoise.
  */
 public final class JNoise {
-    private final NoiseGenerator<?> noiseGenerator;
+    private final NoiseGenerator<? extends NoiseResult> noiseGenerator;
+    private final List<NoiseModule> noiseModules = new ArrayList<>();
 
-    private JNoise(@NotNull NoiseGenerator<?> noiseGenerator) {
+    private JNoise(@NotNull NoiseGenerator<? extends NoiseResult> noiseGenerator, List<NoiseModuleBuilder<?>> noiseModuleBuilders) {
         this.noiseGenerator = noiseGenerator;
+        for (NoiseModuleBuilder<?> builder : noiseModuleBuilders) {
+            noiseModules.add(builder.apply(noiseGenerator));
+        }
+    }
+
+    /**
+     * Evaluates noise at a 1D point.
+     *
+     * @param x The x value of the point.
+     * @return A double representing the noise at the point (x), its bounds are noise-type dependant!
+     */
+    public double getNoise(double x) {
+        double noise = noiseGenerator.evaluateNoise(x);
+        for (NoiseModule noiseModule : noiseModules) {
+            noise = noiseModule.apply1D(noise, x);
+        }
+        return noise;
     }
 
     /**
@@ -44,10 +66,14 @@ public final class JNoise {
      *
      * @param x The x value of the point
      * @param y The y value of the point
-     * @return A value representing the noise at the point (x,y), its bounds are noise-type dependant!
+     * @return A double representing the noise at the point (x,y), its bounds are noise-type dependant!
      */
     public double getNoise(double x, double y) {
-        return noiseGenerator.evaluateNoise(x, y).getNoiseValue();
+        double noise = noiseGenerator.evaluateNoise(x, y);
+        for (NoiseModule noiseModule : noiseModules) {
+            noise = noiseModule.apply2D(noise, x, y);
+        }
+        return noise;
     }
 
     /**
@@ -56,10 +82,14 @@ public final class JNoise {
      * @param x The x value of the point
      * @param y The y value of the point
      * @param z The z value of the point
-     * @return A value representing the noise at the point (x,y,z), its bounds are noise-type dependant!
+     * @return A double representing the noise at the point (x,y,z), its bounds are noise-type dependant!
      */
     public double getNoise(double x, double y, double z) {
-        return noiseGenerator.evaluateNoise(x, y, z).getNoiseValue();
+        double noise = noiseGenerator.evaluateNoise(x, y, z);
+        for (NoiseModule noiseModule : noiseModules) {
+            noise = noiseModule.apply3D(noise, x, y, z);
+        }
+        return noise;
     }
 
     /**
@@ -69,10 +99,28 @@ public final class JNoise {
      * @param y The y value of the point
      * @param z The z value of the point
      * @param w The w value of the point
-     * @return A value representing the noise at the point (x,y,z,w), its bounds are noise-type dependant!
+     * @return A double representing the noise at the point (x,y,z,w), its bounds are noise-type dependant!
      */
     public double getNoise(double x, double y, double z, double w) {
-        return noiseGenerator.evaluateNoise(x, y, z, w).getNoiseValue();
+        double noise = noiseGenerator.evaluateNoise(x, y, z, w);
+        for (NoiseModule noiseModule : noiseModules) {
+            noise = noiseModule.apply4D(noise, x, y, z, w);
+        }
+        return noise;
+    }
+
+    /**
+     * Evaluates noise at a 1D point.
+     *
+     * @param x The x value of the point.
+     * @return A {@link NoiseResult} representing the noise at the point (x), its bounds are noise-type dependant!
+     */
+    public NoiseResult getNoiseResult(double x) {
+        NoiseResult result = noiseGenerator.evaluateNoiseResult(x);
+        for (NoiseModule noiseModule : noiseModules) {
+            result = noiseModule.apply1D(result, x);
+        }
+        return result;
     }
 
     /**
@@ -84,7 +132,11 @@ public final class JNoise {
      */
     @NotNull
     public NoiseResult getNoiseResult(double x, double y) {
-        return noiseGenerator.evaluateNoise(x, y);
+        NoiseResult result = noiseGenerator.evaluateNoiseResult(x, y);
+        for (NoiseModule noiseModule : noiseModules) {
+            result = noiseModule.apply2D(result, x, y);
+        }
+        return result;
     }
 
     /**
@@ -97,7 +149,11 @@ public final class JNoise {
      */
     @NotNull
     public NoiseResult getNoiseResult(double x, double y, double z) {
-        return noiseGenerator.evaluateNoise(x, y, z);
+        NoiseResult result = noiseGenerator.evaluateNoiseResult(x, y, z);
+        for (NoiseModule noiseModule : noiseModules) {
+            result = noiseModule.apply3D(result, x, y, z);
+        }
+        return result;
     }
 
     /**
@@ -111,12 +167,11 @@ public final class JNoise {
      */
     @NotNull
     public NoiseResult getNoiseResult(double x, double y, double z, double w) {
-        return noiseGenerator.evaluateNoise(x, y, z, w);
-    }
-
-    @NotNull
-    public static JNoise build(@NotNull NoiseGenerator<?> generator) {
-        return new JNoise(generator);
+        NoiseResult result = noiseGenerator.evaluateNoiseResult(x, y, z, w);
+        for (NoiseModule noiseModule : noiseModules) {
+            result = noiseModule.apply4D(result, x, y, z, w);
+        }
+        return result;
     }
 
     @NotNull
@@ -154,13 +209,13 @@ public final class JNoise {
         }
 
         @NotNull
-        public OctaveNoiseBuilder octavated() {
-            return new OctaveNoiseBuilder();
+        public WorleyNoiseBuilder worley() {
+            return new WorleyNoiseBuilder();
         }
 
         @NotNull
-        public WorleyNoiseBuilder worley() {
-            return new WorleyNoiseBuilder();
+        public static JNoise build(@NotNull NoiseGenerator<? extends NoiseResult> generator, List<NoiseModuleBuilder<?>> noiseModules) {
+            return new JNoise(generator, noiseModules);
         }
     }
 }

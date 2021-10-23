@@ -16,31 +16,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.noise.worley;
+package de.articdive.jnoise.api.module;
 
-import de.articdive.jnoise.api.NoiseResult;
-import de.articdive.jnoise.util.vectors.Vector;
-import org.jetbrains.annotations.Nullable;
+import de.articdive.jnoise.JNoise;
+import de.articdive.jnoise.api.NoiseGenerator;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.function.Function;
 
 /**
  * @author Articdive
  */
-public final class WorleyNoiseResult<V extends Vector> implements NoiseResult {
-    private final double pureValue;
-    private final V closestPoint;
-
-    WorleyNoiseResult(double pureValue, @Nullable V closestPoint) {
-        this.pureValue = pureValue;
-        this.closestPoint = closestPoint;
-    }
-
-    @Override
-    public double getPureValue() {
-        return pureValue;
-    }
-
-    @Nullable
-    public V getClosestPoint() {
-        return closestPoint;
+public interface NoiseModuleBuilder<M extends NoiseModuleBuilder<M>> extends Function<@NotNull NoiseGenerator<?>, @NotNull NoiseModule> {
+    /**
+     * Builds the {@link NoiseModule} for your {@link JNoise} instance.
+     * Note: You need not include the build() method, as addModule() accepts the Builder.
+     * This is intentional behaviour.
+     *
+     * @return {@link M} this
+     */
+    default M build() {
+        return (M) this;
     }
 }

@@ -16,31 +16,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.noise.worley;
+package de.articdive.jnoise.modules.octavation;
 
 import de.articdive.jnoise.api.NoiseResult;
-import de.articdive.jnoise.util.vectors.Vector;
-import org.jetbrains.annotations.Nullable;
 
-/**
- * @author Articdive
- */
-public final class WorleyNoiseResult<V extends Vector> implements NoiseResult {
+final class OctavatedNoiseResult implements NoiseResult {
     private final double pureValue;
-    private final V closestPoint;
 
-    WorleyNoiseResult(double pureValue, @Nullable V closestPoint) {
+    public OctavatedNoiseResult(double pureValue) {
         this.pureValue = pureValue;
-        this.closestPoint = closestPoint;
     }
 
     @Override
     public double getPureValue() {
         return pureValue;
-    }
-
-    @Nullable
-    public V getClosestPoint() {
-        return closestPoint;
     }
 }

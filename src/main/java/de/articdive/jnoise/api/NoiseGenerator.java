@@ -21,43 +21,51 @@ package de.articdive.jnoise.api;
 import org.jetbrains.annotations.NotNull;
 
 /**
+ * @param <NR> {@link NoiseResult} class
  * @author Articdive
  */
-public abstract class NoiseGenerator<R extends NoiseResult> {
+public interface NoiseGenerator<NR extends NoiseResult> {
 
-    protected NoiseGenerator() {
-    }
+    double evaluateNoise(double x, long seed);
 
-    /**
-     * Evaluates the noise at a 2D point.
-     *
-     * @param x The x value of the point.
-     * @param y The y value of the point.
-     * @return A value representing the noise at the point (x,y), its bounds are noise-type dependant!
-     */
+    double evaluateNoise(double x, double y, long seed);
+
+    double evaluateNoise(double x, double y, double z, long seed);
+
+    double evaluateNoise(double x, double y, double z, double w, long seed);
+
+    double evaluateNoise(double x);
+
+    double evaluateNoise(double x, double y);
+
+    double evaluateNoise(double x, double y, double z);
+
+    double evaluateNoise(double x, double y, double z, double w);
+
     @NotNull
-    public abstract R evaluateNoise(double x, double y);
+    NR evaluateNoiseResult(double x, long seed);
 
-    /**
-     * Evaluates the noise at a 3D point.
-     *
-     * @param x The x value of the point.
-     * @param y The y value of the point.
-     * @param z The z value of the point.
-     * @return A value representing the noise at the point (x,y,z), its bounds are noise-type dependant!
-     */
     @NotNull
-    public abstract R evaluateNoise(double x, double y, double z);
+    NR evaluateNoiseResult(double x, double y, long seed);
 
-    /**
-     * Evaluates the noise at a 4D point.
-     *
-     * @param x The x value of the point.
-     * @param y The y value of the point.
-     * @param z The z value of the point.
-     * @param w The w value of the point.
-     * @return A value representing the noise at the point (x,y,z,w), its bounds are noise-type dependant!
-     */
     @NotNull
-    public abstract R evaluateNoise(double x, double y, double z, double w);
+    NR evaluateNoiseResult(double x, double y, double z, long seed);
+
+    @NotNull
+    NR evaluateNoiseResult(double x, double y, double z, double w, long seed);
+
+    @NotNull
+    NR evaluateNoiseResult(double x);
+
+    @NotNull
+    NR evaluateNoiseResult(double x, double y);
+
+    @NotNull
+    NR evaluateNoiseResult(double x, double y, double z);
+
+    @NotNull
+    NR evaluateNoiseResult(double x, double y, double z, double w);
+
+
+    long getSeed();
 }
