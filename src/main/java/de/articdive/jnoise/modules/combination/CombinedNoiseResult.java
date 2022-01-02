@@ -20,13 +20,12 @@ package de.articdive.jnoise.modules.combination;
 
 import de.articdive.jnoise.api.NoiseResult;
 
-final class CombinedNoiseResult implements NoiseResult {
-    private final double pureValue;
-
-    public CombinedNoiseResult(double pureValue) {
-        this.pureValue = pureValue;
-    }
-
+/**
+ * This class wraps the result of combined Noise.
+ *
+ * @author Articdive
+ */
+public record CombinedNoiseResult(double pureValue) implements NoiseResult {
     @Override
     public double getPureValue() {
         return pureValue;

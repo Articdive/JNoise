@@ -31,7 +31,7 @@ public class CombinationModule extends NoiseModule {
     private final Combiner combiner;
     private final JNoise extNoise;
 
-    public CombinationModule(
+    CombinationModule(
         @NotNull NoiseGenerator<?> noiseGenerator,
         @NotNull Combiner combiner,
         @NotNull JNoise extNoise

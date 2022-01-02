@@ -21,15 +21,11 @@ package de.articdive.jnoise.noise.value;
 import de.articdive.jnoise.api.NoiseResult;
 
 /**
+ * This class wraps the result of Value Noise.
+ *
  * @author Articdive
  */
-public final class ValueNoiseResult implements NoiseResult {
-    private final double pureValue;
-
-    ValueNoiseResult(double pureValue) {
-        this.pureValue = pureValue;
-    }
-
+public record ValueNoiseResult(double pureValue) implements NoiseResult {
     @Override
     public double getPureValue() {
         return pureValue;

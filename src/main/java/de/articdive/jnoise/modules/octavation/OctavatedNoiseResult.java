@@ -20,13 +20,12 @@ package de.articdive.jnoise.modules.octavation;
 
 import de.articdive.jnoise.api.NoiseResult;
 
-final class OctavatedNoiseResult implements NoiseResult {
-    private final double pureValue;
-
-    public OctavatedNoiseResult(double pureValue) {
-        this.pureValue = pureValue;
-    }
-
+/**
+ * This class wraps the result of octavated Noise.
+ *
+ * @author Articdive
+ */
+public record OctavatedNoiseResult(double pureValue) implements NoiseResult {
     @Override
     public double getPureValue() {
         return pureValue;

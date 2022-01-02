@@ -19,6 +19,7 @@
 package de.articdive.jnoise.api;
 
 import de.articdive.jnoise.JNoise;
+import de.articdive.jnoise.api.module.NoiseModule;
 import de.articdive.jnoise.api.module.NoiseModuleBuilder;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +32,14 @@ import java.util.List;
 public abstract class NoiseBuilder<NR extends NoiseResult, B extends NoiseBuilder<? extends NoiseResult, B>> {
     private final List<NoiseModuleBuilder<?>> noiseModules = new ArrayList<>();
     protected long seed = 1729;
-
+    
+    /**
+     * Adds a module to the {@link NoiseGenerator}.
+     *
+     * @param module the new {@link NoiseModule} to add to the {@link NoiseGenerator}.
+     * @return {@link B} this
+     */
+    @SuppressWarnings("unchecked")
     @NotNull
     public B addModule(@NotNull NoiseModuleBuilder<?> module) {
         noiseModules.add(module);
@@ -44,7 +52,9 @@ public abstract class NoiseBuilder<NR extends NoiseResult, B extends NoiseBuilde
      * @param seed the new seed for the {@link NoiseGenerator}.
      * @return {@link B} this
      */
-    public @NotNull B setSeed(long seed) {
+    @SuppressWarnings("unchecked")
+    @NotNull
+    public B setSeed(long seed) {
         this.seed = seed;
         return (B) this;
     }

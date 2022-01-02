@@ -21,18 +21,13 @@ package de.articdive.jnoise.noise.opensimplex;
 import de.articdive.jnoise.api.NoiseResult;
 
 /**
+ * This class wraps the result of Super Simplex Noise.
+ *
  * @author Articdive
  */
-public final class SuperSimplexResult implements NoiseResult {
-    private final double pureValue;
-
-    SuperSimplexResult(double pureValue) {
-        this.pureValue = pureValue;
-    }
-
+public record SuperSimplexResult(double pureValue) implements NoiseResult {
     @Override
     public double getPureValue() {
         return pureValue;
     }
-
 }

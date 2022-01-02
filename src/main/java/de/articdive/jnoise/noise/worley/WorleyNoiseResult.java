@@ -23,22 +23,19 @@ import de.articdive.jnoise.util.vectors.Vector;
 import org.jetbrains.annotations.Nullable;
 
 /**
+ * This class wraps the result of Worley Noise.
+ *
  * @author Articdive
  */
-public final class WorleyNoiseResult<V extends Vector> implements NoiseResult {
-    private final double pureValue;
-    private final V closestPoint;
-
-    WorleyNoiseResult(double pureValue, @Nullable V closestPoint) {
-        this.pureValue = pureValue;
-        this.closestPoint = closestPoint;
-    }
-
+public record WorleyNoiseResult<V extends Vector>(
+        double pureValue,
+        @Nullable V closestPoint
+) implements NoiseResult {
     @Override
     public double getPureValue() {
         return pureValue;
     }
-
+    
     @Nullable
     public V getClosestPoint() {
         return closestPoint;
