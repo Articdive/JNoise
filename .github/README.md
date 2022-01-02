@@ -27,21 +27,12 @@ It works for all Java 11+ apps and is built using [Gradle](https://gradle.org/).
 
 To add JNoise to your project using [Gradle](https://gradle.org/) or [Maven](http://maven.apache.org/):
 
-Repository (Maven):
-
-```
-<repository>
-    <id>Jitpack</id>
-    <url>https://jitpack.io</url>
-</repository>
-```
-
 Dependency (Maven):
 
 ```
 <dependency>
-    <groupId>com.github.Articdive</groupId>
-    <artifactId>JNoise</artifactId>
+    <groupId>de.articdive</groupId>
+    <artifactId>jnoise</artifactId>
     <version>VERSION</version>
 </dependency>
 ```
@@ -50,10 +41,7 @@ Repository (Gradle Kotlin DSL)
 
 ```
 repositories {
-    maven {
-        name = "Jitpack"
-        url = uri("https://jitpack.io")
-    }
+    mavenCentral()
 }
 ```
 
@@ -62,7 +50,7 @@ Dependency (Gradle Kotlin DSL)
 ```
 dependencies {
     // JNoise Library
-    implementation("com.github.Articdive:JNoise:VERSION")
+    implementation("de.articdive:jnoise:VERSION")
 }
 ```
 
@@ -151,6 +139,8 @@ All noise types have a customizable seed.
 - Simplex variants
 
 #### White Noise
+
+- Frequency
 
 #### Octavation Module
 
