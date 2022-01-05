@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2021 Articdive
+ * Copyright (C) 2021-2022 Articdive
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -20,9 +20,7 @@ package de.articdive.jnoise.noise.value;
 
 import de.articdive.jnoise.api.NoiseBuilder;
 import de.articdive.jnoise.fade_functions.FadeFunction;
-import de.articdive.jnoise.fade_functions.FadeFunctionType;
 import de.articdive.jnoise.interpolation.Interpolation;
-import de.articdive.jnoise.interpolation.InterpolationType;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -30,8 +28,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public final class ValueNoiseBuilder extends NoiseBuilder<ValueNoiseResult, ValueNoiseBuilder> {
     private double frequency = 1.00;
-    private Interpolation interpolation = InterpolationType.LINEAR;
-    private FadeFunction fadeFunction = FadeFunctionType.NONE;
+    private Interpolation interpolation = Interpolation.LINEAR;
+    private FadeFunction fadeFunction = FadeFunction.NONE;
 
     /**
      * Sets the frequency for the {@link ValueNoiseGenerator}.

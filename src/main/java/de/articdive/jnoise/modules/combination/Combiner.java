@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2021 Articdive
+ * Copyright (C) 2021-2022 Articdive
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,14 +18,16 @@
 
 package de.articdive.jnoise.modules.combination;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.function.BiFunction;
-
 /**
  * @author Articdive
  */
 @FunctionalInterface
-public interface Combiner extends BiFunction<@NotNull Double, @NotNull Double, @NotNull Double> {
-
+public interface Combiner {
+    Combiner ADD = Double::sum;
+    Combiner MULTIPLY = (a, b) -> a * b;
+    Combiner MAX = Math::max;
+    Combiner MIN = Math::min;
+    Combiner POW = Math::pow;
+    
+    double combine(double a, double b);
 }

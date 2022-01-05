@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2021 Articdive
+ * Copyright (C) 2021-2022 Articdive
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -41,32 +41,22 @@ public final class WhiteNoiseGenerator implements NoiseGenerator<WhiteNoiseResul
     }
 
     public double evaluateNoise(double x, long seed) {
-        long iX = (long) Math.floor(x * frequency);
-        return evaluateCoord1D(iX, seed);
+        return evaluateCoord1D((long) Math.floor(x * frequency), seed);
     }
 
     @Override
     public double evaluateNoise(double x, double y, long seed) {
-        long iX = (long) Math.floor(x * frequency);
-        long iY = (long) Math.floor(y * frequency);
-        return evaluateCoord2D(iX, iY, seed);
+        return evaluateCoord2D((long) Math.floor(x * frequency), (long) Math.floor(y * frequency), seed);
     }
 
     @Override
     public double evaluateNoise(double x, double y, double z, long seed) {
-        long iX = (long) Math.floor(x * frequency);
-        long iY = (long) Math.floor(y * frequency);
-        long iZ = (long) Math.floor(z * frequency);
-        return evaluateCoord3D(iX, iY, iZ, seed);
+        return evaluateCoord3D((long) Math.floor(x * frequency), (long) Math.floor(y * frequency), (long) Math.floor(z * frequency), seed);
     }
 
     @Override
     public double evaluateNoise(double x, double y, double z, double w, long seed) {
-        long iX = (long) Math.floor(x * frequency);
-        long iY = (long) Math.floor(y * frequency);
-        long iZ = (long) Math.floor(z * frequency);
-        long iW = (long) Math.floor(w * frequency);
-        return evaluateCoord4D(iX, iY, iZ, iW, seed);
+        return evaluateCoord4D((long) Math.floor(x * frequency), (long) Math.floor(y * frequency), (long) Math.floor(z * frequency), (long) Math.floor(w * frequency), seed);
     }
 
     @Override

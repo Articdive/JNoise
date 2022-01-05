@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2021 Articdive
+ * Copyright (C) 2021-2022 Articdive
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -54,88 +54,40 @@ public final class FastSimplexGenerator implements NoiseGenerator<FastSimplexRes
 
     @Override
     public double evaluateNoise(double x, long seed) {
-        x *= frequency;
-        OpenSimplex2F simplex = simplexInstances.computeIfAbsent(seed, OpenSimplex2F::new);
-
-        return simplex.noise2(x, 1.0);
+        return simplexInstances.computeIfAbsent(seed, OpenSimplex2F::new).noise2(x * frequency, 1.0);
     }
 
     @Override
     public double evaluateNoise(double x, double y, long seed) {
-        x *= frequency;
-        y *= frequency;
         OpenSimplex2F simplex = simplexInstances.computeIfAbsent(seed, OpenSimplex2F::new);
 
-        double result;
-        switch (variant2D) {
-            case X_BEFORE_Y: {
-                result = simplex.noise2_XBeforeY(x, y);
-                break;
-            }
-            default:
-            case CLASSIC: {
-                result = simplex.noise2(x, y);
-            }
-        }
-
-        return result;
+        return switch (variant2D) {
+            case X_BEFORE_Y -> simplex.noise2_XBeforeY(x * frequency, y * frequency);
+            case CLASSIC -> simplex.noise2(x * frequency, y * frequency);
+        };
     }
 
     @Override
     public double evaluateNoise(double x, double y, double z, long seed) {
-        x *= frequency;
-        y *= frequency;
-        z *= frequency;
         OpenSimplex2F simplex = simplexInstances.computeIfAbsent(seed, OpenSimplex2F::new);
 
-        double result;
-        switch (variant3D) {
-            case XY_BEFORE_Z: {
-                result = simplex.noise3_XYBeforeZ(x, y, z);
-                break;
-            }
-            case XZ_BEFORE_Y: {
-                result = simplex.noise3_XZBeforeY(x, y, z);
-                break;
-            }
-            default:
-            case CLASSIC: {
-                result = simplex.noise3_Classic(x, y, z);
-            }
-        }
-
-        return result;
+        return switch (variant3D) {
+            case XY_BEFORE_Z -> simplex.noise3_XYBeforeZ(x * frequency, y * frequency, z * frequency);
+            case XZ_BEFORE_Y -> simplex.noise3_XZBeforeY(x * frequency, y * frequency, z * frequency);
+            case CLASSIC -> simplex.noise3_Classic(x * frequency, y * frequency, z * frequency);
+        };
     }
 
     @Override
     public double evaluateNoise(double x, double y, double z, double w, long seed) {
-        x *= frequency;
-        y *= frequency;
-        z *= frequency;
-        w *= frequency;
         OpenSimplex2F simplex = simplexInstances.computeIfAbsent(seed, OpenSimplex2F::new);
-
-        double result;
-        switch (variant4D) {
-            case XY_BEFORE_ZW: {
-                result = simplex.noise4_XYBeforeZW(x, y, z, w);
-                break;
-            }
-            case XZ_BEFORE_YW: {
-                result = simplex.noise4_XZBeforeYW(x, y, z, w);
-                break;
-            }
-            case XYZ_BEFORE_W: {
-                result = simplex.noise4_XYZBeforeW(x, y, z, w);
-                break;
-            }
-            default:
-            case CLASSIC: {
-                result = simplex.noise4_Classic(x, y, z, w);
-            }
-        }
-
-        return result;
+        
+        return switch (variant4D) {
+            case XY_BEFORE_ZW -> simplex.noise4_XYBeforeZW(x * frequency, y * frequency, z * frequency, w * frequency);
+            case XZ_BEFORE_YW -> simplex.noise4_XZBeforeYW(x * frequency, y * frequency, z * frequency, w * frequency);
+            case XYZ_BEFORE_W -> simplex.noise4_XYZBeforeW(x * frequency, y * frequency, z * frequency, w * frequency);
+            case CLASSIC -> simplex.noise4_Classic(x * frequency, y * frequency, z * frequency, w * frequency);
+        };
     }
 
     @Override

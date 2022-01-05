@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2021 Articdive
+ * Copyright (C) 2021-2022 Articdive
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,30 +23,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Articdive
  */
-public final class Vector3D implements Vector {
-    private final double x;
-    private final double y;
-    private final double z;
-
-    public Vector3D(double x, double y, double z) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-    }
-
-    public double getX() {
-        return x;
-    }
-
-    public double getY() {
-        return y;
-    }
-
-    public double getZ() {
-        return z;
-    }
-
+public record Vector3D(double x, double y, double z) implements Vector {
+    
     public double dot(@NotNull Vector3D vector3D) {
-        return (x * vector3D.getX()) + (y * vector3D.getY()) + (z * vector3D.getZ());
+        return (x * vector3D.x) + (y * vector3D.y) + (z * vector3D.z);
     }
 }

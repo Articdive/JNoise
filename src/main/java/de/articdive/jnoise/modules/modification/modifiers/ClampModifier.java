@@ -16,16 +16,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.util.vectors;
+package de.articdive.jnoise.modules.modification.modifiers;
 
-import org.jetbrains.annotations.NotNull;
+import de.articdive.jnoise.modules.modification.Modifier;
 
 /**
+ * Modifier that clamps the output value between a lower bound and an upper bound.
+ *
  * @author Articdive
  */
-public record Vector4D(double x, double y, double z, double w) implements Vector {
+public class ClampModifier implements Modifier {
+    private final double lowerBound;
+    private final double upperBound;
     
-    public double dot(@NotNull Vector4D vector4D) {
-        return (x * vector4D.x) + (y * vector4D.y) + (z * vector4D.z) + (w * vector4D.w);
+    public ClampModifier(double lowerBound, double upperBound) {
+        this.lowerBound = lowerBound;
+        this.upperBound = upperBound;
+    }
+    
+    @Override
+    public double modify(double t) {
+        return Math.max(lowerBound, Math.min(upperBound, t));
     }
 }

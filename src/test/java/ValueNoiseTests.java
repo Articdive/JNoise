@@ -1,5 +1,5 @@
 import de.articdive.jnoise.JNoise;
-import de.articdive.jnoise.interpolation.InterpolationType;
+import de.articdive.jnoise.interpolation.Interpolation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Articdive
  */
 final class ValueNoiseTests {
-    private final JNoise valueLinear = JNoise.newBuilder().value().setInterpolation(InterpolationType.LINEAR).build();
-    private final JNoise valueCosine = JNoise.newBuilder().value().setInterpolation(InterpolationType.COSINE).build();
-    private final JNoise valueQuadratic = JNoise.newBuilder().value().setInterpolation(InterpolationType.QUADRATIC).build();
-    private final JNoise valueCubic = JNoise.newBuilder().value().setInterpolation(InterpolationType.CUBIC).build();
-    private final JNoise valueQuartic = JNoise.newBuilder().value().setInterpolation(InterpolationType.QUARTIC).build();
+    private final JNoise valueLinear = JNoise.newBuilder().value().setInterpolation(Interpolation.LINEAR).build();
+    private final JNoise valueCosine = JNoise.newBuilder().value().setInterpolation(Interpolation.COSINE).build();
+    private final JNoise valueQuadratic = JNoise.newBuilder().value().setInterpolation(Interpolation.QUADRATIC).build();
+    private final JNoise valueCubic = JNoise.newBuilder().value().setInterpolation(Interpolation.CUBIC).build();
+    private final JNoise valueQuartic = JNoise.newBuilder().value().setInterpolation(Interpolation.QUARTIC).build();
 
     @Test
     @DisplayName("Linear Value Noise 2D")

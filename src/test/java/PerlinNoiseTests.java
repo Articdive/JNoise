@@ -1,5 +1,5 @@
 import de.articdive.jnoise.JNoise;
-import de.articdive.jnoise.interpolation.InterpolationType;
+import de.articdive.jnoise.interpolation.Interpolation;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @author Articdive
  */
 final class PerlinNoiseTests {
-    private final JNoise perlinLinear = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.LINEAR).build();
-    private final JNoise perlinCosine = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.COSINE).build();
-    private final JNoise perlinQuadratic = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.QUADRATIC).build();
-    private final JNoise perlinCubic = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.CUBIC).build();
-    private final JNoise perlinQuartic = JNoise.newBuilder().perlin().setInterpolation(InterpolationType.QUARTIC).build();
+    private final JNoise perlinLinear = JNoise.newBuilder().perlin().setInterpolation(Interpolation.LINEAR).build();
+    private final JNoise perlinCosine = JNoise.newBuilder().perlin().setInterpolation(Interpolation.COSINE).build();
+    private final JNoise perlinQuadratic = JNoise.newBuilder().perlin().setInterpolation(Interpolation.QUADRATIC).build();
+    private final JNoise perlinCubic = JNoise.newBuilder().perlin().setInterpolation(Interpolation.CUBIC).build();
+    private final JNoise perlinQuartic = JNoise.newBuilder().perlin().setInterpolation(Interpolation.QUARTIC).build();
 
     @Test
     @DisplayName("Linear Perlin Noise Zero Equality")

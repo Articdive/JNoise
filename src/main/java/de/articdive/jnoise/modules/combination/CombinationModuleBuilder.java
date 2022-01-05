@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2021 Articdive
+ * Copyright (C) 2021-2022 Articdive
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
  * @author Articdive
  */
 public final class CombinationModuleBuilder implements NoiseModuleBuilder<CombinationModuleBuilder> {
-    private Combiner combiner = CombinerType.ADD;
+    private Combiner combiner = Combiner.ADD;
     private JNoise extNoise;
 
     CombinationModuleBuilder() {

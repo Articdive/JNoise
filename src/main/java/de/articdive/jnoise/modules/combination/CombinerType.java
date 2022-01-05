@@ -18,45 +18,57 @@
 
 package de.articdive.jnoise.modules.combination;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * @author Articdive
  */
 public enum CombinerType implements Combiner {
+    /**
+     * @deprecated Use {@link Combiner#ADD}
+     */
+    @Deprecated
     ADD {
         @Override
-        @NotNull
-        public Double apply(@NotNull Double main, @NotNull Double ext) {
+        public double combine(double main, double ext) {
             return main + ext;
         }
     },
+    /**
+     * @deprecated Use {@link Combiner#MULTIPLY}
+     */
+    @Deprecated
     MULTIPLY {
         @Override
-        @NotNull
-        public Double apply(@NotNull Double main, @NotNull Double ext) {
+        public double combine(double main, double ext) {
             return main * ext;
         }
     },
+    /**
+     * @deprecated Use {@link Combiner#MAX}
+     */
+    @Deprecated
     MAX {
         @Override
-        @NotNull
-        public Double apply(@NotNull Double main, @NotNull Double ext) {
+        public double combine(double main, double ext) {
             return Math.max(main, ext);
         }
     },
+    /**
+     * @deprecated Use {@link Combiner#MIN}
+     */
+    @Deprecated
     MIN {
         @Override
-        @NotNull
-        public Double apply(@NotNull Double main, @NotNull Double ext) {
+        public double combine(double main, double ext) {
             return Math.min(main, ext);
         }
     },
-
+    /**
+     * @deprecated Use {@link Combiner#POW}
+     */
+    @Deprecated
     POW {
         @Override
-        @NotNull
-        public Double apply(@NotNull Double main, @NotNull Double ext) {
+        public double combine(double main, double ext) {
             return Math.pow(main, ext);
         }
     },

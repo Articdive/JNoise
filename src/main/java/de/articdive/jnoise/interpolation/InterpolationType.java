@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2021 Articdive
+ * Copyright (C) 2021-2022 Articdive
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,31 +21,52 @@ package de.articdive.jnoise.interpolation;
 /**
  * @author Articdive
  */
+@Deprecated
 public enum InterpolationType implements Interpolation {
+    /**
+     * @deprecated Use {@link Interpolation#LINEAR}
+     */
+    @Deprecated(forRemoval = true)
     LINEAR {
         @Override
         public double lerp(double x, double a, double b) {
             return a + x * (b - a);
         }
     },
+    /**
+     * @deprecated Use {@link Interpolation#QUADRATIC}
+     */
+    @Deprecated(forRemoval = true)
     QUADRATIC {
         @Override
         public double lerp(double x, double a, double b) {
             return a + (b - a) * x * x;
         }
     },
+    /**
+     * @deprecated Use {@link Interpolation#CUBIC}
+     */
+    @Deprecated(forRemoval = true)
     CUBIC {
         @Override
         public double lerp(double x, double a, double b) {
             return a + (b - a) * x * x * x;
         }
     },
+    /**
+     * @deprecated Use {@link Interpolation#QUARTIC}
+     */
+    @Deprecated(forRemoval = true)
     QUARTIC {
         @Override
         public double lerp(double x, double a, double b) {
             return a + (b - a) * x * x * x * x;
         }
     },
+    /**
+     * @deprecated Use {@link Interpolation#COSINE}
+     */
+    @Deprecated(forRemoval = true)
     COSINE {
         @Override
         public double lerp(double x, double a, double b) {

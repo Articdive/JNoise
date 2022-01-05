@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2021 Articdive
+ * Copyright (C) 2021-2022 Articdive
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,12 @@ package de.articdive.jnoise.fade_functions;
 /**
  * @author Articdive
  */
+@FunctionalInterface
 public interface FadeFunction {
+    FadeFunction NONE = t -> t;
+    FadeFunction SMOOTHSTEP = t -> t * t * (3 - 2 * t); // f(t) = -(2t^3) + 3t^2
+    FadeFunction IMPROVED_PERLIN_NOISE = t -> t * t * t * (t * (t * 6 - 15) + 10); // f(t) = 6t^5 - (15t^4) + 10t^3
+    
     /**
      * Specifies a value to fade, this is used to remove interpolation artefacts.
      *

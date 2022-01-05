@@ -16,9 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.modules.combination;
+package de.articdive.jnoise.modules.modification;
 
-import de.articdive.jnoise.JNoise;
 import de.articdive.jnoise.api.NoiseGenerator;
 import de.articdive.jnoise.api.NoiseResult;
 import de.articdive.jnoise.api.module.NoiseModule;
@@ -27,66 +26,63 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Articdive
  */
-public class CombinationModule extends NoiseModule {
-    private final Combiner combiner;
-    private final JNoise extNoise;
-
-    CombinationModule(
+public class ModificationModule extends NoiseModule {
+    private final Modifier modifier;
+    
+    ModificationModule(
         @NotNull NoiseGenerator<?> noiseGenerator,
-        @NotNull Combiner combiner,
-        @NotNull JNoise extNoise
+        @NotNull Modifier modifier
     ) {
         super(noiseGenerator);
-        this.combiner = combiner;
-        this.extNoise = extNoise;
+        this.modifier = modifier;
     }
 
     @Override
     public double apply1D(double noise, double x) {
-        return combiner.combine(noise, extNoise.getNoise(x));
+        return modifier.modify(noise);
     }
 
     @Override
     @NotNull
     public NoiseResult apply1D(@NotNull NoiseResult noiseResult, double x) {
-        return new CombinedNoiseResult(apply1D(noiseResult.getPureValue(), x));
+        return new ModifiedNoiseResult(apply1D(noiseResult.getPureValue(), x));
     }
 
     @Override
     public double apply2D(double noise, double x, double y) {
-        return combiner.combine(noise, extNoise.getNoise(x, y));
+        return modifier.modify(noise);
     }
 
     @Override
     @NotNull
     public NoiseResult apply2D(@NotNull NoiseResult noiseResult, double x, double y) {
-        return new CombinedNoiseResult(apply2D(noiseResult.getPureValue(), x, y));
+        return new ModifiedNoiseResult(apply2D(noiseResult.getPureValue(), x, y));
     }
 
     @Override
     public double apply3D(double noise, double x, double y, double z) {
-        return combiner.combine(noise, extNoise.getNoise(x, y, z));
+        return modifier.modify(noise);
     }
 
     @Override
     @NotNull
     public NoiseResult apply3D(@NotNull NoiseResult noiseResult, double x, double y, double z) {
-        return new CombinedNoiseResult(apply3D(noiseResult.getPureValue(), x, y, z));
+        return new ModifiedNoiseResult(apply3D(noiseResult.getPureValue(), x, y, z));
     }
 
     @Override
     public double apply4D(double noise, double x, double y, double z, double w) {
-        return combiner.combine(noise, extNoise.getNoise(x, y, z, w));
+        return modifier.modify(noise);
     }
 
     @Override
     @NotNull
     public NoiseResult apply4D(@NotNull NoiseResult noiseResult, double x, double y, double z, double w) {
-        return new CombinedNoiseResult(apply4D(noiseResult.getPureValue(), x, y, z, w));
+        return new ModifiedNoiseResult(apply4D(noiseResult.getPureValue(), x, y, z, w));
     }
 
     @NotNull
-    public static CombinationModuleBuilder newBuilder() {
-        return new CombinationModuleBuilder();
+    public static ModificationModuleBuilder newBuilder() {
+        return new ModificationModuleBuilder();
     }
 }

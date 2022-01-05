@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2021 Articdive
+ * Copyright (C) 2021-2022 Articdive
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,14 +21,13 @@ package de.articdive.jnoise.modules.octavation;
 import de.articdive.jnoise.api.NoiseGenerator;
 import de.articdive.jnoise.api.module.NoiseModuleBuilder;
 import de.articdive.jnoise.fractal_functions.FractalFunction;
-import de.articdive.jnoise.fractal_functions.FractalFunctionType;
 import org.jetbrains.annotations.NotNull;
 
 public final class OctavationModuleBuilder implements NoiseModuleBuilder<OctavationModuleBuilder> {
     private int octaves = 1;
     private double persistence = 1;
     private double lacunarity = 1;
-    private FractalFunction fractalFunction = FractalFunctionType.FBM;
+    private FractalFunction fractalFunction = FractalFunction.FBM;
     private boolean incrementSeed = true;
 
     OctavationModuleBuilder() {

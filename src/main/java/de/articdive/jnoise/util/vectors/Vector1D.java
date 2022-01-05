@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2021 Articdive
+ * Copyright (C) 2021-2022 Articdive
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,18 +23,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * @author Articdive
  */
-public final class Vector1D implements Vector {
-    private final double x;
-
-    public Vector1D(double x) {
-        this.x = x;
-    }
-
-    public double getX() {
-        return x;
-    }
-
+public record Vector1D(double x) implements Vector {
+    
     public double dot(@NotNull Vector1D vector1D) {
-        return (x * vector1D.getX());
+        return (x * vector1D.x);
     }
 }

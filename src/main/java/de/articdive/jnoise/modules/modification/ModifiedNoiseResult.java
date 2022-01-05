@@ -16,16 +16,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.util.vectors;
+package de.articdive.jnoise.modules.modification;
 
-import org.jetbrains.annotations.NotNull;
+import de.articdive.jnoise.api.NoiseResult;
 
 /**
+ * This class wraps the result of modified Noise.
+ *
  * @author Articdive
  */
-public record Vector4D(double x, double y, double z, double w) implements Vector {
-    
-    public double dot(@NotNull Vector4D vector4D) {
-        return (x * vector4D.x) + (y * vector4D.y) + (z * vector4D.z) + (w * vector4D.w);
+public record ModifiedNoiseResult(double pureValue) implements NoiseResult {
+    @Override
+    public double getPureValue() {
+        return pureValue;
     }
 }

@@ -16,16 +16,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.util.vectors;
+package de.articdive.jnoise.modules.modification;
 
-import org.jetbrains.annotations.NotNull;
-
-/**
- * @author Articdive
- */
-public record Vector4D(double x, double y, double z, double w) implements Vector {
+@FunctionalInterface
+public interface Modifier {
+    Modifier ABS = Math::abs;
     
-    public double dot(@NotNull Vector4D vector4D) {
-        return (x * vector4D.x) + (y * vector4D.y) + (z * vector4D.z) + (w * vector4D.w);
-    }
+    double modify(double t);
 }

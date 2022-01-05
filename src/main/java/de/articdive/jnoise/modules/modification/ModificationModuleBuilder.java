@@ -16,26 +16,35 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package de.articdive.jnoise.api.module;
+package de.articdive.jnoise.modules.modification;
 
-import de.articdive.jnoise.JNoise;
 import de.articdive.jnoise.api.NoiseGenerator;
+import de.articdive.jnoise.api.module.NoiseModuleBuilder;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.function.Function;
 
 /**
  * @author Articdive
  */
-public interface NoiseModuleBuilder<M extends NoiseModuleBuilder<M>> extends Function<@NotNull NoiseGenerator<?>, @NotNull NoiseModule> {
+public final class ModificationModuleBuilder implements NoiseModuleBuilder<ModificationModuleBuilder> {
+    private Modifier modifier = Modifier.ABS;
+
+    ModificationModuleBuilder() {
+    }
+
     /**
-     * Builds the {@link NoiseModule} for your {@link JNoise} instance.
-     * Note: You need not include the build() method, as addModule() accepts the Builder.
-     * This is intentional behaviour.
+     * Sets the combiner for the {@link ModificationModule}.
      *
-     * @return {@link M} this
+     * @param modifier the new {@link Modifier} for the {@link ModificationModule}.
+     * @return {@link ModificationModuleBuilder} this
      */
-    default M build() {
-        return (M) this;
+    @NotNull
+    public ModificationModuleBuilder setModifier(@NotNull Modifier modifier) {
+        this.modifier = modifier;
+        return this;
+    }
+
+    @Override
+    public ModificationModule apply(@NotNull NoiseGenerator<?> noiseGenerator) {
+        return new ModificationModule(noiseGenerator, modifier);
     }
 }

@@ -1,6 +1,6 @@
 /*
  * JNoise
- * Copyright (C) 2021 Articdive
+ * Copyright (C) 2021-2022 Articdive
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@ package de.articdive.jnoise.interpolation;
 /**
  * @author Articdive
  */
+@FunctionalInterface
 public interface Interpolation {
-
     /**
      * Interpolates a value between two known values.
      *
@@ -54,4 +54,10 @@ public interface Interpolation {
         // This should only have 1 element, the final value!
         return values[0];
     }
+    
+    Interpolation LINEAR = (x, a, b) -> a + x * (b - a);
+    Interpolation QUADRATIC = (x, a, b) -> a + (b - a) * x * x;
+    Interpolation CUBIC = (x, a, b) -> a + (b - a) * x * x * x;
+    Interpolation QUARTIC = (x, a, b) -> a + (b - a) * x * x * x * x;
+    Interpolation COSINE = (x, a, b) -> a + ((1.0 - Math.cos(x * Math.PI)) / 2.0) * (b - a);
 }
