@@ -27,30 +27,45 @@ It works for all Java 11+ apps and is built using [Gradle](https://gradle.org/).
 
 To add JNoise to your project using [Gradle](https://gradle.org/) or [Maven](http://maven.apache.org/):
 
-Dependency (Maven):
 
+
+Repository (Maven) (Only required if using a snapshot version of JNoise):
+```
+<repository>
+    <id>sonatypeSnapshots</id>
+    <name>Sonatype Snapshots</name>
+    <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    <releases>
+        <enabled>false</enabled>
+    </releases>
+    <snapshots>
+        <enabled>true</enabled>
+    </snapshots>
+</repository>
+```
+
+Dependency (Maven):
 ```
 <dependency>
     <groupId>de.articdive</groupId>
-    <artifactId>jnoise</artifactId>
+    <artifactId>jnoise-pipeline</artifactId>
     <version>VERSION</version>
 </dependency>
 ```
 
-Repository (Gradle Kotlin DSL)
-
+Repository (Gradle Kotlin DSL):
 ```
 repositories {
     mavenCentral()
+    // If using a snapshot version of JNoise: maven("https://s01.oss.sonatype.org/content/repositories/snapshots/")
 }
 ```
 
-Dependency (Gradle Kotlin DSL)
-
+Dependency (Gradle Kotlin DSL):
 ```
 dependencies {
     // JNoise Library
-    implementation("de.articdive:jnoise:VERSION")
+    implementation("de.articdive:jnoise-pipeline:VERSION")
 }
 ```
 
