@@ -1,11 +1,11 @@
 # Gradle
-/.gradle/
-/build/
+**/.gradle/
+**/build/
 
 # Ignore Gradle GUI config
 gradle-app.setting
 
 # IntelliJ project files
-/.idea/
+**/.idea/
+**/out/
 *.iml
-/out/
