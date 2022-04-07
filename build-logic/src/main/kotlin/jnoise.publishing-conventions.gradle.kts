@@ -18,9 +18,9 @@ publishing {
     }
     publications {
         create<MavenPublication>("maven") {
-            groupId = project.rootProject.group as String
+            groupId = project.group as String
             artifactId = "jnoise-${project.name}"
-            version = project.rootProject.version as String
+            version = project.version as String
 
             from(components["java"])
             pom {
