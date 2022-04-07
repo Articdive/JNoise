@@ -100,7 +100,7 @@ public JNoise noisePipeline=JNoise.newBuilder().perlin(3301,Interpolation.COSINE
 
 ### Getting Noise Values
 
-The Noise's dimension has to do with the amount of parameters. If you add two doubles after the getNoise method, you
+The Noise's dimension has to do with the amount of parameters. If you add two doubles after the evaluateNoise method, you
 will receive 2 dimensional noise.
 
 All Noise Implementations support 1D, 2D, 3D and 4D noise.
@@ -116,7 +116,7 @@ Example: Getting 3D Perlin-Noise:
 
 ```java
     // 1D Noise at x = 1.0, y = 0.5 and z = 1.22 in a 3D plane.
-    return perlinLinear.getNoise(1.0,0.5,1.22);
+    return perlinLinear.evaluateNoise(1.0,0.5,1.22);
 ```
 
 ### Advantages of the JNoise Pipeline
