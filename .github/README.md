@@ -6,6 +6,7 @@
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Articdive/JNoise?style=for-the-badge)](https://github.com/Articdive/JNoise/releases)
 [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=for-the-badge)](https://github.com/RichardLitt/standard-readme)
 [![Discord](https://img.shields.io/discord/525595722859675648?label=discord&style=for-the-badge)](https://discord.gg/c26nC7FxU6)
+[![javadocs](https://img.shields.io/badge/documentation-javadocs-4d7a97?style=for-the-badge)](https://jnoise.articdive.de/)
 
 JNoise is a simple to use java-library for generating noise (including gradient noise) in Java.
 
@@ -81,7 +82,7 @@ Every noise-type has different customizable features, e.g. Perlin Noise has diff
 from and Worley Noise's point distribution can be altered.
 
 Normally if you are using an IDE, the code-completition is intuitive enough to use this library without having to check
-the source-code.
+the source-code. There are also Javadocs available [here](https://jnoise.articdive.de/).
 
 Nevertheless, the [Github Wiki](https://github.com/Articdive/JNoise/wiki) contains more than enough information to
 acquire achieved results.
