@@ -2,10 +2,6 @@ package de.articdive.jnoise.core.util.vectors;
 
 /**
  * Interface that denotes a mathematical vector.
- * @see Vector1D for 1D Vectors.
- * @see Vector2D for 2D Vectors.
- * @see Vector3D for 3D Vectors.
- * @see Vector4D for 4D Vectors.
  *
  * @author Articdive
  */
