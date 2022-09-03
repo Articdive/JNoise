@@ -1,21 +1,3 @@
-/*
- * JNoise
- * Copyright (C) 2020-2022 Articdive
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 package de.articdive.jnoise.generators.noisegen.worley;
 
 import de.articdive.jnoise.core.api.noisegen.SeededExplicitNoiseGenerator;
@@ -31,22 +13,22 @@ import de.articdive.jnoise.generators.noise_parameters.distance_functions.Distan
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
-import java.util.function.LongFunction;
+import java.util.function.IntToLongFunction;
 
 /**
  * The bounds of the worley noise implementation heavily depend on the distance functions,
  * they will be in the interval of: [0.0, {@link Double#MAX_VALUE}], it is highly recommended to clamp the output.
- * The more feature points there are, the upper bound will be less.
- * if no one feature points exist, then the distance will be {@link Double#MAX_VALUE}.
+ * The more feature points there are, the lower u the pper bound will be.
+ * if no feature points exist, then the distance will be {@link Double#MAX_VALUE}.
  *
  * @author Articdive
  */
 public final class WorleyNoiseGenerator implements SeededExplicitNoiseGenerator<WorleyNoiseResult<Vector>> {
     private final long seed;
     private final DistanceFunction distanceFunction;
-    private final LongFunction<Integer> fpAmountFunction;
+    private final IntToLongFunction fpAmountFunction;
 
-    private WorleyNoiseGenerator(long seed, DistanceFunction distanceFunction, LongFunction<Integer> fpAmountFunction) {
+    private WorleyNoiseGenerator(long seed, DistanceFunction distanceFunction, IntToLongFunction fpAmountFunction) {
         this.seed = seed;
         this.distanceFunction = distanceFunction;
         this.fpAmountFunction = fpAmountFunction;
@@ -107,7 +89,7 @@ public final class WorleyNoiseGenerator implements SeededExplicitNoiseGenerator<
             Random fpRNG = new Random(hash);
 
             // For performance reasons this can at most be 10:
-            for (int i = 0; i < Math.max(1, Math.min(fpAmountFunction.apply(hash), 10)); i++) {
+            for (int i = 0; i < Math.max(1, Math.min(fpAmountFunction.applyAsLong(hash), 10)); i++) {
                 double pointX = fpRNG.nextDouble() + secX;
                 double distance = distanceFunction.distance(
                     x,
@@ -142,7 +124,7 @@ public final class WorleyNoiseGenerator implements SeededExplicitNoiseGenerator<
                 Random fpRNG = new Random(hash);
 
                 // For performance reasons this can at most be 10:
-                for (int i = 0; i < Math.max(1, Math.min(fpAmountFunction.apply(hash), 10)); i++) {
+                for (int i = 0; i < Math.max(1, Math.min(fpAmountFunction.applyAsLong(hash), 10)); i++) {
                     double pointX = fpRNG.nextDouble() + secX;
                     double pointY = fpRNG.nextDouble() + secY;
                     double distance = distanceFunction.distance(
@@ -184,7 +166,7 @@ public final class WorleyNoiseGenerator implements SeededExplicitNoiseGenerator<
                     Random fpRNG = new Random(hash);
 
                     // For performance reasons this can at most be 10:
-                    for (int i = 0; i < Math.max(1, Math.min(fpAmountFunction.apply(hash), 10)); i++) {
+                    for (int i = 0; i < Math.max(1, Math.min(fpAmountFunction.applyAsLong(hash), 10)); i++) {
                         double pointX = fpRNG.nextDouble() + secX;
                         double pointY = fpRNG.nextDouble() + secY;
                         double pointZ = fpRNG.nextDouble() + secZ;
@@ -235,7 +217,7 @@ public final class WorleyNoiseGenerator implements SeededExplicitNoiseGenerator<
                         Random fpRNG = new Random(hash);
 
                         // For performance reasons this can at most be 10:
-                        for (int i = 0; i < Math.max(1, Math.min(fpAmountFunction.apply(hash), 10)); i++) {
+                        for (int i = 0; i < Math.max(1, Math.min(fpAmountFunction.applyAsLong(hash), 10)); i++) {
                             double pointX = fpRNG.nextDouble() + secX;
                             double pointY = fpRNG.nextDouble() + secY;
                             double pointZ = fpRNG.nextDouble() + secZ;
@@ -301,7 +283,7 @@ public final class WorleyNoiseGenerator implements SeededExplicitNoiseGenerator<
     public static final class WorleyNoiseBuilder implements NoiseSourceBuilder {
         private long seed = 1729;
         private DistanceFunction distanceFunction = DistanceFunctionType.EUCLIDEAN_SQUARED;
-        private LongFunction<Integer> fpAmountFunction = i -> 1;
+        private IntToLongFunction fpAmountFunction = i -> 1;
 
         private WorleyNoiseBuilder() {
 
@@ -343,7 +325,7 @@ public final class WorleyNoiseGenerator implements SeededExplicitNoiseGenerator<
          * @return {@link WorleyNoiseBuilder} this
          */
         @NotNull
-        public WorleyNoiseBuilder setFeaturePointAmountFunction(LongFunction<Integer> fpAmountFunction) {
+        public WorleyNoiseBuilder setFeaturePointAmountFunction(IntToLongFunction fpAmountFunction) {
             if (fpAmountFunction == null) {
                 throw new IllegalArgumentException("Featurepoint amount function cannot be null.");
             }

@@ -29,8 +29,8 @@ publishing {
                 url.set("https://github.com/Articdive/JNoise")
                 licenses {
                     license {
-                        name.set("GPL-3.0 License")
-                        url.set("https://www.gnu.org/licenses/gpl-3.0.en.html")
+                        name.set("MIT License")
+                        url.set("https://opensource.org/licenses/MIT")
                     }
                 }
                 developers {

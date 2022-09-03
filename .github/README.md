@@ -10,7 +10,7 @@
 JNoise is a simple to use java-library for generating noise (including gradient noise) in Java.
 
 JNoise was created in early 2020 by Articdive. It was created for a project in Minecraft for custom terrain generation.
-It works for all Java 11+ apps and is built using [Gradle](https://gradle.org/).
+It works for all Java 17+ apps and is built using [Gradle](https://gradle.org/).
 
 ## Table of Contents
 

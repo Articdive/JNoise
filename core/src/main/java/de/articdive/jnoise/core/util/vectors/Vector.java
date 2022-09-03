@@ -1,35 +1,21 @@
-/*
- * JNoise
- * Copyright (C) 2020-2022 Articdive
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 package de.articdive.jnoise.core.util.vectors;
 
 /**
  * Interface that denotes a mathematical vector.
+ * @see Vector1D for 1D Vectors.
+ * @see Vector2D for 2D Vectors.
+ * @see Vector3D for 3D Vectors.
+ * @see Vector4D for 4D Vectors.
  *
  * @author Articdive
  */
-public interface Vector {
+public sealed interface Vector permits Vector1D, Vector2D, Vector3D, Vector4D {
     /**
      * Gets the length of the Vector on the X axis.
      *
      * @return X component of the {@link Vector}.
      */
-    double getX();
+    double x();
 
     /**
      * Gets the length of the Vector on the Y axis.
@@ -37,7 +23,7 @@ public interface Vector {
      * @return Y component of the {@link Vector}.
      * @throws UnsupportedOperationException if the Vector does not have a Y component.
      */
-    default double getY() {
+    default double y() {
         throw new UnsupportedOperationException("This vector does not have a Y component.");
     }
 
@@ -47,7 +33,7 @@ public interface Vector {
      * @return Z component of the {@link Vector}.
      * @throws UnsupportedOperationException if the Vector does not have a Z component.
      */
-    default double getZ() {
+    default double z() {
         throw new UnsupportedOperationException("This vector does not have a Z component.");
     }
 
@@ -57,7 +43,7 @@ public interface Vector {
      * @return W component of the {@link Vector}.
      * @throws UnsupportedOperationException if the Vector does not have a W component.
      */
-    default double getW() {
+    default double w() {
         throw new UnsupportedOperationException("This vector does not have a W component.");
     }
 }

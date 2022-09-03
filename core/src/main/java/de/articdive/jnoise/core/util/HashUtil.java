@@ -1,21 +1,3 @@
-/*
- * JNoise
- * Copyright (C) 2020-2022 Articdive
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <https://www.gnu.org/licenses/>.
- */
-
 package de.articdive.jnoise.core.util;
 
 /**
@@ -45,12 +27,27 @@ public final class HashUtil {
 
     }
 
+    /**
+     * Hashes a 1D point using a seed.
+     *
+     * @param seed seed to hash with.
+     * @param x    X-Coordinate of the 1D point.
+     * @return hash value of the 1D point.
+     */
     public static int hash1D(long seed, long x) {
         long hash = seed ^ (X_PRIME * x);
 
         return (int) finalizeHash(hash);
     }
 
+    /**
+     * Hashes a 2D point using a seed.
+     *
+     * @param seed seed to hash with.
+     * @param x    X-Coordinate of the 2D point.
+     * @param y    Y-Coordinate of the 2D point.
+     * @return hash value of the 2D point.
+     */
     public static int hash2D(long seed, long x, long y) {
         long hash = seed ^ (X_PRIME * x);
         hash ^= (Y_PRIME * y);
@@ -58,6 +55,15 @@ public final class HashUtil {
         return (int) finalizeHash(hash);
     }
 
+    /**
+     * Hashes a 3D point using a seed.
+     *
+     * @param seed seed to hash with.
+     * @param x    X-Coordinate of the 3D point.
+     * @param y    Y-Coordinate of the 3D point.
+     * @param z    Z-Coordinate of the 3D Point.
+     * @return hash value of the 3D point.
+     */
     public static int hash3D(long seed, long x, long y, long z) {
         long hash = seed ^ (X_PRIME * x);
         hash ^= (Y_PRIME * y);
@@ -66,6 +72,16 @@ public final class HashUtil {
         return (int) finalizeHash(hash);
     }
 
+    /**
+     * Hashes a 4D point using a seed.
+     *
+     * @param seed seed to hash with.
+     * @param x    X-Coordinate of the 4D point.
+     * @param y    Y-Coordinate of the 4D point.
+     * @param z    Z-Coordinate of the 4D Point.
+     * @param w    W-Coordinate of the 4D Point.
+     * @return hash value of the 4D point.
+     */
     public static int hash4D(long seed, long x, long y, long z, long w) {
         long hash = seed ^ (X_PRIME * x);
         hash ^= (Y_PRIME * y);
