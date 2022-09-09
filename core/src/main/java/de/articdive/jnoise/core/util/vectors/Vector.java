@@ -5,7 +5,7 @@ package de.articdive.jnoise.core.util.vectors;
  *
  * @author Articdive
  */
-public sealed interface Vector permits Vector1D, Vector2D, Vector3D, Vector4D {
+public interface Vector {
     /**
      * Gets the length of the Vector on the X axis.
      *

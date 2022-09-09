@@ -38,30 +38,46 @@ public final class SuperSimplexNoiseGenerator implements SeededNoiseGenerator {
 
     @Override
     public double evaluateNoise(double x, double y, long seed) {
-        return switch (variant2D) {
-            case IMPROVE_X -> OpenSimplex2S.noise2_ImproveX(seed, x, y);
-            case CLASSIC -> OpenSimplex2S.noise2(seed, x, y);
-        };
+        switch (variant2D) {
+            case IMPROVE_X:
+                return OpenSimplex2S.noise2_ImproveX(seed, x, y);
+            case CLASSIC:
+                return OpenSimplex2S.noise2(seed, x, y);
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     @Override
     public double evaluateNoise(double x, double y, double z, long seed) {
-        return switch (variant3D) {
-            case IMPROVE_XY -> OpenSimplex2S.noise3_ImproveXY(seed, x, y, z);
-            case IMPROVE_XZ -> OpenSimplex2S.noise3_ImproveXZ(seed, x, y, z);
-            case CLASSIC -> OpenSimplex2S.noise3_Fallback(seed, x, y, z);
-        };
+        switch (variant3D) {
+            case IMPROVE_XY:
+                return OpenSimplex2S.noise3_ImproveXY(seed, x, y, z);
+            case IMPROVE_XZ:
+                return OpenSimplex2S.noise3_ImproveXZ(seed, x, y, z);
+            case CLASSIC:
+                return OpenSimplex2S.noise3_Fallback(seed, x, y, z);
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     @Override
     public double evaluateNoise(double x, double y, double z, double w, long seed) {
-        return switch (variant4D) {
-            case IMPROVE_XY_IMPROVE_ZW -> OpenSimplex2S.noise4_ImproveXY_ImproveZW(seed, x, y, z, w);
-            case IMPROVE_XYZ_IMPROVE_XY -> OpenSimplex2S.noise4_ImproveXYZ_ImproveXY(seed, x, y, z, w);
-            case IMPROVE_XYZ_IMPROVE_XZ -> OpenSimplex2S.noise4_ImproveXYZ_ImproveXZ(seed, x, y, z, w);
-            case IMRPOVE_XYZ -> OpenSimplex2S.noise4_ImproveXYZ(seed, x, y, z, w);
-            case CLASSIC -> OpenSimplex2S.noise4_Fallback(seed, x, y, z, w);
-        };
+        switch (variant4D) {
+            case IMPROVE_XY_IMPROVE_ZW:
+                return OpenSimplex2S.noise4_ImproveXY_ImproveZW(seed, x, y, z, w);
+            case IMPROVE_XYZ_IMPROVE_XY:
+                return OpenSimplex2S.noise4_ImproveXYZ_ImproveXY(seed, x, y, z, w);
+            case IMPROVE_XYZ_IMPROVE_XZ:
+                return OpenSimplex2S.noise4_ImproveXYZ_ImproveXZ(seed, x, y, z, w);
+            case IMRPOVE_XYZ:
+                return OpenSimplex2S.noise4_ImproveXYZ(seed, x, y, z, w);
+            case CLASSIC:
+                return OpenSimplex2S.noise4_Fallback(seed, x, y, z, w);
+            default:
+                throw new IllegalArgumentException();
+        }
     }
 
     @Override
