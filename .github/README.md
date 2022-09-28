@@ -49,7 +49,7 @@ Dependency (Maven):
 ```
 <dependency>
     <groupId>de.articdive</groupId>
-    <artifactId>jnoise-pipeline</artifactId>
+    <artifactId>jnoise</artifactId>
     <version>VERSION</version>
 </dependency>
 ```
@@ -66,7 +66,7 @@ Dependency (Gradle Kotlin DSL):
 ```
 dependencies {
     // JNoise Library
-    implementation("de.articdive:jnoise-pipeline:VERSION")
+    implementation("de.articdive:jnoise:VERSION")
 }
 ```
 
