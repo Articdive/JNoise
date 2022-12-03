@@ -34,7 +34,7 @@ public final class OctavationModule implements NoiseModule {
         double fractalBounding = 0;
         double amplitude = 1;
         for (int i = 0; i < this.octaves; i++) {
-            fractalBounding += amplitude;
+            fractalBounding += (amplitude *= this.persistence);
         }
         this.fractalBounding = fractalBounding;
     }
