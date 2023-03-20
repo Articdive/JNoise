@@ -1,4 +1,4 @@
-package de.articdive.jnoise.generators.noisegen.white;
+package de.articdive.jnoise.generators.noisegen.random.white;
 
 import de.articdive.jnoise.core.api.noisegen.SeededNoiseGenerator;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;

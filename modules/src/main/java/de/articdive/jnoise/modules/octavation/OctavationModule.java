@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 public final class OctavationModule implements NoiseModule {
     private final NoiseSource noiseSource;
     private final int octaves;
-    private final double persistence;
+    private final double gain;
     private final double lacunarity;
     private final FractalFunction fractalFunction;
     private final boolean incrementSeed;
@@ -20,40 +20,44 @@ public final class OctavationModule implements NoiseModule {
     private OctavationModule(
         @NotNull NoiseSource noiseSource,
         int octaves,
-        double persistence,
+        double gain,
         double lacunarity,
         @NotNull FractalFunction fractalFunction,
         boolean incrementSeed
     ) {
         this.noiseSource = noiseSource;
         this.octaves = octaves;
-        this.persistence = persistence;
+        this.gain = gain;
         this.lacunarity = lacunarity;
         this.fractalFunction = fractalFunction;
         this.incrementSeed = incrementSeed;
         double fractalBounding = 0;
-        double amplitude = 1;
+        double amplitude = this.gain;
         for (int i = 0; i < this.octaves; i++) {
-            fractalBounding += (amplitude *= this.persistence);
+            fractalBounding += amplitude;
+            amplitude *= this.gain;
         }
         this.fractalBounding = fractalBounding;
     }
 
     @Override
     public double evaluateNoise(double x) {
-        double amplitude = this.persistence;
-        double output;
+        double amplitude = gain;
+        double frequency = 1;
+        double output = 0;
         if (incrementSeed) {
             SeededNoiseGenerator sng = (SeededNoiseGenerator) noiseSource;
             long seed = sng.getSeed();
-            output = fractalFunction.fractalize(sng.evaluateNoise(x, seed)) * amplitude;
-            for (int i = 1; i < this.octaves; i++) {
-                output += fractalFunction.fractalize(sng.evaluateNoise(x *= lacunarity, ++seed)) * (amplitude *= this.persistence);
+            for (int i = 0; i < octaves; i++) {
+                output += amplitude * fractalFunction.fractalize(sng.evaluateNoise(frequency * x, seed++));
+                frequency *= lacunarity;
+                amplitude *= gain;
             }
         } else {
-            output = fractalFunction.fractalize(noiseSource.evaluateNoise(x)) * amplitude;
-            for (int i = 1; i < this.octaves; i++) {
-                output += fractalFunction.fractalize(noiseSource.evaluateNoise(x *= lacunarity)) * (amplitude *= this.persistence);
+            for (int i = 0; i < octaves; i++) {
+                output += amplitude * fractalFunction.fractalize(noiseSource.evaluateNoise(frequency * x));
+                frequency *= lacunarity;
+                amplitude *= gain;
             }
         }
         return output / fractalBounding;
@@ -61,19 +65,22 @@ public final class OctavationModule implements NoiseModule {
 
     @Override
     public double evaluateNoise(double x, double y) {
-        double amplitude = this.persistence;
-        double output;
+        double amplitude = gain;
+        double frequency = 1;
+        double output = 0;
         if (incrementSeed) {
             SeededNoiseGenerator sng = (SeededNoiseGenerator) noiseSource;
             long seed = sng.getSeed();
-            output = fractalFunction.fractalize(sng.evaluateNoise(x, y, seed)) * amplitude;
-            for (int i = 1; i < this.octaves; i++) {
-                output += fractalFunction.fractalize(sng.evaluateNoise(x *= lacunarity, y *= lacunarity, ++seed)) * (amplitude *= this.persistence);
+            for (int i = 0; i < octaves; i++) {
+                output += amplitude * fractalFunction.fractalize(sng.evaluateNoise(frequency * x, frequency * y, seed++));
+                frequency *= lacunarity;
+                amplitude *= gain;
             }
         } else {
-            output = fractalFunction.fractalize(noiseSource.evaluateNoise(x, y)) * amplitude;
-            for (int i = 1; i < this.octaves; i++) {
-                output += fractalFunction.fractalize(noiseSource.evaluateNoise(x *= lacunarity, y *= lacunarity)) * (amplitude *= this.persistence);
+            for (int i = 0; i < octaves; i++) {
+                output += amplitude * fractalFunction.fractalize(noiseSource.evaluateNoise(frequency * x, frequency * y));
+                frequency *= lacunarity;
+                amplitude *= gain;
             }
         }
         return output / fractalBounding;
@@ -81,19 +88,22 @@ public final class OctavationModule implements NoiseModule {
 
     @Override
     public double evaluateNoise(double x, double y, double z) {
-        double amplitude = this.persistence;
-        double output;
+        double amplitude = gain;
+        double frequency = 1;
+        double output = 0;
         if (incrementSeed) {
             SeededNoiseGenerator sng = (SeededNoiseGenerator) noiseSource;
             long seed = sng.getSeed();
-            output = fractalFunction.fractalize(sng.evaluateNoise(x, y, z, seed)) * amplitude;
-            for (int i = 1; i < this.octaves; i++) {
-                output += fractalFunction.fractalize(sng.evaluateNoise(x *= lacunarity, y *= lacunarity, z *= lacunarity, ++seed)) * (amplitude *= this.persistence);
+            for (int i = 0; i < octaves; i++) {
+                output += amplitude * fractalFunction.fractalize(sng.evaluateNoise(frequency * x, frequency * y, frequency * z, seed++));
+                frequency *= lacunarity;
+                amplitude *= gain;
             }
         } else {
-            output = fractalFunction.fractalize(noiseSource.evaluateNoise(x, y, z)) * amplitude;
-            for (int i = 1; i < this.octaves; i++) {
-                output += fractalFunction.fractalize(noiseSource.evaluateNoise(x *= lacunarity, y *= lacunarity, z *= lacunarity)) * (amplitude *= this.persistence);
+            for (int i = 0; i < octaves; i++) {
+                output += amplitude * fractalFunction.fractalize(noiseSource.evaluateNoise(frequency * x, frequency * y, frequency * z));
+                frequency *= lacunarity;
+                amplitude *= gain;
             }
         }
         return output / fractalBounding;
@@ -101,19 +111,22 @@ public final class OctavationModule implements NoiseModule {
 
     @Override
     public double evaluateNoise(double x, double y, double z, double w) {
-        double amplitude = this.persistence;
-        double output;
+        double amplitude = gain;
+        double frequency = 1;
+        double output = 0;
         if (incrementSeed) {
             SeededNoiseGenerator sng = (SeededNoiseGenerator) noiseSource;
             long seed = sng.getSeed();
-            output = fractalFunction.fractalize(sng.evaluateNoise(x, y, z, w, seed)) * amplitude;
-            for (int i = 1; i < this.octaves; i++) {
-                output += fractalFunction.fractalize(sng.evaluateNoise(x *= lacunarity, y *= lacunarity, z *= lacunarity, w *= lacunarity, ++seed)) * (amplitude *= this.persistence);
+            for (int i = 0; i < octaves; i++) {
+                output += amplitude * fractalFunction.fractalize(sng.evaluateNoise(frequency * x, frequency * y, frequency * z, frequency * w, seed++));
+                frequency *= lacunarity;
+                amplitude *= gain;
             }
         } else {
-            output = fractalFunction.fractalize(noiseSource.evaluateNoise(x, y, z, w)) * amplitude;
-            for (int i = 1; i < this.octaves; i++) {
-                output += fractalFunction.fractalize(noiseSource.evaluateNoise(x *= lacunarity, y *= lacunarity, z *= lacunarity, w *= lacunarity)) * (amplitude *= this.persistence);
+            for (int i = 0; i < octaves; i++) {
+                output += amplitude * fractalFunction.fractalize(noiseSource.evaluateNoise(frequency * x, frequency * y, frequency * z, frequency * w));
+                frequency *= lacunarity;
+                amplitude *= gain;
             }
         }
         return output / fractalBounding;
@@ -126,9 +139,9 @@ public final class OctavationModule implements NoiseModule {
 
     public static final class OctavationModuleBuilder implements NoiseSourceBuilder {
         private NoiseSource noiseSource;
-        private int octaves = 1;
-        private double persistence = 1;
-        private double lacunarity = 1;
+        private int octaves = 4;
+        private double gain = 0.5;
+        private double lacunarity = 2;
         private FractalFunction fractalFunction = FractalFunction.FBM;
         private boolean incrementSeed = false;
 
@@ -185,13 +198,26 @@ public final class OctavationModule implements NoiseModule {
          *
          * @param persistence the new persistence for the {@link OctavationModule}.
          * @return {@link OctavationModuleBuilder} this
+         * @deprecated Use {@link #setGain} - Internals have not changed.
          */
         @NotNull
+        @Deprecated
         public OctavationModuleBuilder setPersistence(double persistence) {
-            if (persistence <= 0) {
-                throw new IllegalArgumentException("Persistence must be a non-zero positive value.");
+            return setGain(persistence);
+        }
+
+        /**
+         * Sets the gain for the {@link OctavationModule}.
+         *
+         * @param gain the new gain for the {@link OctavationModule}.
+         * @return {@link OctavationModuleBuilder} this
+         */
+        @NotNull
+        public OctavationModuleBuilder setGain(double gain) {
+            if (gain <= 0) {
+                throw new IllegalArgumentException("Gain must be a non-zero positive value.");
             }
-            this.persistence = persistence;
+            this.gain = gain;
             return this;
         }
 
@@ -245,7 +271,7 @@ public final class OctavationModule implements NoiseModule {
             if (incrementSeed && !(noiseSource instanceof SeededNoiseGenerator)) {
                 throw new IllegalArgumentException("Noise source does not have a seed, hence incrementSeed cannot be true!");
             }
-            return new OctavationModule(noiseSource, octaves, persistence, lacunarity, fractalFunction, incrementSeed);
+            return new OctavationModule(noiseSource, octaves, gain, lacunarity, fractalFunction, incrementSeed);
         }
     }
 }

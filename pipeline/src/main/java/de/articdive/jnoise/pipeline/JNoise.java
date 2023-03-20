@@ -22,8 +22,9 @@ import de.articdive.jnoise.generators.noisegen.constant.ConstantNoiseGenerator;
 import de.articdive.jnoise.generators.noisegen.opensimplex.FastSimplexNoiseGenerator;
 import de.articdive.jnoise.generators.noisegen.opensimplex.SuperSimplexNoiseGenerator;
 import de.articdive.jnoise.generators.noisegen.perlin.PerlinNoiseGenerator;
+import de.articdive.jnoise.generators.noisegen.random.gaussian.GaussianWhiteNoiseGenerator;
 import de.articdive.jnoise.generators.noisegen.value.ValueNoiseGenerator;
-import de.articdive.jnoise.generators.noisegen.white.WhiteNoiseGenerator;
+import de.articdive.jnoise.generators.noisegen.random.white.WhiteNoiseGenerator;
 import de.articdive.jnoise.generators.noisegen.worley.WorleyNoiseGenerator;
 import de.articdive.jnoise.generators.noisegen.worley.WorleyNoiseResult;
 import de.articdive.jnoise.modifiers.absolute_value.AbsoluteValueModifier;
@@ -206,7 +207,7 @@ public class JNoise implements NoiseSource {
             return setNoiseSource(OctavationModule.newBuilder()
                 .setNoiseSource(a)
                 .setOctaves(octaves)
-                .setPersistence(persistence)
+                .setGain(persistence)
                 .setLacunarity(lacunarity)
                 .setFractalFunction(fractalFunction)
                 .setIncrementSeed(incrementSeed)
@@ -227,7 +228,7 @@ public class JNoise implements NoiseSource {
         @NotNull
         public JNoiseBuilder<?> octavate(
             int octaves,
-            double persistence,
+            double gain,
             double lacunarity,
             @NotNull FractalFunction fractalFunction,
             boolean incrementSeed) {
@@ -237,7 +238,7 @@ public class JNoise implements NoiseSource {
             return setNoiseSource(OctavationModule.newBuilder()
                 .setNoiseSource(source)
                 .setOctaves(octaves)
-                .setPersistence(persistence)
+                .setGain(gain)
                 .setLacunarity(lacunarity)
                 .setFractalFunction(fractalFunction)
                 .setIncrementSeed(incrementSeed)
@@ -376,6 +377,21 @@ public class JNoise implements NoiseSource {
 
         @NotNull
         public JNoiseBuilder<?> white(@NotNull WhiteNoiseGenerator generator) {
+            return setNoiseSource(generator);
+        }
+
+        @NotNull
+        public JNoiseBuilder<?> gaussianWhite(long seed) {
+            return setNoiseSource(GaussianWhiteNoiseGenerator.newBuilder().setSeed(seed).build());
+        }
+
+        @NotNull
+        public JNoiseBuilder<?> gaussianWhite(GaussianWhiteNoiseGenerator.GaussianWhiteNoiseBuilder builder) {
+            return setNoiseSource(builder);
+        }
+
+        @NotNull
+        public JNoiseBuilder<?> gaussianWhite(GaussianWhiteNoiseGenerator generator) {
             return setNoiseSource(generator);
         }
 

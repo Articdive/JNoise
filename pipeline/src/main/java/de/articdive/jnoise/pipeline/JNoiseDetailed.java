@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class JNoiseDetailed<NR extends NoiseResult> extends JNoise implements ExplicitNoiseSource<NR> {
     private final ExplicitNoiseSource<NR> source;
 
-    protected JNoiseDetailed(
+    JNoiseDetailed(
         @NotNull SimpleTransformer[] simpleTransformers,
         @NotNull DetailedTransformer[] detailedTransformers,
         @NotNull ExplicitNoiseSource<NR> source,

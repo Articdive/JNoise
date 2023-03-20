@@ -1,4 +1,4 @@
-import de.articdive.jnoise.generators.noisegen.white.WhiteNoiseGenerator;
+import de.articdive.jnoise.generators.noisegen.random.white.WhiteNoiseGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

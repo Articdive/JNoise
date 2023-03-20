@@ -18,7 +18,7 @@ import java.util.function.IntToLongFunction;
 /**
  * The bounds of the worley noise implementation heavily depend on the distance functions,
  * they will be in the interval of: [0.0, {@link Double#MAX_VALUE}], it is highly recommended to clamp the output.
- * The more feature points there are, the lower u the pper bound will be.
+ * The more feature points there are, the lower the upper bound will be.
  * if no feature points exist, then the distance will be {@link Double#MAX_VALUE}.
  *
  * @author Articdive
@@ -81,6 +81,7 @@ public final class WorleyNoiseGenerator implements SeededExplicitNoiseGenerator<
         double shortestDistance = Double.MAX_VALUE;
         Vector1D closestPoint = null;
 
+        //TODO: Add Grid size as a parameter in all worley noise types. (Here it is 3)
         for (int xOffset = -1; xOffset <= 1; xOffset++) {
             long secX = iX + xOffset;
 
