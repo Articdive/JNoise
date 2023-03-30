@@ -203,6 +203,7 @@ Most noise types have a customizable seed.
 
 - Distance function
 - Feature point amount
+- Combination of shortest distances.
 
 #### OpenSimplex Noise
 
@@ -211,13 +212,18 @@ Most noise types have a customizable seed.
 
 #### White Noise
 
+### Gaussian White Noise
+
+- Mean
+- Standard Deviation
+
 #### Octavation Module
 
 - The underlying noise type to be octavated
 - Amount of octaves
 - Lacunarity
-- Persistance / Gain
-- Fractal functions (FBM, Billow & Ridged)
+- Gain (Persistence)
+- Fractal functions (FBM, Turbelent & Ridged)
 - Seed incrementation per octave (Increases the seed by 1 each octave)
 
 #### Combination Moudle

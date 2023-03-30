@@ -53,7 +53,7 @@ public class JNoise implements NoiseSource {
     protected final NoiseModifier[] modifiers;
     private final NoiseSource source;
 
-    protected JNoise(
+    JNoise(
         @NotNull SimpleTransformer[] simpleTransformers,
         @NotNull DetailedTransformer[] detailedTransformers,
         @NotNull NoiseSource source,
