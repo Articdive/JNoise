@@ -96,7 +96,7 @@ public PerlinNoiseGenerator perlinCosine=PerlinNoiseGenerator.newBuilder().setSe
 Example using the JNoise Pipeline:
 
 ```java
-public JNoise noisePipeline=JNoise.newBuilder().perlin(3301,Interpolation.COSINE,FadeFunction.IMPROVED_PERLIN_NOISE).build();
+public JNoise noisePipeline=JNoise.newBuilder().perlin(3301,Interpolation.COSINE,FadeFunction.QUINTIC_POLY).build();
 ```
 
 ### Getting Noise Values
@@ -172,7 +172,7 @@ public JNoise noisePipeline=JNoise.newBuilder().octavation(perlinCosine,4,1.0,1.
 Example using the JNoise Pipeline (Variant 2):
 
 ```java
-public JNoise noisePipeline=JNoise.newBuilder().perlin(3301,Interpolation.COSINE,FadeFunction.IMPROVED_PERLIN_NOISE).octavate(4,1.0,1.0,FractalFunction.FBM,false).build();
+public JNoise noisePipeline=JNoise.newBuilder().perlin(3301,Interpolation.COSINE,FadeFunction.QUINTIC_POLY).octavate(4,1.0,1.0,FractalFunction.FBM,false).build();
 ```
 
 #### Modifiers

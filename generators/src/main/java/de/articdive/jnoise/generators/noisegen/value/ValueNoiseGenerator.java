@@ -179,7 +179,7 @@ public final class ValueNoiseGenerator implements SeededNoiseGenerator {
     public static final class ValueNoiseBuilder implements NoiseSourceBuilder {
         private long seed = 1729;
         private Interpolation interpolation = Interpolation.LINEAR;
-        private FadeFunction fadeFunction = FadeFunction.IMPROVED_PERLIN_NOISE;
+        private FadeFunction fadeFunction = FadeFunction.QUINTIC_POLY;
 
         private ValueNoiseBuilder() {
 

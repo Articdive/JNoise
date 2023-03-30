@@ -14,8 +14,8 @@ public class PipelineSyntaxTest {
     @DisplayName("Syntax - Return Types")
     public void testSyntaxReturnTypes() {
         assertAll("Is the JNoiseBuilder returning the correct types for the chaining syntax?",
-            () -> assertThrows(IllegalArgumentException.class, () -> JNoise.newBuilder().perlin(1729, Interpolation.LINEAR, FadeFunction.IMPROVED_PERLIN_NOISE).buildDetailed()),
-            () -> assertThrows(IllegalArgumentException.class, () -> JNoise.newBuilder().value(1729, Interpolation.LINEAR, FadeFunction.IMPROVED_PERLIN_NOISE).buildDetailed()),
+            () -> assertThrows(IllegalArgumentException.class, () -> JNoise.newBuilder().perlin(1729, Interpolation.LINEAR, FadeFunction.QUINTIC_POLY).buildDetailed()),
+            () -> assertThrows(IllegalArgumentException.class, () -> JNoise.newBuilder().value(1729, Interpolation.LINEAR, FadeFunction.QUINTIC_POLY).buildDetailed()),
             () -> assertThrows(IllegalArgumentException.class, () -> JNoise.newBuilder().constant(1729).buildDetailed()),
             () -> assertThrows(IllegalArgumentException.class, () -> JNoise.newBuilder().white(1729).buildDetailed()),
             () -> assertThrows(IllegalArgumentException.class, () -> JNoise.newBuilder().build()),
