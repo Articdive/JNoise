@@ -74,7 +74,7 @@ dependencies {
 
 ### Picking your Noise Algorithm.
 
-The JNoise library supports "Perlin", "OpenSimplex", "Value", "Worley" and "White" noise.
+The JNoise library supports "Perlin", "OpenSimplex", "Value", "Worley" (Cellular) and "White" noise.
 
 It also supports modules with which you can octavate (fractalize) and combine different noise types.
 
