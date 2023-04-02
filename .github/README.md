@@ -28,9 +28,8 @@ It works for all Java 17+ apps and is built using [Gradle](https://gradle.org/).
 
 To add JNoise to your project using [Gradle](https://gradle.org/) or [Maven](http://maven.apache.org/):
 
-
-
 Repository (Maven) (Only required if using a snapshot version of JNoise):
+
 ```
 <repository>
     <id>sonatypeSnapshots</id>
@@ -46,6 +45,7 @@ Repository (Maven) (Only required if using a snapshot version of JNoise):
 ```
 
 Dependency (Maven):
+
 ```
 <dependency>
     <groupId>de.articdive</groupId>
@@ -55,6 +55,7 @@ Dependency (Maven):
 ```
 
 Repository (Gradle Kotlin DSL):
+
 ```
 repositories {
     mavenCentral()
@@ -63,6 +64,7 @@ repositories {
 ```
 
 Dependency (Gradle Kotlin DSL):
+
 ```
 dependencies {
     // JNoise Library
@@ -101,7 +103,8 @@ public JNoise noisePipeline=JNoise.newBuilder().perlin(3301,Interpolation.COSINE
 
 ### Getting Noise Values
 
-The Noise's dimension has to do with the amount of parameters. If you add two doubles after the evaluateNoise method, you
+The Noise's dimension has to do with the amount of parameters. If you add two doubles after the evaluateNoise method,
+you
 will receive 2 dimensional noise.
 
 All Noise Implementations support 1D, 2D, 3D and 4D noise.
@@ -259,6 +262,8 @@ public JNoiseDetailed<WorleyNoiseResult<Vector>>worleyNoise=JNoise.newBuilder().
 located [here](https://github.com/KdotJPG/OpenSimplex2).
 
 [@Steven Worley](http://weber.itn.liu.se/~stegu/TNM084-2017/worley-originalpaper.pdf)'s work on Worley Noise.
+
+[@Inigo Quilez](https://iquilezles.org)'s work on Smooth Voronoi (Worley) Noise and domain warping.
 
 ## Contributing
 
