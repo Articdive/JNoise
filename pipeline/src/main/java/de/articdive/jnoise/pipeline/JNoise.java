@@ -1,7 +1,6 @@
 package de.articdive.jnoise.pipeline;
 
 import de.articdive.jnoise.core.api.modifiers.NoiseModifier;
-import de.articdive.jnoise.core.api.noisegen.ExplicitNoiseGenerator;
 import de.articdive.jnoise.core.api.noisegen.NoiseResult;
 import de.articdive.jnoise.core.api.pipeline.ExplicitNoiseSource;
 import de.articdive.jnoise.core.api.pipeline.NoiseSource;
@@ -23,8 +22,8 @@ import de.articdive.jnoise.generators.noisegen.opensimplex.FastSimplexNoiseGener
 import de.articdive.jnoise.generators.noisegen.opensimplex.SuperSimplexNoiseGenerator;
 import de.articdive.jnoise.generators.noisegen.perlin.PerlinNoiseGenerator;
 import de.articdive.jnoise.generators.noisegen.random.gaussian.GaussianWhiteNoiseGenerator;
-import de.articdive.jnoise.generators.noisegen.value.ValueNoiseGenerator;
 import de.articdive.jnoise.generators.noisegen.random.white.WhiteNoiseGenerator;
+import de.articdive.jnoise.generators.noisegen.value.ValueNoiseGenerator;
 import de.articdive.jnoise.generators.noisegen.worley.WorleyNoiseGenerator;
 import de.articdive.jnoise.generators.noisegen.worley.WorleyNoiseResult;
 import de.articdive.jnoise.modifiers.absolute_value.AbsoluteValueModifier;
@@ -191,7 +190,7 @@ public class JNoise implements NoiseSource {
         }
 
         @NotNull
-        public <K extends NoiseResult> JNoiseBuilder<K> setNoiseSource(@NotNull ExplicitNoiseGenerator<K> noiseGenerator) {
+        public <K extends NoiseResult> JNoiseBuilder<K> setNoiseSource(@NotNull ExplicitNoiseSource<K> noiseGenerator) {
             this.source = noiseGenerator;
             return (JNoiseBuilder<K>) this;
         }
