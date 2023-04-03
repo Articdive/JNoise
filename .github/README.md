@@ -78,16 +78,21 @@ dependencies {
 
 The JNoise library supports "Perlin", "OpenSimplex", "Value", "Worley" (Cellular) and "White" noise.
 
-It also supports modules with which you can octavate (fractalize) and combine different noise types.
+It also supports modules with which you can octavate (fractalize), e.g. Fractional Brownian Motion, and combine
+different
+noise types.
+
+Furthermore, JNoise supports coordinate transformations (transformers), e.g. scaling and domain warping, and noise
+modification (modifiers), e.g. changing an interval from [-1, 1] to [0,1] . All in an easy to use pipeline syntax.
 
 Every noise-type has different customizable features, e.g. Perlin Noise has different types of interpolation to choose
 from and Worley Noise's point distribution can be altered.
 
-Normally if you are using an IDE, the code-completition is intuitive enough to use this library without having to check
+Normally if you are using an IDE, the code-completion is intuitive enough to use this library without having to check
 the source-code. There are also Javadocs available [here](https://jnoise.articdive.de/).
 
 Nevertheless, the [Github Wiki](https://github.com/Articdive/JNoise/wiki) contains more than enough information to
-acquire achieved results.
+acquire achieved results and is always looking for improvements.
 
 Example: Creating a noise-generator using Perlin Noise with cosine interpolation.
 
@@ -138,6 +143,22 @@ To apply the scale transformer via the Jnoise Pipeline (with a scaling factor of
 ```java
 public JNoise noisePipeline=Jnoise.newBuilder().scale(0.5).[...].build();
 ```
+
+##### Domain Warping
+
+As of version ```4.1.0``` JNoise supports [domain warping](https://iquilezles.org/articles/warp/). To apply domain
+warping one requires another noise generator as the 'warping' input.
+
+Here's an example for Worley Noise being warped by Simplex Noise:
+```java
+public JNoise noise=JNoise.newBuilder()
+    .worley(WorleyNoiseGenerator.newBuilder())
+    .addDetailedTransformer(DomainWarpTransformer.newBuilder().setNoiseSource(SuperSimplexNoiseGenerator.newBuilder().build()).build())
+    .build();
+```
+
+The domain warping transformer has a vareity of options to control pinching, streching, twisting, bending and basically
+any deformation on noise.
 
 #### Modules
 
@@ -215,7 +236,7 @@ Most noise types have a customizable seed.
 
 #### White Noise
 
-### Gaussian White Noise
+#### Gaussian White Noise
 
 - Mean
 - Standard Deviation
