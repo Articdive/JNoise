@@ -9,6 +9,11 @@ package de.articdive.jnoise.generators.noise_parameters.distance_functions;
 public final class MinkowskiDistance implements DistanceFunction {
     private final long p;
 
+    /**
+     * Creates a new DistanceFunction using Minkowski's Distance formulas with a specified order.
+     *
+     * @param p The order of the distance function.
+     */
     public MinkowskiDistance(long p) {
         this.p = p;
     }

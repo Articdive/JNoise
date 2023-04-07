@@ -6,6 +6,9 @@ package de.articdive.jnoise.generators.noise_parameters.distance_functions;
  * @author Articdive
  */
 public enum DistanceFunctionType implements DistanceFunction {
+    /**
+     * Euclidean distance function
+     */
     EUCLIDEAN {
         @Override
         public double distance(double x0, double x1) {
@@ -27,6 +30,9 @@ public enum DistanceFunctionType implements DistanceFunction {
             return Math.sqrt(EUCLIDEAN_SQUARED.distance(x0, y0, z0, w0, x1, y1, z1, w1));
         }
     },
+    /**
+     * Euclidean distance function (squared)
+     */
     EUCLIDEAN_SQUARED {
         @Override
         public double distance(double x0, double x1) {
@@ -48,6 +54,9 @@ public enum DistanceFunctionType implements DistanceFunction {
             return (x0 - x1) * (x0 - x1) + (y0 - y1) * (y0 - y1) + (z0 - z1) * (z0 - z1) + (w0 - w1) * (w0 - w1);
         }
     },
+    /**
+     * Manhatten distance function
+     */
     MANHATTAN {
         @Override
         public double distance(double x0, double x1) {
@@ -69,6 +78,9 @@ public enum DistanceFunctionType implements DistanceFunction {
             return Math.abs(x0 - x1) + Math.abs(y0 - y1) + Math.abs(z0 - z1) + Math.abs(w0 - w1);
         }
     },
+    /**
+     * Chebyshev distance function
+     */
     CHEBYSHEV {
         @Override
         public double distance(double x0, double x1) {

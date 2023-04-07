@@ -1,9 +1,9 @@
 package de.articdive.jnoise.generators.noisegen.value;
 
+import de.articdive.jnoise.core.api.functions.Interpolation;
 import de.articdive.jnoise.core.api.noisegen.SeededNoiseGenerator;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
 import de.articdive.jnoise.generators.noise_parameters.fade_functions.FadeFunction;
-import de.articdive.jnoise.generators.noise_parameters.interpolation.Interpolation;
 import org.jetbrains.annotations.NotNull;
 
 import static de.articdive.jnoise.core.util.HashUtil.W_PRIME;
@@ -21,7 +21,7 @@ public final class ValueNoiseGenerator implements SeededNoiseGenerator {
     private final Interpolation interpolation;
     private final FadeFunction fadeFunction;
 
-    private ValueNoiseGenerator(long seed, @NotNull Interpolation interpolation, @NotNull FadeFunction fadeFunction) {
+    private ValueNoiseGenerator(long seed, Interpolation interpolation, @NotNull FadeFunction fadeFunction) {
         this.seed = seed;
         this.interpolation = interpolation;
         this.fadeFunction = fadeFunction;
@@ -171,11 +171,19 @@ public final class ValueNoiseGenerator implements SeededNoiseGenerator {
         return (n * n * n * 60493) / 2147483648.0;
     }
 
+    /**
+     * Gets a {@link ValueNoiseBuilder} to build a {@link ValueNoiseGenerator}.
+     *
+     * @return {@link ValueNoiseBuilder}.
+     */
     @NotNull
     public static ValueNoiseBuilder newBuilder() {
         return new ValueNoiseBuilder();
     }
 
+    /**
+     * Builder for the {@link ValueNoiseGenerator}.
+     */
     public static final class ValueNoiseBuilder implements NoiseSourceBuilder {
         private long seed = 1729;
         private Interpolation interpolation = Interpolation.LINEAR;

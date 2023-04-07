@@ -45,11 +45,19 @@ public final class CheckerboardNoiseGenerator implements NoiseGenerator {
         return ((iX & 1) ^ (iY & 1) ^ (iZ & 1) ^ (iW & 1)) != 0 ? 0.0 : 1.0;
     }
 
+    /**
+     * Gets a {@link CheckerboardNoiseBuilder} to build a {@link CheckerboardNoiseGenerator}.
+     *
+     * @return {@link CheckerboardNoiseBuilder}.
+     */
     @NotNull
     public static CheckerboardNoiseBuilder newBuilder() {
         return new CheckerboardNoiseBuilder();
     }
 
+    /**
+     * Builder for the {@link CheckerboardNoiseGenerator}.
+     */
     public static final class CheckerboardNoiseBuilder implements NoiseSourceBuilder {
 
         private CheckerboardNoiseBuilder() {

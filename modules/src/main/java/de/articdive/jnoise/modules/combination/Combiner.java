@@ -1,12 +1,10 @@
 package de.articdive.jnoise.modules.combination;
 
+/**
+ * @author Articdive
+ * @deprecated Moved to {@link de.articdive.jnoise.core.api.functions.Combiner}
+ */
+@Deprecated(since = "4.1.0", forRemoval = true)
 @FunctionalInterface
-public interface Combiner {
-    Combiner ADD = Double::sum;
-    Combiner MULTIPLY = (a, b) -> a * b;
-    Combiner MAX = Math::max;
-    Combiner MIN = Math::min;
-    Combiner POW = Math::pow;
-
-    double combine(double a, double b);
+public interface Combiner extends de.articdive.jnoise.core.api.functions.Combiner {
 }

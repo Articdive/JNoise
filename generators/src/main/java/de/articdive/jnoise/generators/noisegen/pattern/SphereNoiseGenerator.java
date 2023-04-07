@@ -55,11 +55,19 @@ public final class SphereNoiseGenerator implements NoiseGenerator {
         return 1 - 2 * Math.min(distFromSmallerSphere, distFromLargerSphere);
     }
 
+    /**
+     * Gets a {@link SphereNoiseBuilder} to build a {@link SphereNoiseGenerator}.
+     *
+     * @return {@link SphereNoiseBuilder}.
+     */
     @NotNull
     public static SphereNoiseBuilder newBuilder() {
         return new SphereNoiseBuilder();
     }
 
+    /**
+     * Builder for the {@link SphereNoiseGenerator}.
+     */
     public static final class SphereNoiseBuilder implements NoiseSourceBuilder {
 
         private SphereNoiseBuilder() {

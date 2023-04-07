@@ -90,11 +90,19 @@ public final class GaussianWhiteNoiseGenerator implements SeededNoiseGenerator {
         return seed;
     }
 
+    /**
+     * Gets a {@link GaussianWhiteNoiseBuilder} to build a {@link GaussianWhiteNoiseGenerator}.
+     *
+     * @return {@link GaussianWhiteNoiseBuilder}.
+     */
     @NotNull
-    public static GaussianWhiteNoiseGenerator.GaussianWhiteNoiseBuilder newBuilder() {
+    public static GaussianWhiteNoiseBuilder newBuilder() {
         return new GaussianWhiteNoiseBuilder();
     }
 
+    /**
+     * Builder for the {@link GaussianWhiteNoiseGenerator}.
+     */
     public static final class GaussianWhiteNoiseBuilder implements NoiseSourceBuilder {
         private long seed = 1729;
 

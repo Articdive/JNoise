@@ -1,5 +1,6 @@
 package de.articdive.jnoise.generators.noisegen.perlin;
 
+import de.articdive.jnoise.core.api.functions.Interpolation;
 import de.articdive.jnoise.core.api.noisegen.SeededNoiseGenerator;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
 import de.articdive.jnoise.core.util.HashUtil;
@@ -8,7 +9,6 @@ import de.articdive.jnoise.core.util.vectors.Vector2D;
 import de.articdive.jnoise.core.util.vectors.Vector3D;
 import de.articdive.jnoise.core.util.vectors.Vector4D;
 import de.articdive.jnoise.generators.noise_parameters.fade_functions.FadeFunction;
-import de.articdive.jnoise.generators.noise_parameters.interpolation.Interpolation;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -239,14 +239,22 @@ public final class PerlinNoiseGenerator implements SeededNoiseGenerator {
         return seed;
     }
 
+    /**
+     * Gets a {@link PerlinNoiseBuilder} to build a {@link PerlinNoiseGenerator}.
+     *
+     * @return {@link PerlinNoiseBuilder}.
+     */
     @NotNull
     public static PerlinNoiseBuilder newBuilder() {
         return new PerlinNoiseBuilder();
     }
 
+    /**
+     * Builder for the {@link PerlinNoiseGenerator}.
+     */
     public static final class PerlinNoiseBuilder implements NoiseSourceBuilder {
         private long seed = 1729;
-        private Interpolation interpolation = Interpolation.LINEAR;
+        private de.articdive.jnoise.core.api.functions.Interpolation interpolation = de.articdive.jnoise.core.api.functions.Interpolation.LINEAR;
         private FadeFunction fadeFunction = FadeFunction.QUINTIC_POLY;
 
         private PerlinNoiseBuilder() {

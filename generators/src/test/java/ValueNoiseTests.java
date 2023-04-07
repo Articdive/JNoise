@@ -1,5 +1,5 @@
+import de.articdive.jnoise.core.api.functions.Interpolation;
 import de.articdive.jnoise.generators.noise_parameters.fade_functions.FadeFunction;
-import de.articdive.jnoise.generators.noise_parameters.interpolation.Interpolation;
 import de.articdive.jnoise.generators.noisegen.value.ValueNoiseGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

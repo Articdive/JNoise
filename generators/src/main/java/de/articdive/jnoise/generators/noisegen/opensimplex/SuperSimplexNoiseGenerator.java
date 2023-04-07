@@ -90,11 +90,19 @@ public final class SuperSimplexNoiseGenerator implements SeededNoiseGenerator {
         return seed;
     }
 
+    /**
+     * Gets a {@link SuperSimplexNoiseBuilder} to build a {@link SuperSimplexNoiseGenerator}.
+     *
+     * @return {@link SuperSimplexNoiseBuilder}.
+     */
     @NotNull
     public static SuperSimplexNoiseBuilder newBuilder() {
         return new SuperSimplexNoiseBuilder();
     }
 
+    /**
+     * Builder for the {@link SuperSimplexNoiseGenerator}.
+     */
     public static final class SuperSimplexNoiseBuilder implements NoiseSourceBuilder {
         private long seed = 1729;
         private Simplex2DVariant variant2D = Simplex2DVariant.CLASSIC;

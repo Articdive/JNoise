@@ -74,11 +74,19 @@ public final class DomainWarpTransformer implements DetailedTransformer {
         return new Vector4D(x + warpingVector.x() * q0, y + warpingVector.y() * q1, z + warpingVector.z() * q2, w + warpingVector.w() * q3);
     }
 
+    /**
+     * Gets a {@link DomainWarpTransformerBuilder} to build a {@link DomainWarpTransformer}.
+     *
+     * @return {@link DomainWarpTransformerBuilder}.
+     */
     @NotNull
     public static DomainWarpTransformerBuilder newBuilder() {
         return new DomainWarpTransformerBuilder();
     }
 
+    /**
+     * Builder for the {@link DomainWarpTransformer}.
+     */
     public static final class DomainWarpTransformerBuilder {
         private NoiseSource noiseSource;
         private Vector4D warpingVector = new Vector4D(4, 4, 4, 4);
@@ -194,6 +202,11 @@ public final class DomainWarpTransformer implements DetailedTransformer {
             return this;
         }
 
+        /**
+         * Builds the {@link DomainWarpTransformer}
+         *
+         * @return the built {@link DomainWarpTransformer} or throws an error if misconfigured.
+         */
         @NotNull
         public DomainWarpTransformer build() {
             if (noiseSource == null) {

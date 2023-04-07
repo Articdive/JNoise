@@ -3,6 +3,7 @@ package de.articdive.jnoise.modules.combination;
 import de.articdive.jnoise.core.api.modules.NoiseModule;
 import de.articdive.jnoise.core.api.pipeline.NoiseSource;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
+import de.articdive.jnoise.core.api.functions.Combiner;
 import org.jetbrains.annotations.NotNull;
 
 public final class CombinationModule implements NoiseModule {
@@ -22,22 +23,22 @@ public final class CombinationModule implements NoiseModule {
 
     @Override
     public double evaluateNoise(double x) {
-        return combiner.combine(a.evaluateNoise(x), b.evaluateNoise(x));
+        return combiner.applyTo(a.evaluateNoise(x), b.evaluateNoise(x));
     }
 
     @Override
     public double evaluateNoise(double x, double y) {
-        return combiner.combine(a.evaluateNoise(x, y), b.evaluateNoise(x, y));
+        return combiner.applyTo(a.evaluateNoise(x, y), b.evaluateNoise(x, y));
     }
 
     @Override
     public double evaluateNoise(double x, double y, double z) {
-        return combiner.combine(a.evaluateNoise(x, y, z), b.evaluateNoise(x, y, z));
+        return combiner.applyTo(a.evaluateNoise(x, y, z), b.evaluateNoise(x, y, z));
     }
 
     @Override
     public double evaluateNoise(double x, double y, double z, double w) {
-        return combiner.combine(a.evaluateNoise(x, y, z, w), b.evaluateNoise(x, y, z, w));
+        return combiner.applyTo(a.evaluateNoise(x, y, z, w), b.evaluateNoise(x, y, z, w));
     }
 
     @NotNull

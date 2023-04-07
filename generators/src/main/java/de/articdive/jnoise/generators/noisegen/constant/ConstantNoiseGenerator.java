@@ -36,11 +36,19 @@ public final class ConstantNoiseGenerator implements NoiseGenerator {
         return constant;
     }
 
+    /**
+     * Gets a {@link ConstantNoiseBuilder} to build a {@link ConstantNoiseGenerator}.
+     *
+     * @return {@link ConstantNoiseBuilder}.
+     */
     @NotNull
     public static ConstantNoiseBuilder newBuilder() {
         return new ConstantNoiseBuilder();
     }
 
+    /**
+     * Builder for the {@link ConstantNoiseGenerator}.
+     */
     public static final class ConstantNoiseBuilder implements NoiseSourceBuilder {
         private double constant = 0;
 

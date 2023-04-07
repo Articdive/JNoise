@@ -95,11 +95,19 @@ public final class WhiteNoiseGenerator implements SeededNoiseGenerator {
         return (n * n * n * 60493) / 2147483648.0;
     }
 
+    /**
+     * Gets a {@link WhiteNoiseBuilder} to build a {@link WhiteNoiseGenerator}.
+     *
+     * @return {@link WhiteNoiseBuilder}.
+     */
     @NotNull
     public static WhiteNoiseBuilder newBuilder() {
         return new WhiteNoiseBuilder();
     }
 
+    /**
+     * Builder for the {@link WhiteNoiseGenerator}.
+     */
     public static final class WhiteNoiseBuilder implements NoiseSourceBuilder {
         private long seed = 1729;
 

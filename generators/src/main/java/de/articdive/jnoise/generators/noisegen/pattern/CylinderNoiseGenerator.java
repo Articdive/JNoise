@@ -53,14 +53,22 @@ public final class CylinderNoiseGenerator implements NoiseGenerator {
         return 1 - 2 * Math.min(distFromSmallerSphere, distFromLargerSphere);
     }
 
+    /**
+     * Gets a {@link CylinderNoiseBuilder} to build a {@link CylinderNoiseGenerator}.
+     *
+     * @return {@link CylinderNoiseBuilder}.
+     */
     @NotNull
-    public static SphereNoiseBuilder newBuilder() {
-        return new SphereNoiseBuilder();
+    public static CylinderNoiseBuilder newBuilder() {
+        return new CylinderNoiseBuilder();
     }
 
-    public static final class SphereNoiseBuilder implements NoiseSourceBuilder {
+    /**
+     * Builder for the {@link CylinderNoiseGenerator}.
+     */
+    public static final class CylinderNoiseBuilder implements NoiseSourceBuilder {
 
-        private SphereNoiseBuilder() {
+        private CylinderNoiseBuilder() {
 
         }
 

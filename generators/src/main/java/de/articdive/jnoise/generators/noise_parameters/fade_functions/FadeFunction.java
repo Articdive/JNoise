@@ -2,7 +2,7 @@ package de.articdive.jnoise.generators.noise_parameters.fade_functions;
 
 /**
  * Interface marking the implementing class as a fade function for noise generation.
- * See <a href="https://iquilezles.org/articles/smoothsteps/">...</a> for more information
+ * See <a href="https://iquilezles.org/articles/smoothsteps/">here</a> for more information
  *
  * @author Articdive
  */

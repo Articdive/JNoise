@@ -1,5 +1,7 @@
 package de.articdive.jnoise.pipeline;
 
+import de.articdive.jnoise.core.api.functions.Combiner;
+import de.articdive.jnoise.core.api.functions.Interpolation;
 import de.articdive.jnoise.core.api.modifiers.NoiseModifier;
 import de.articdive.jnoise.core.api.noisegen.NoiseResult;
 import de.articdive.jnoise.core.api.pipeline.ExplicitNoiseSource;
@@ -13,7 +15,6 @@ import de.articdive.jnoise.core.util.vectors.Vector3D;
 import de.articdive.jnoise.core.util.vectors.Vector4D;
 import de.articdive.jnoise.generators.noise_parameters.distance_functions.DistanceFunction;
 import de.articdive.jnoise.generators.noise_parameters.fade_functions.FadeFunction;
-import de.articdive.jnoise.generators.noise_parameters.interpolation.Interpolation;
 import de.articdive.jnoise.generators.noise_parameters.simplex_variants.Simplex2DVariant;
 import de.articdive.jnoise.generators.noise_parameters.simplex_variants.Simplex3DVariant;
 import de.articdive.jnoise.generators.noise_parameters.simplex_variants.Simplex4DVariant;
@@ -30,7 +31,6 @@ import de.articdive.jnoise.modifiers.absolute_value.AbsoluteValueModifier;
 import de.articdive.jnoise.modifiers.clamp.ClampModifier;
 import de.articdive.jnoise.modifiers.inverter.InvertModifier;
 import de.articdive.jnoise.modules.combination.CombinationModule;
-import de.articdive.jnoise.modules.combination.Combiner;
 import de.articdive.jnoise.modules.octavation.OctavationModule;
 import de.articdive.jnoise.modules.octavation.fractal_functions.FractalFunction;
 import de.articdive.jnoise.transformers.scale.ScaleTransformer;

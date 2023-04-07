@@ -90,11 +90,19 @@ public final class FastSimplexNoiseGenerator implements SeededNoiseGenerator {
         return seed;
     }
 
+    /**
+     * Gets a {@link FastSimplexNoiseBuilder} to build a {@link FastSimplexNoiseGenerator}.
+     *
+     * @return {@link FastSimplexNoiseBuilder}.
+     */
     @NotNull
     public static FastSimplexNoiseBuilder newBuilder() {
         return new FastSimplexNoiseBuilder();
     }
 
+    /**
+     * Builder for the {@link FastSimplexNoiseGenerator}.
+     */
     public static final class FastSimplexNoiseBuilder implements NoiseSourceBuilder {
         private long seed = 1729;
         private Simplex2DVariant variant2D = Simplex2DVariant.CLASSIC;
