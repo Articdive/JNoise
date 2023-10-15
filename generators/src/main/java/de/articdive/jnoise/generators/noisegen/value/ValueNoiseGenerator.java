@@ -4,7 +4,7 @@ import de.articdive.jnoise.core.api.functions.Interpolation;
 import de.articdive.jnoise.core.api.noisegen.SeededNoiseGenerator;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
 import de.articdive.jnoise.generators.noise_parameters.fade_functions.FadeFunction;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import static de.articdive.jnoise.core.util.HashUtil.W_PRIME;
 import static de.articdive.jnoise.core.util.HashUtil.X_PRIME;
@@ -16,12 +16,13 @@ import static de.articdive.jnoise.core.util.HashUtil.Z_PRIME;
  *
  * @author Articdive
  */
+@NullMarked
 public final class ValueNoiseGenerator implements SeededNoiseGenerator {
     private final long seed;
     private final Interpolation interpolation;
     private final FadeFunction fadeFunction;
 
-    private ValueNoiseGenerator(long seed, Interpolation interpolation, @NotNull FadeFunction fadeFunction) {
+    private ValueNoiseGenerator(long seed, Interpolation interpolation, FadeFunction fadeFunction) {
         this.seed = seed;
         this.interpolation = interpolation;
         this.fadeFunction = fadeFunction;
@@ -176,7 +177,6 @@ public final class ValueNoiseGenerator implements SeededNoiseGenerator {
      *
      * @return {@link ValueNoiseBuilder}.
      */
-    @NotNull
     public static ValueNoiseBuilder newBuilder() {
         return new ValueNoiseBuilder();
     }
@@ -184,6 +184,7 @@ public final class ValueNoiseGenerator implements SeededNoiseGenerator {
     /**
      * Builder for the {@link ValueNoiseGenerator}.
      */
+    @NullMarked
     public static final class ValueNoiseBuilder implements NoiseSourceBuilder {
         private long seed = 1729;
         private Interpolation interpolation = Interpolation.LINEAR;
@@ -199,7 +200,6 @@ public final class ValueNoiseGenerator implements SeededNoiseGenerator {
          * @param seed the new seed for the {@link ValueNoiseGenerator}.
          * @return {@link ValueNoiseBuilder} this
          */
-        @NotNull
         public ValueNoiseBuilder setSeed(long seed) {
             this.seed = seed;
             return this;
@@ -211,11 +211,7 @@ public final class ValueNoiseGenerator implements SeededNoiseGenerator {
          * @param interpolation The new {@link Interpolation} for the {@link ValueNoiseGenerator}.
          * @return {@link ValueNoiseBuilder} this
          */
-        @NotNull
         public ValueNoiseBuilder setInterpolation(Interpolation interpolation) {
-            if (interpolation == null) {
-                throw new IllegalArgumentException("Interpolation cannot be null.");
-            }
             this.interpolation = interpolation;
             return this;
         }
@@ -226,17 +222,12 @@ public final class ValueNoiseGenerator implements SeededNoiseGenerator {
          * @param fadeFunction the new {@link FadeFunction} for the {@link ValueNoiseGenerator}.
          * @return {@link ValueNoiseBuilder} this
          */
-        @NotNull
         public ValueNoiseBuilder setFadeFunction(FadeFunction fadeFunction) {
-            if (fadeFunction == null) {
-                throw new IllegalArgumentException("Fade function cannot be null.");
-            }
             this.fadeFunction = fadeFunction;
             return this;
         }
 
         @Override
-        @NotNull
         public ValueNoiseGenerator build() {
             return new ValueNoiseGenerator(seed, interpolation, fadeFunction);
         }

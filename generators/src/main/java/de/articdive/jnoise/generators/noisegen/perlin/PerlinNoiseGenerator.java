@@ -9,7 +9,7 @@ import de.articdive.jnoise.core.util.vectors.Vector2D;
 import de.articdive.jnoise.core.util.vectors.Vector3D;
 import de.articdive.jnoise.core.util.vectors.Vector4D;
 import de.articdive.jnoise.generators.noise_parameters.fade_functions.FadeFunction;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Based on Ken Perlin's implementation of Perlin Noise.
@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Articdive
  */
+@NullMarked
 public final class PerlinNoiseGenerator implements SeededNoiseGenerator {
     private static final Vector1D[] VECTOR_1D = new Vector1D[]{
         new Vector1D(1), new Vector1D(-1)
@@ -68,7 +69,7 @@ public final class PerlinNoiseGenerator implements SeededNoiseGenerator {
     private final Interpolation interpolation;
     private final FadeFunction fadeFunction;
 
-    private PerlinNoiseGenerator(long seed, @NotNull Interpolation interpolation, @NotNull FadeFunction fadeFunction) {
+    private PerlinNoiseGenerator(long seed, Interpolation interpolation, FadeFunction fadeFunction) {
         this.seed = seed;
         this.interpolation = interpolation;
         this.fadeFunction = fadeFunction;
@@ -244,7 +245,6 @@ public final class PerlinNoiseGenerator implements SeededNoiseGenerator {
      *
      * @return {@link PerlinNoiseBuilder}.
      */
-    @NotNull
     public static PerlinNoiseBuilder newBuilder() {
         return new PerlinNoiseBuilder();
     }
@@ -252,6 +252,7 @@ public final class PerlinNoiseGenerator implements SeededNoiseGenerator {
     /**
      * Builder for the {@link PerlinNoiseGenerator}.
      */
+    @NullMarked
     public static final class PerlinNoiseBuilder implements NoiseSourceBuilder {
         private long seed = 1729;
         private de.articdive.jnoise.core.api.functions.Interpolation interpolation = de.articdive.jnoise.core.api.functions.Interpolation.LINEAR;
@@ -267,7 +268,6 @@ public final class PerlinNoiseGenerator implements SeededNoiseGenerator {
          * @param seed the new seed for the {@link PerlinNoiseGenerator}.
          * @return {@link PerlinNoiseBuilder} this
          */
-        @NotNull
         public PerlinNoiseBuilder setSeed(long seed) {
             this.seed = seed;
             return this;
@@ -279,11 +279,7 @@ public final class PerlinNoiseGenerator implements SeededNoiseGenerator {
          * @param interpolation The new {@link Interpolation} for the {@link PerlinNoiseGenerator}.
          * @return {@link PerlinNoiseBuilder} this
          */
-        @NotNull
         public PerlinNoiseBuilder setInterpolation(Interpolation interpolation) {
-            if (interpolation == null) {
-                throw new IllegalArgumentException("Interpolation cannot be null.");
-            }
             this.interpolation = interpolation;
             return this;
         }
@@ -294,17 +290,12 @@ public final class PerlinNoiseGenerator implements SeededNoiseGenerator {
          * @param fadeFunction the new {@link FadeFunction} for the {@link PerlinNoiseGenerator}.
          * @return {@link PerlinNoiseBuilder} this
          */
-        @NotNull
         public PerlinNoiseBuilder setFadeFunction(FadeFunction fadeFunction) {
-            if (fadeFunction == null) {
-                throw new IllegalArgumentException("Fade function cannot be null.");
-            }
             this.fadeFunction = fadeFunction;
             return this;
         }
 
         @Override
-        @NotNull
         public PerlinNoiseGenerator build() {
             return new PerlinNoiseGenerator(seed, interpolation, fadeFunction);
         }

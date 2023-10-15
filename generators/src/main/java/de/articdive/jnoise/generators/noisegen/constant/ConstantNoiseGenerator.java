@@ -2,13 +2,14 @@ package de.articdive.jnoise.generators.noisegen.constant;
 
 import de.articdive.jnoise.core.api.noisegen.NoiseGenerator;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * A noise generator that always returns the constant specified.
  *
  * @author Articdive
  */
+@NullMarked
 public final class ConstantNoiseGenerator implements NoiseGenerator {
     private final double constant;
 
@@ -41,7 +42,6 @@ public final class ConstantNoiseGenerator implements NoiseGenerator {
      *
      * @return {@link ConstantNoiseBuilder}.
      */
-    @NotNull
     public static ConstantNoiseBuilder newBuilder() {
         return new ConstantNoiseBuilder();
     }
@@ -49,6 +49,7 @@ public final class ConstantNoiseGenerator implements NoiseGenerator {
     /**
      * Builder for the {@link ConstantNoiseGenerator}.
      */
+    @NullMarked
     public static final class ConstantNoiseBuilder implements NoiseSourceBuilder {
         private double constant = 0;
 
@@ -62,14 +63,12 @@ public final class ConstantNoiseGenerator implements NoiseGenerator {
          * @param constant the new result for the {@link ConstantNoiseGenerator}.
          * @return {@link ConstantNoiseBuilder} this
          */
-        @NotNull
         public ConstantNoiseBuilder setConstant(double constant) {
             this.constant = constant;
             return this;
         }
 
         @Override
-        @NotNull
         public ConstantNoiseGenerator build() {
             return new ConstantNoiseGenerator(constant);
         }

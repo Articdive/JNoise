@@ -2,7 +2,7 @@ package de.articdive.jnoise.generators.noisegen.random.white;
 
 import de.articdive.jnoise.core.api.noisegen.SeededNoiseGenerator;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import static de.articdive.jnoise.core.util.HashUtil.W_PRIME;
 import static de.articdive.jnoise.core.util.HashUtil.X_PRIME;
@@ -14,6 +14,7 @@ import static de.articdive.jnoise.core.util.HashUtil.Z_PRIME;
  *
  * @author Articdive
  */
+@NullMarked
 public final class WhiteNoiseGenerator implements SeededNoiseGenerator {
     private final long seed;
 
@@ -100,7 +101,6 @@ public final class WhiteNoiseGenerator implements SeededNoiseGenerator {
      *
      * @return {@link WhiteNoiseBuilder}.
      */
-    @NotNull
     public static WhiteNoiseBuilder newBuilder() {
         return new WhiteNoiseBuilder();
     }
@@ -108,6 +108,7 @@ public final class WhiteNoiseGenerator implements SeededNoiseGenerator {
     /**
      * Builder for the {@link WhiteNoiseGenerator}.
      */
+    @NullMarked
     public static final class WhiteNoiseBuilder implements NoiseSourceBuilder {
         private long seed = 1729;
 
@@ -121,14 +122,12 @@ public final class WhiteNoiseGenerator implements SeededNoiseGenerator {
          * @param seed the new seed for the {@link WhiteNoiseGenerator}.
          * @return {@link WhiteNoiseBuilder} this
          */
-        @NotNull
         public WhiteNoiseBuilder setSeed(long seed) {
             this.seed = seed;
             return this;
         }
 
         @Override
-        @NotNull
         public WhiteNoiseGenerator build() {
             return new WhiteNoiseGenerator(seed);
         }

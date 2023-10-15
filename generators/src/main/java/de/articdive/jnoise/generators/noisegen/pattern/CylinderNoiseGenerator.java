@@ -2,7 +2,7 @@ package de.articdive.jnoise.generators.noisegen.pattern;
 
 import de.articdive.jnoise.core.api.noisegen.NoiseGenerator;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * A noise generator that returns a concentric cylinders (centered on the origin) extending infinitely.
@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Articdive
  */
+@NullMarked
 public final class CylinderNoiseGenerator implements NoiseGenerator {
     private CylinderNoiseGenerator() {
 
@@ -58,7 +59,6 @@ public final class CylinderNoiseGenerator implements NoiseGenerator {
      *
      * @return {@link CylinderNoiseBuilder}.
      */
-    @NotNull
     public static CylinderNoiseBuilder newBuilder() {
         return new CylinderNoiseBuilder();
     }
@@ -66,6 +66,7 @@ public final class CylinderNoiseGenerator implements NoiseGenerator {
     /**
      * Builder for the {@link CylinderNoiseGenerator}.
      */
+    @NullMarked
     public static final class CylinderNoiseBuilder implements NoiseSourceBuilder {
 
         private CylinderNoiseBuilder() {
@@ -73,7 +74,6 @@ public final class CylinderNoiseGenerator implements NoiseGenerator {
         }
 
         @Override
-        @NotNull
         public CylinderNoiseGenerator build() {
             return new CylinderNoiseGenerator();
         }

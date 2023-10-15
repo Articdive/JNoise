@@ -6,13 +6,14 @@ import de.articdive.jnoise.core.api.transformers.DetailedTransformer;
 import de.articdive.jnoise.core.util.vectors.Vector2D;
 import de.articdive.jnoise.core.util.vectors.Vector3D;
 import de.articdive.jnoise.core.util.vectors.Vector4D;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Domain warping transformer. This will allow for pinching, streching, twisting, bending and basically any deformation on noise.
  *
  * @author Articdive
  */
+@NullMarked
 public final class DomainWarpTransformer implements DetailedTransformer {
     private final NoiseSource noiseSource;
     private final Vector4D warpingVector;
@@ -22,11 +23,11 @@ public final class DomainWarpTransformer implements DetailedTransformer {
 
 
     private DomainWarpTransformer(
-        @NotNull NoiseSource noiseSource,
-        @NotNull Vector4D warpingVector,
-        @NotNull Vector2D offset2D,
-        @NotNull Vector3D[] offset3D,
-        @NotNull Vector4D[] offset4D
+        NoiseSource noiseSource,
+        Vector4D warpingVector,
+        Vector2D offset2D,
+        Vector3D[] offset3D,
+        Vector4D[] offset4D
     ) {
         this.noiseSource = noiseSource;
         this.warpingVector = warpingVector;
@@ -41,7 +42,7 @@ public final class DomainWarpTransformer implements DetailedTransformer {
     }
 
     @Override
-    public @NotNull Vector2D transform(double x, double y) {
+    public Vector2D transform(double x, double y) {
         double q0 = noiseSource.evaluateNoise(x, y);
         double q1 = noiseSource.evaluateNoise(x + offset2D.x(), y + offset2D.y());
 
@@ -49,7 +50,7 @@ public final class DomainWarpTransformer implements DetailedTransformer {
     }
 
     @Override
-    public @NotNull Vector3D transform(double x, double y, double z) {
+    public Vector3D transform(double x, double y, double z) {
         Vector3D offset0 = offset3D[0];
         Vector3D offset1 = offset3D[1];
 
@@ -61,7 +62,7 @@ public final class DomainWarpTransformer implements DetailedTransformer {
     }
 
     @Override
-    public @NotNull Vector4D transform(double x, double y, double z, double w) {
+    public Vector4D transform(double x, double y, double z, double w) {
         Vector4D offset0 = offset4D[0];
         Vector4D offset1 = offset4D[1];
         Vector4D offset2 = offset4D[2];
@@ -79,7 +80,6 @@ public final class DomainWarpTransformer implements DetailedTransformer {
      *
      * @return {@link DomainWarpTransformerBuilder}.
      */
-    @NotNull
     public static DomainWarpTransformerBuilder newBuilder() {
         return new DomainWarpTransformerBuilder();
     }
@@ -87,6 +87,7 @@ public final class DomainWarpTransformer implements DetailedTransformer {
     /**
      * Builder for the {@link DomainWarpTransformer}.
      */
+    @NullMarked
     public static final class DomainWarpTransformerBuilder {
         private NoiseSource noiseSource;
         private Vector4D warpingVector = new Vector4D(4, 4, 4, 4);
@@ -104,11 +105,7 @@ public final class DomainWarpTransformer implements DetailedTransformer {
          * @param noiseSource the new noise source for the {@link DomainWarpTransformer}.
          * @return {@link DomainWarpTransformerBuilder} this
          */
-        @NotNull
         public DomainWarpTransformerBuilder setNoiseSource(NoiseSource noiseSource) {
-            if (noiseSource == null) {
-                throw new IllegalArgumentException("Noise source cannot be null.");
-            }
             this.noiseSource = noiseSource;
             return this;
         }
@@ -119,11 +116,7 @@ public final class DomainWarpTransformer implements DetailedTransformer {
          * @param noiseSourceBuilder the new noise source for the {@link DomainWarpTransformer}.
          * @return {@link DomainWarpTransformerBuilder} this
          */
-        @NotNull
         public DomainWarpTransformerBuilder setNoiseSource(NoiseSourceBuilder noiseSourceBuilder) {
-            if (noiseSourceBuilder == null) {
-                throw new IllegalArgumentException("Noise source cannot be null.");
-            }
             this.noiseSource = noiseSourceBuilder.build();
             return this;
         }
@@ -134,11 +127,7 @@ public final class DomainWarpTransformer implements DetailedTransformer {
          * @param warpingVector {@link Vector4D} the new warping vector for the {@link DomainWarpTransformer}.
          * @return {@link DomainWarpTransformerBuilder} this
          */
-        @NotNull
         public DomainWarpTransformerBuilder setWarpingVector(Vector4D warpingVector) {
-            if (warpingVector == null) {
-                throw new IllegalArgumentException("Warping vector cannot be null.");
-            }
             this.warpingVector = warpingVector;
             return this;
         }
@@ -149,11 +138,7 @@ public final class DomainWarpTransformer implements DetailedTransformer {
          * @param offset2D {@link Vector2D} the new 2D offset for the {@link DomainWarpTransformer}.
          * @return {@link DomainWarpTransformerBuilder} this
          */
-        @NotNull
         public DomainWarpTransformerBuilder set2DOffset(Vector2D offset2D) {
-            if (offset2D == null) {
-                throw new IllegalArgumentException("2D Offset cannot be null.");
-            }
             this.offset2D = offset2D;
             return this;
         }
@@ -165,16 +150,9 @@ public final class DomainWarpTransformer implements DetailedTransformer {
          * @param offset3D {@link Vector3D} the new 3D offset for the {@link DomainWarpTransformer}.
          * @return {@link DomainWarpTransformerBuilder} this
          */
-        @NotNull
         public DomainWarpTransformerBuilder set3DOffset(Vector3D... offset3D) {
-            if (offset3D == null) {
-                throw new IllegalArgumentException("3D Offset cannot be null.");
-            }
             if (offset3D.length < 2) {
                 throw new IllegalArgumentException("3D Offset must have length 2 (Elements beyond index 1 will be ignored).");
-            }
-            if (offset3D[0] == null || offset3D[1] == null) {
-                throw new IllegalArgumentException("3D Offset must contain non-null values.");
             }
             this.offset3D = new Vector3D[]{offset3D[0], offset3D[1]};
             return this;
@@ -187,16 +165,9 @@ public final class DomainWarpTransformer implements DetailedTransformer {
          * @param offset4D {@link Vector4D} the new 4D offset for the {@link DomainWarpTransformer}.
          * @return {@link DomainWarpTransformerBuilder} this
          */
-        @NotNull
         public DomainWarpTransformerBuilder set4DOffset(Vector4D... offset4D) {
-            if (offset4D == null) {
-                throw new IllegalArgumentException("4D Offset cannot be null.");
-            }
-            if (offset4D.length < 2) {
-                throw new IllegalArgumentException("4D Offset must have length 2 (Elements beyond index 1 will be ignored).");
-            }
-            if (offset4D[0] == null || offset4D[1] == null || offset4D[2] == null) {
-                throw new IllegalArgumentException("4D Offset must contain non-null values.");
+            if (offset4D.length < 3) {
+                throw new IllegalArgumentException("4D Offset must have length 3 (Elements beyond index 2 will be ignored).");
             }
             this.offset4D = new Vector4D[]{offset4D[0], offset4D[1], offset4D[2]};
             return this;
@@ -207,10 +178,9 @@ public final class DomainWarpTransformer implements DetailedTransformer {
          *
          * @return the built {@link DomainWarpTransformer} or throws an error if misconfigured.
          */
-        @NotNull
         public DomainWarpTransformer build() {
             if (noiseSource == null) {
-                throw new IllegalArgumentException("Noise source has not been defined.");
+                throw new IllegalArgumentException("Noise source must be defined.");
             }
             return new DomainWarpTransformer(noiseSource, warpingVector, offset2D, offset3D, offset4D);
         }

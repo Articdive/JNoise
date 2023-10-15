@@ -8,28 +8,28 @@ import de.articdive.jnoise.core.api.transformers.SimpleTransformer;
 import de.articdive.jnoise.core.util.vectors.Vector2D;
 import de.articdive.jnoise.core.util.vectors.Vector3D;
 import de.articdive.jnoise.core.util.vectors.Vector4D;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Secondary class for the JNoise Pipeline for handling {@link ExplicitNoiseSource}s and their {@link NoiseResult}s.
  *
  * @author Articdive
  */
+@NullMarked
 public class JNoiseDetailed<NR extends NoiseResult> extends JNoise implements ExplicitNoiseSource<NR> {
     private final ExplicitNoiseSource<NR> source;
 
     JNoiseDetailed(
-        @NotNull SimpleTransformer[] simpleTransformers,
-        @NotNull DetailedTransformer[] detailedTransformers,
-        @NotNull ExplicitNoiseSource<NR> source,
-        @NotNull NoiseModifier[] modifiers
+        SimpleTransformer[] simpleTransformers,
+        DetailedTransformer[] detailedTransformers,
+        ExplicitNoiseSource<NR> source,
+        NoiseModifier[] modifiers
     ) {
         super(simpleTransformers, detailedTransformers, source, modifiers);
         this.source = source;
     }
 
     @Override
-    @NotNull
     public NR evaluateNoiseResult(double x) {
         for (SimpleTransformer simpleTransformer : simpleTransformers) {
             x = simpleTransformer.transformX(x);
@@ -45,7 +45,6 @@ public class JNoiseDetailed<NR extends NoiseResult> extends JNoise implements Ex
     }
 
     @Override
-    @NotNull
     public NR evaluateNoiseResult(double x, double y) {
         for (SimpleTransformer simpleTransformer : simpleTransformers) {
             x = simpleTransformer.transformX(x);
@@ -64,7 +63,6 @@ public class JNoiseDetailed<NR extends NoiseResult> extends JNoise implements Ex
     }
 
     @Override
-    @NotNull
     public NR evaluateNoiseResult(double x, double y, double z) {
         for (SimpleTransformer simpleTransformer : simpleTransformers) {
             x = simpleTransformer.transformX(x);
@@ -85,7 +83,6 @@ public class JNoiseDetailed<NR extends NoiseResult> extends JNoise implements Ex
     }
 
     @Override
-    @NotNull
     public NR evaluateNoiseResult(double x, double y, double z, double w) {
         for (SimpleTransformer simpleTransformer : simpleTransformers) {
             x = simpleTransformer.transformX(x);

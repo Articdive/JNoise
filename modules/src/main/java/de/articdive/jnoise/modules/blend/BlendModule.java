@@ -4,8 +4,9 @@ import de.articdive.jnoise.core.api.functions.Interpolation;
 import de.articdive.jnoise.core.api.modules.NoiseModule;
 import de.articdive.jnoise.core.api.pipeline.NoiseSource;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public final class BlendModule implements NoiseModule {
     private final NoiseSource a;
     private final NoiseSource b;
@@ -13,9 +14,9 @@ public final class BlendModule implements NoiseModule {
     private final Interpolation interpolation;
 
     private BlendModule(
-        @NotNull NoiseSource a,
-        @NotNull NoiseSource b,
-        @NotNull NoiseSource controlSource,
+        NoiseSource a,
+        NoiseSource b,
+        NoiseSource controlSource,
         Interpolation interpolation
     ) {
         this.a = a;
@@ -44,11 +45,11 @@ public final class BlendModule implements NoiseModule {
         return interpolation.lerp(controlSource.evaluateNoise(x, y, z, w), a.evaluateNoise(x, y, z, w), b.evaluateNoise(x, y, z, w));
     }
 
-    @NotNull
     public static BlendModuleBuilder newBuilder() {
         return new BlendModuleBuilder();
     }
 
+    @NullMarked
     public static final class BlendModuleBuilder implements NoiseSourceBuilder {
         private NoiseSource a;
         private NoiseSource b;
@@ -64,11 +65,7 @@ public final class BlendModule implements NoiseModule {
          * @param noiseSource the new noise source for the {@link BlendModule}.
          * @return {@link BlendModuleBuilder} this
          */
-        @NotNull
         public BlendModuleBuilder setA(NoiseSource noiseSource) {
-            if (noiseSource == null) {
-                throw new IllegalArgumentException("First noise source cannot be null.");
-            }
             this.a = noiseSource;
             return this;
         }
@@ -79,11 +76,7 @@ public final class BlendModule implements NoiseModule {
          * @param noiseSourceBuilder the new noise source for the {@link BlendModule}.
          * @return {@link BlendModuleBuilder} this
          */
-        @NotNull
         public BlendModuleBuilder setA(NoiseSourceBuilder noiseSourceBuilder) {
-            if (noiseSourceBuilder == null) {
-                throw new IllegalArgumentException("First noise source cannot be null.");
-            }
             this.a = noiseSourceBuilder.build();
             return this;
         }
@@ -94,11 +87,7 @@ public final class BlendModule implements NoiseModule {
          * @param noiseSource the new noise source for the {@link BlendModule}.
          * @return {@link BlendModuleBuilder} this
          */
-        @NotNull
         public BlendModuleBuilder setB(NoiseSource noiseSource) {
-            if (noiseSource == null) {
-                throw new IllegalArgumentException("Second noise source cannot be null.");
-            }
             this.b = noiseSource;
             return this;
         }
@@ -109,11 +98,7 @@ public final class BlendModule implements NoiseModule {
          * @param noiseSourceBuilder the new noise source for the {@link BlendModule}.
          * @return {@link BlendModuleBuilder} this
          */
-        @NotNull
         public BlendModuleBuilder setB(NoiseSourceBuilder noiseSourceBuilder) {
-            if (noiseSourceBuilder == null) {
-                throw new IllegalArgumentException("Second noise source cannot be null.");
-            }
             this.b = noiseSourceBuilder.build();
             return this;
         }
@@ -124,11 +109,7 @@ public final class BlendModule implements NoiseModule {
          * @param noiseSource the new noise source for the {@link BlendModule}.
          * @return {@link BlendModuleBuilder} this
          */
-        @NotNull
         public BlendModuleBuilder setControl(NoiseSource noiseSource) {
-            if (noiseSource == null) {
-                throw new IllegalArgumentException("Second noise source cannot be null.");
-            }
             this.controlSource = noiseSource;
             return this;
         }
@@ -139,11 +120,7 @@ public final class BlendModule implements NoiseModule {
          * @param noiseSourceBuilder the new noise source for the {@link BlendModule}.
          * @return {@link BlendModuleBuilder} this
          */
-        @NotNull
         public BlendModuleBuilder setControl(NoiseSourceBuilder noiseSourceBuilder) {
-            if (noiseSourceBuilder == null) {
-                throw new IllegalArgumentException("Second noise source cannot be null.");
-            }
             this.controlSource = noiseSourceBuilder.build();
             return this;
         }
@@ -154,26 +131,21 @@ public final class BlendModule implements NoiseModule {
          * @param interpolation The new {@link Interpolation} for the {@link BlendModule}.
          * @return {@link BlendModuleBuilder} this
          */
-        @NotNull
         public BlendModuleBuilder setInterpolation(Interpolation interpolation) {
-            if (interpolation == null) {
-                throw new IllegalArgumentException("Interpolation cannot be null.");
-            }
             this.interpolation = interpolation;
             return this;
         }
 
-
-        @NotNull
+        @Override
         public BlendModule build() {
             if (a == null) {
-                throw new IllegalArgumentException("First noise source cannot be null.");
+                throw new IllegalArgumentException("First noise source must be defined.");
             }
             if (b == null) {
-                throw new IllegalArgumentException("Second noise source cannot be null.");
+                throw new IllegalArgumentException("Second noise source must be defined.");
             }
             if (controlSource == null) {
-                throw new IllegalArgumentException("Control noise source cannot be null.");
+                throw new IllegalArgumentException("Control noise source must be defined.");
             }
             return new BlendModule(a, b, controlSource, interpolation);
         }

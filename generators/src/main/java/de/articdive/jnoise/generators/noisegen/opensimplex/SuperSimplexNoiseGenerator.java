@@ -5,7 +5,7 @@ import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
 import de.articdive.jnoise.generators.noise_parameters.simplex_variants.Simplex2DVariant;
 import de.articdive.jnoise.generators.noise_parameters.simplex_variants.Simplex3DVariant;
 import de.articdive.jnoise.generators.noise_parameters.simplex_variants.Simplex4DVariant;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Uses KdotJPG's the super variant of OpenSimplex2 Noise located at <a href=https://github.com/KdotJPG/OpenSimplex2>https://github.com/KdotJPG/OpenSimplex2</a>.
@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Articdive
  */
+@NullMarked
 public final class SuperSimplexNoiseGenerator implements SeededNoiseGenerator {
     private final long seed;
     private final Simplex2DVariant variant2D;
@@ -21,9 +22,9 @@ public final class SuperSimplexNoiseGenerator implements SeededNoiseGenerator {
 
     private SuperSimplexNoiseGenerator(
         long seed,
-        @NotNull Simplex2DVariant variant2D,
-        @NotNull Simplex3DVariant variant3D,
-        @NotNull Simplex4DVariant variant4D
+        Simplex2DVariant variant2D,
+        Simplex3DVariant variant3D,
+        Simplex4DVariant variant4D
     ) {
         this.seed = seed;
         this.variant2D = variant2D;
@@ -95,7 +96,6 @@ public final class SuperSimplexNoiseGenerator implements SeededNoiseGenerator {
      *
      * @return {@link SuperSimplexNoiseBuilder}.
      */
-    @NotNull
     public static SuperSimplexNoiseBuilder newBuilder() {
         return new SuperSimplexNoiseBuilder();
     }
@@ -103,6 +103,7 @@ public final class SuperSimplexNoiseGenerator implements SeededNoiseGenerator {
     /**
      * Builder for the {@link SuperSimplexNoiseGenerator}.
      */
+    @NullMarked
     public static final class SuperSimplexNoiseBuilder implements NoiseSourceBuilder {
         private long seed = 1729;
         private Simplex2DVariant variant2D = Simplex2DVariant.CLASSIC;
@@ -119,7 +120,6 @@ public final class SuperSimplexNoiseGenerator implements SeededNoiseGenerator {
          * @param seed the new seed for the {@link SuperSimplexNoiseGenerator}.
          * @return {@link SuperSimplexNoiseBuilder} this
          */
-        @NotNull
         public SuperSimplexNoiseBuilder setSeed(long seed) {
             this.seed = seed;
             return this;
@@ -131,11 +131,7 @@ public final class SuperSimplexNoiseGenerator implements SeededNoiseGenerator {
          * @param variant2D the new {@link Simplex2DVariant} for the {@link SuperSimplexNoiseGenerator}.
          * @return {@link SuperSimplexNoiseBuilder} this
          */
-        @NotNull
         public SuperSimplexNoiseBuilder setVariant2D(Simplex2DVariant variant2D) {
-            if (variant2D == null) {
-                throw new IllegalArgumentException("Simplex 2D Variant cannot be null.");
-            }
             this.variant2D = variant2D;
             return this;
         }
@@ -146,11 +142,7 @@ public final class SuperSimplexNoiseGenerator implements SeededNoiseGenerator {
          * @param variant3D the new {@link Simplex3DVariant} for the {@link SuperSimplexNoiseGenerator}.
          * @return {@link SuperSimplexNoiseBuilder} this
          */
-        @NotNull
         public SuperSimplexNoiseBuilder setVariant3D(Simplex3DVariant variant3D) {
-            if (variant3D == null) {
-                throw new IllegalArgumentException("Simplex 3D Variant cannot be null.");
-            }
             this.variant3D = variant3D;
             return this;
         }
@@ -161,17 +153,12 @@ public final class SuperSimplexNoiseGenerator implements SeededNoiseGenerator {
          * @param variant4D the new {@link Simplex4DVariant} for the {@link SuperSimplexNoiseGenerator}.
          * @return {@link SuperSimplexNoiseBuilder} this
          */
-        @NotNull
         public SuperSimplexNoiseBuilder setVariant4D(Simplex4DVariant variant4D) {
-            if (variant4D == null) {
-                throw new IllegalArgumentException("Simplex 4D Variant cannot be null.");
-            }
             this.variant4D = variant4D;
             return this;
         }
 
         @Override
-        @NotNull
         public SuperSimplexNoiseGenerator build() {
             return new SuperSimplexNoiseGenerator(seed, variant2D, variant3D, variant4D);
         }

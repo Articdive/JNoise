@@ -2,7 +2,7 @@ package de.articdive.jnoise.generators.noisegen.pattern;
 
 import de.articdive.jnoise.core.api.noisegen.NoiseGenerator;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * A noise generator that returns a concentric spheres (centered on the origin) extending infinitely.
@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Articdive
  */
+@NullMarked
 public final class SphereNoiseGenerator implements NoiseGenerator {
     private SphereNoiseGenerator() {
 
@@ -60,7 +61,6 @@ public final class SphereNoiseGenerator implements NoiseGenerator {
      *
      * @return {@link SphereNoiseBuilder}.
      */
-    @NotNull
     public static SphereNoiseBuilder newBuilder() {
         return new SphereNoiseBuilder();
     }
@@ -68,6 +68,7 @@ public final class SphereNoiseGenerator implements NoiseGenerator {
     /**
      * Builder for the {@link SphereNoiseGenerator}.
      */
+    @NullMarked
     public static final class SphereNoiseBuilder implements NoiseSourceBuilder {
 
         private SphereNoiseBuilder() {
@@ -75,7 +76,6 @@ public final class SphereNoiseGenerator implements NoiseGenerator {
         }
 
         @Override
-        @NotNull
         public SphereNoiseGenerator build() {
             return new SphereNoiseGenerator();
         }

@@ -3,8 +3,9 @@ package de.articdive.jnoise.modules.selection;
 import de.articdive.jnoise.core.api.modules.NoiseModule;
 import de.articdive.jnoise.core.api.pipeline.NoiseSource;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public final class SelectionModule implements NoiseModule {
     private final NoiseSource a;
     private final NoiseSource b;
@@ -12,9 +13,9 @@ public final class SelectionModule implements NoiseModule {
     private final double boundary;
 
     private SelectionModule(
-        @NotNull NoiseSource a,
-        @NotNull NoiseSource b,
-        @NotNull NoiseSource controlSource,
+        NoiseSource a,
+        NoiseSource b,
+        NoiseSource controlSource,
         double boundary
     ) {
         this.a = a;
@@ -59,11 +60,11 @@ public final class SelectionModule implements NoiseModule {
         }
     }
 
-    @NotNull
     public static SelectionModuleBuilder newBuilder() {
         return new SelectionModuleBuilder();
     }
 
+    @NullMarked
     public static final class SelectionModuleBuilder implements NoiseSourceBuilder {
         private NoiseSource a;
         private NoiseSource b;
@@ -79,11 +80,7 @@ public final class SelectionModule implements NoiseModule {
          * @param noiseSource the new noise source for the {@link SelectionModule}.
          * @return {@link SelectionModuleBuilder} this
          */
-        @NotNull
         public SelectionModuleBuilder setA(NoiseSource noiseSource) {
-            if (noiseSource == null) {
-                throw new IllegalArgumentException("First noise source cannot be null.");
-            }
             this.a = noiseSource;
             return this;
         }
@@ -94,11 +91,7 @@ public final class SelectionModule implements NoiseModule {
          * @param noiseSourceBuilder the new noise source for the {@link SelectionModule}.
          * @return {@link SelectionModuleBuilder} this
          */
-        @NotNull
         public SelectionModuleBuilder setA(NoiseSourceBuilder noiseSourceBuilder) {
-            if (noiseSourceBuilder == null) {
-                throw new IllegalArgumentException("First noise source cannot be null.");
-            }
             this.a = noiseSourceBuilder.build();
             return this;
         }
@@ -109,11 +102,7 @@ public final class SelectionModule implements NoiseModule {
          * @param noiseSource the new noise source for the {@link SelectionModule}.
          * @return {@link SelectionModuleBuilder} this
          */
-        @NotNull
         public SelectionModuleBuilder setB(NoiseSource noiseSource) {
-            if (noiseSource == null) {
-                throw new IllegalArgumentException("Second noise source cannot be null.");
-            }
             this.b = noiseSource;
             return this;
         }
@@ -124,11 +113,7 @@ public final class SelectionModule implements NoiseModule {
          * @param noiseSourceBuilder the new noise source for the {@link SelectionModule}.
          * @return {@link SelectionModuleBuilder} this
          */
-        @NotNull
         public SelectionModuleBuilder setB(NoiseSourceBuilder noiseSourceBuilder) {
-            if (noiseSourceBuilder == null) {
-                throw new IllegalArgumentException("Second noise source cannot be null.");
-            }
             this.b = noiseSourceBuilder.build();
             return this;
         }
@@ -139,11 +124,7 @@ public final class SelectionModule implements NoiseModule {
          * @param noiseSource the new noise source for the {@link SelectionModule}.
          * @return {@link SelectionModuleBuilder} this
          */
-        @NotNull
         public SelectionModuleBuilder setControl(NoiseSource noiseSource) {
-            if (noiseSource == null) {
-                throw new IllegalArgumentException("Second noise source cannot be null.");
-            }
             this.controlSource = noiseSource;
             return this;
         }
@@ -154,11 +135,7 @@ public final class SelectionModule implements NoiseModule {
          * @param noiseSourceBuilder the new noise source for the {@link SelectionModule}.
          * @return {@link SelectionModuleBuilder} this
          */
-        @NotNull
         public SelectionModuleBuilder setControl(NoiseSourceBuilder noiseSourceBuilder) {
-            if (noiseSourceBuilder == null) {
-                throw new IllegalArgumentException("Second noise source cannot be null.");
-            }
             this.controlSource = noiseSourceBuilder.build();
             return this;
         }
@@ -169,23 +146,21 @@ public final class SelectionModule implements NoiseModule {
          * @param boundary the new boundary for the {@link SelectionModule}.
          * @return {@link SelectionModuleBuilder} this
          */
-        @NotNull
         public SelectionModuleBuilder setBoundary(double boundary) {
             this.boundary = boundary;
             return this;
         }
 
-
-        @NotNull
+        @Override
         public SelectionModule build() {
             if (a == null) {
-                throw new IllegalArgumentException("First noise source cannot be null.");
+                throw new IllegalArgumentException("First noise source must be defined.");
             }
             if (b == null) {
-                throw new IllegalArgumentException("Second noise source cannot be null.");
+                throw new IllegalArgumentException("Second noise source must be defined.");
             }
             if (controlSource == null) {
-                throw new IllegalArgumentException("Control noise source cannot be null.");
+                throw new IllegalArgumentException("Control noise source must be defined.");
             }
             return new SelectionModule(a, b, controlSource, boundary);
         }

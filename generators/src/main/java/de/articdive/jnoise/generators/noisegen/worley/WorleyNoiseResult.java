@@ -3,7 +3,7 @@ package de.articdive.jnoise.generators.noisegen.worley;
 import de.articdive.jnoise.core.api.modifiers.NoiseModifier;
 import de.articdive.jnoise.core.api.noisegen.NoiseResult;
 import de.articdive.jnoise.core.util.vectors.Vector;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 /**
  * This class wraps the result of Worley Noise.

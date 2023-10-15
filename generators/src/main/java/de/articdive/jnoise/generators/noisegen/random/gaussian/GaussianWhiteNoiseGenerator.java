@@ -3,7 +3,7 @@ package de.articdive.jnoise.generators.noisegen.random.gaussian;
 import de.articdive.jnoise.core.api.noisegen.SeededNoiseGenerator;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
 import de.articdive.jnoise.core.util.HashUtil;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.Random;
 
@@ -13,6 +13,7 @@ import java.util.Random;
  *
  * @author Articdive
  */
+@NullMarked
 public final class GaussianWhiteNoiseGenerator implements SeededNoiseGenerator {
     private final long seed;
     private final double mean;
@@ -95,7 +96,6 @@ public final class GaussianWhiteNoiseGenerator implements SeededNoiseGenerator {
      *
      * @return {@link GaussianWhiteNoiseBuilder}.
      */
-    @NotNull
     public static GaussianWhiteNoiseBuilder newBuilder() {
         return new GaussianWhiteNoiseBuilder();
     }
@@ -103,6 +103,7 @@ public final class GaussianWhiteNoiseGenerator implements SeededNoiseGenerator {
     /**
      * Builder for the {@link GaussianWhiteNoiseGenerator}.
      */
+    @NullMarked
     public static final class GaussianWhiteNoiseBuilder implements NoiseSourceBuilder {
         private long seed = 1729;
 
@@ -120,7 +121,6 @@ public final class GaussianWhiteNoiseGenerator implements SeededNoiseGenerator {
          * @param seed the new seed for the {@link GaussianWhiteNoiseGenerator}.
          * @return {@link GaussianWhiteNoiseBuilder} this
          */
-        @NotNull
         public GaussianWhiteNoiseGenerator.GaussianWhiteNoiseBuilder setSeed(long seed) {
             this.seed = seed;
             return this;
@@ -149,7 +149,6 @@ public final class GaussianWhiteNoiseGenerator implements SeededNoiseGenerator {
         }
 
         @Override
-        @NotNull
         public GaussianWhiteNoiseGenerator build() {
             return new GaussianWhiteNoiseGenerator(seed, mean, stddev);
         }

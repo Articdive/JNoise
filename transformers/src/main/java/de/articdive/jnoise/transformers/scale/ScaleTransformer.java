@@ -2,13 +2,14 @@ package de.articdive.jnoise.transformers.scale;
 
 import de.articdive.jnoise.core.api.transformers.SimpleTransformer;
 import de.articdive.jnoise.core.util.vectors.Vector4D;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Simplistic Scale transformer (Frequency transformer) that multiplies each coordinate part by the specified scale value.
  *
  * @author Articdive
  */
+@NullMarked
 public final class ScaleTransformer implements SimpleTransformer {
     private final Vector4D scale;
 
@@ -22,7 +23,7 @@ public final class ScaleTransformer implements SimpleTransformer {
     /**
      * @param scaleVector Vector containing the scale value for all dimensions.
      */
-    public ScaleTransformer(@NotNull Vector4D scaleVector) {
+    public ScaleTransformer(Vector4D scaleVector) {
         this(scaleVector.x(), scaleVector.y(), scaleVector.z(), scaleVector.w());
     }
 

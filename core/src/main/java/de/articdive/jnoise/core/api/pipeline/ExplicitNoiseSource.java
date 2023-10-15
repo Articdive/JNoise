@@ -1,7 +1,7 @@
 package de.articdive.jnoise.core.api.pipeline;
 
 import de.articdive.jnoise.core.api.noisegen.NoiseResult;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * Interface that denotes an explicit {@link NoiseSource}, which can evaluate a {@link NoiseResult} at a location.
@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Articdive
  */
+@NullMarked
 public interface ExplicitNoiseSource<NR extends NoiseResult> extends NoiseSource {
     /**
      * Evaluates noise at a 1D point.
@@ -16,7 +17,6 @@ public interface ExplicitNoiseSource<NR extends NoiseResult> extends NoiseSource
      * @param x X-Coordinate of the 1D point.
      * @return {@link NR} denoting the noise value at the 1D point.
      */
-    @NotNull
     NR evaluateNoiseResult(double x);
 
     /**
@@ -26,7 +26,6 @@ public interface ExplicitNoiseSource<NR extends NoiseResult> extends NoiseSource
      * @param y Y-Coordinate of the 2D point.
      * @return {@link NR} denoting the noise value at the 2D point.
      */
-    @NotNull
     NR evaluateNoiseResult(double x, double y);
 
     /**
@@ -37,7 +36,6 @@ public interface ExplicitNoiseSource<NR extends NoiseResult> extends NoiseSource
      * @param z Z-Coordinate of the 3D point.
      * @return {@link NR} denoting the noise value at the 3D point.
      */
-    @NotNull
     NR evaluateNoiseResult(double x, double y, double z);
 
     /**
@@ -49,6 +47,5 @@ public interface ExplicitNoiseSource<NR extends NoiseResult> extends NoiseSource
      * @param w W-Coordinate of the 4D point.
      * @return {@link NR} denoting the noise value at the 4D point.
      */
-    @NotNull
     NR evaluateNoiseResult(double x, double y, double z, double w);
 }

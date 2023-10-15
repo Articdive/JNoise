@@ -2,7 +2,7 @@ package de.articdive.jnoise.generators.noisegen.pattern;
 
 import de.articdive.jnoise.core.api.noisegen.NoiseGenerator;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 /**
  * A noise generator that returns a checkerboard of unit-sized blocks alternating between 0.0 and 1.0.
@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author Articdive
  */
+@NullMarked
 public final class CheckerboardNoiseGenerator implements NoiseGenerator {
     private CheckerboardNoiseGenerator() {
 
@@ -50,7 +51,6 @@ public final class CheckerboardNoiseGenerator implements NoiseGenerator {
      *
      * @return {@link CheckerboardNoiseBuilder}.
      */
-    @NotNull
     public static CheckerboardNoiseBuilder newBuilder() {
         return new CheckerboardNoiseBuilder();
     }
@@ -58,6 +58,7 @@ public final class CheckerboardNoiseGenerator implements NoiseGenerator {
     /**
      * Builder for the {@link CheckerboardNoiseGenerator}.
      */
+    @NullMarked
     public static final class CheckerboardNoiseBuilder implements NoiseSourceBuilder {
 
         private CheckerboardNoiseBuilder() {
@@ -65,7 +66,6 @@ public final class CheckerboardNoiseGenerator implements NoiseGenerator {
         }
 
         @Override
-        @NotNull
         public CheckerboardNoiseGenerator build() {
             return new CheckerboardNoiseGenerator();
         }

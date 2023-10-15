@@ -34,7 +34,7 @@ import de.articdive.jnoise.modules.combination.CombinationModule;
 import de.articdive.jnoise.modules.octavation.OctavationModule;
 import de.articdive.jnoise.modules.octavation.fractal_functions.FractalFunction;
 import de.articdive.jnoise.transformers.scale.ScaleTransformer;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -46,6 +46,7 @@ import java.util.function.IntToLongFunction;
  *
  * @author Articdive
  */
+@NullMarked
 public class JNoise implements NoiseSource {
     protected final SimpleTransformer[] simpleTransformers;
     protected final DetailedTransformer[] detailedTransformers;
@@ -53,10 +54,10 @@ public class JNoise implements NoiseSource {
     private final NoiseSource source;
 
     JNoise(
-        @NotNull SimpleTransformer[] simpleTransformers,
-        @NotNull DetailedTransformer[] detailedTransformers,
-        @NotNull NoiseSource source,
-        @NotNull NoiseModifier[] modifiers
+        SimpleTransformer[] simpleTransformers,
+        DetailedTransformer[] detailedTransformers,
+        NoiseSource source,
+        NoiseModifier[] modifiers
     ) {
         this.simpleTransformers = simpleTransformers;
         this.detailedTransformers = detailedTransformers;
@@ -140,12 +141,12 @@ public class JNoise implements NoiseSource {
     }
 
 
-    @NotNull
     public static JNoiseBuilder<NoiseResult> newBuilder() {
         return new JNoiseBuilder<>();
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "unused"})
+    @NullMarked
     public static final class JNoiseBuilder<T extends NoiseResult> implements NoiseSourceBuilder {
         private final List<SimpleTransformer> simpleTransformers = new ArrayList<>();
         private final List<DetailedTransformer> detailedTransformers = new ArrayList<>();
@@ -157,51 +158,44 @@ public class JNoise implements NoiseSource {
         }
 
         // SIMPLE TRANSFORMERS
-        @NotNull
-        public JNoiseBuilder<T> addSimpleTransformer(@NotNull SimpleTransformer transformer) {
+        public JNoiseBuilder<T> addSimpleTransformer(SimpleTransformer transformer) {
             simpleTransformers.add(transformer);
             return this;
         }
 
-        @NotNull
         public JNoiseBuilder<T> scale(double factor) {
             simpleTransformers.add(new ScaleTransformer(factor));
             return this;
         }
 
         // DETAILED TRANSFORMERS
-        @NotNull
-        public JNoiseBuilder<T> addDetailedTransformer(@NotNull DetailedTransformer transformer) {
+        public JNoiseBuilder<T> addDetailedTransformer(DetailedTransformer transformer) {
             detailedTransformers.add(transformer);
             return this;
         }
 
         // SOURCES
-        @NotNull
-        public JNoiseBuilder<?> setNoiseSource(@NotNull NoiseSource source) {
+        public JNoiseBuilder<?> setNoiseSource(NoiseSource source) {
             this.source = source;
             return this;
         }
 
-        @NotNull
-        public JNoiseBuilder<?> setNoiseSource(@NotNull NoiseSourceBuilder sourceBuilder) {
+        public JNoiseBuilder<?> setNoiseSource(NoiseSourceBuilder sourceBuilder) {
             this.source = sourceBuilder.build();
             return this;
         }
 
-        @NotNull
-        public <K extends NoiseResult> JNoiseBuilder<K> setNoiseSource(@NotNull ExplicitNoiseSource<K> noiseGenerator) {
+        public <K extends NoiseResult> JNoiseBuilder<K> setNoiseSource(ExplicitNoiseSource<K> noiseGenerator) {
             this.source = noiseGenerator;
             return (JNoiseBuilder<K>) this;
         }
 
-        @NotNull
         public JNoiseBuilder<?> octavation(
-            @NotNull NoiseSource a,
+            NoiseSource a,
             int octaves,
             double persistence,
             double lacunarity,
-            @NotNull FractalFunction fractalFunction,
+            FractalFunction fractalFunction,
             boolean incrementSeed) {
             return setNoiseSource(OctavationModule.newBuilder()
                 .setNoiseSource(a)
@@ -214,22 +208,19 @@ public class JNoise implements NoiseSource {
             );
         }
 
-        @NotNull
-        public JNoiseBuilder<?> octavation(@NotNull OctavationModule.OctavationModuleBuilder builder) {
+        public JNoiseBuilder<?> octavation(OctavationModule.OctavationModuleBuilder builder) {
             return setNoiseSource(builder);
         }
 
-        @NotNull
-        public JNoiseBuilder<?> octavation(@NotNull OctavationModule module) {
+        public JNoiseBuilder<?> octavation(OctavationModule module) {
             return setNoiseSource(module);
         }
 
-        @NotNull
         public JNoiseBuilder<?> octavate(
             int octaves,
             double gain,
             double lacunarity,
-            @NotNull FractalFunction fractalFunction,
+            FractalFunction fractalFunction,
             boolean incrementSeed) {
             if (source == null) {
                 throw new IllegalArgumentException("Cannot octavate an empty noise source.");
@@ -245,8 +236,7 @@ public class JNoise implements NoiseSource {
             );
         }
 
-        @NotNull
-        public JNoiseBuilder<?> combination(@NotNull NoiseSource a, @NotNull NoiseSource b, @NotNull Combiner combiner) {
+        public JNoiseBuilder<?> combination(NoiseSource a, NoiseSource b, Combiner combiner) {
             return setNoiseSource(CombinationModule.newBuilder()
                 .setA(a)
                 .setB(b)
@@ -255,18 +245,15 @@ public class JNoise implements NoiseSource {
             );
         }
 
-        @NotNull
-        public JNoiseBuilder<?> combination(@NotNull CombinationModule.CombinationModuleBuilder builder) {
+        public JNoiseBuilder<?> combination(CombinationModule.CombinationModuleBuilder builder) {
             return setNoiseSource(builder);
         }
 
-        @NotNull
-        public JNoiseBuilder<?> combination(@NotNull CombinationModule module) {
+        public JNoiseBuilder<?> combination(CombinationModule module) {
             return setNoiseSource(module);
         }
 
-        @NotNull
-        public JNoiseBuilder<?> combine(@NotNull NoiseSource b, @NotNull Combiner combiner) {
+        public JNoiseBuilder<?> combine(NoiseSource b, Combiner combiner) {
             if (source == null) {
                 throw new IllegalArgumentException("Cannot combine to an empty noise source.");
             }
@@ -278,29 +265,25 @@ public class JNoise implements NoiseSource {
             );
         }
 
-        @NotNull
-        public JNoiseBuilder<?> perlin(long seed, @NotNull Interpolation interpolation, @NotNull FadeFunction fadeFunction) {
+        public JNoiseBuilder<?> perlin(long seed, Interpolation interpolation, FadeFunction fadeFunction) {
             return setNoiseSource(
                 PerlinNoiseGenerator.newBuilder().setSeed(seed).setInterpolation(interpolation).setFadeFunction(fadeFunction).build()
             );
         }
 
-        @NotNull
-        public JNoiseBuilder<?> perlin(@NotNull PerlinNoiseGenerator.PerlinNoiseBuilder builder) {
+        public JNoiseBuilder<?> perlin(PerlinNoiseGenerator.PerlinNoiseBuilder builder) {
             return setNoiseSource(builder);
         }
 
-        @NotNull
-        public JNoiseBuilder<?> perlin(@NotNull PerlinNoiseGenerator generator) {
+        public JNoiseBuilder<?> perlin(PerlinNoiseGenerator generator) {
             return setNoiseSource(generator);
         }
 
-        @NotNull
         public JNoiseBuilder<?> fastSimplex(
             long seed,
-            @NotNull Simplex2DVariant variant2D,
-            @NotNull Simplex3DVariant variant3D,
-            @NotNull Simplex4DVariant variant4D
+            Simplex2DVariant variant2D,
+            Simplex3DVariant variant3D,
+            Simplex4DVariant variant4D
         ) {
             return setNoiseSource(
                 FastSimplexNoiseGenerator.newBuilder().setSeed(seed)
@@ -311,22 +294,19 @@ public class JNoise implements NoiseSource {
             );
         }
 
-        @NotNull
-        public JNoiseBuilder<?> fastSimplex(@NotNull FastSimplexNoiseGenerator.FastSimplexNoiseBuilder builder) {
+        public JNoiseBuilder<?> fastSimplex(FastSimplexNoiseGenerator.FastSimplexNoiseBuilder builder) {
             return setNoiseSource(builder);
         }
 
-        @NotNull
-        public JNoiseBuilder<?> fastSimplex(@NotNull FastSimplexNoiseGenerator generator) {
+        public JNoiseBuilder<?> fastSimplex(FastSimplexNoiseGenerator generator) {
             return setNoiseSource(generator);
         }
 
-        @NotNull
         public JNoiseBuilder<?> superSimplex(
             long seed,
-            @NotNull Simplex2DVariant variant2D,
-            @NotNull Simplex3DVariant variant3D,
-            @NotNull Simplex4DVariant variant4D
+            Simplex2DVariant variant2D,
+            Simplex3DVariant variant3D,
+            Simplex4DVariant variant4D
         ) {
             return setNoiseSource(SuperSimplexNoiseGenerator.newBuilder().setSeed(seed)
                 .setVariant2D(variant2D)
@@ -336,121 +316,99 @@ public class JNoise implements NoiseSource {
             );
         }
 
-        @NotNull
-        public JNoiseBuilder<?> superSimplex(@NotNull SuperSimplexNoiseGenerator.SuperSimplexNoiseBuilder builder) {
+        public JNoiseBuilder<?> superSimplex(SuperSimplexNoiseGenerator.SuperSimplexNoiseBuilder builder) {
             return setNoiseSource(builder);
         }
 
-        @NotNull
-        public JNoiseBuilder<?> superSimplex(@NotNull SuperSimplexNoiseGenerator generator) {
+        public JNoiseBuilder<?> superSimplex(SuperSimplexNoiseGenerator generator) {
             return setNoiseSource(generator);
         }
 
 
-        @NotNull
-        public JNoiseBuilder<?> value(long seed, @NotNull Interpolation interpolation, @NotNull FadeFunction fadeFunction) {
+        public JNoiseBuilder<?> value(long seed, Interpolation interpolation, FadeFunction fadeFunction) {
             return setNoiseSource(
                 ValueNoiseGenerator.newBuilder().setSeed(seed).setInterpolation(interpolation).setFadeFunction(fadeFunction).build()
             );
         }
 
-        @NotNull
-        public JNoiseBuilder<?> value(@NotNull ValueNoiseGenerator.ValueNoiseBuilder builder) {
+        public JNoiseBuilder<?> value(ValueNoiseGenerator.ValueNoiseBuilder builder) {
             return setNoiseSource(builder);
         }
 
-        @NotNull
-        public JNoiseBuilder<?> value(@NotNull ValueNoiseGenerator generator) {
+        public JNoiseBuilder<?> value(ValueNoiseGenerator generator) {
             return setNoiseSource(generator);
         }
 
-        @NotNull
         public JNoiseBuilder<?> white(long seed) {
             return setNoiseSource(WhiteNoiseGenerator.newBuilder().setSeed(seed).build());
         }
 
-        @NotNull
-        public JNoiseBuilder<?> white(@NotNull WhiteNoiseGenerator.WhiteNoiseBuilder builder) {
+        public JNoiseBuilder<?> white(WhiteNoiseGenerator.WhiteNoiseBuilder builder) {
             return setNoiseSource(builder);
         }
 
-        @NotNull
-        public JNoiseBuilder<?> white(@NotNull WhiteNoiseGenerator generator) {
+        public JNoiseBuilder<?> white(WhiteNoiseGenerator generator) {
             return setNoiseSource(generator);
         }
 
-        @NotNull
         public JNoiseBuilder<?> gaussianWhite(long seed) {
             return setNoiseSource(GaussianWhiteNoiseGenerator.newBuilder().setSeed(seed).build());
         }
 
-        @NotNull
         public JNoiseBuilder<?> gaussianWhite(GaussianWhiteNoiseGenerator.GaussianWhiteNoiseBuilder builder) {
             return setNoiseSource(builder);
         }
 
-        @NotNull
         public JNoiseBuilder<?> gaussianWhite(GaussianWhiteNoiseGenerator generator) {
             return setNoiseSource(generator);
         }
 
-        @NotNull
-        public JNoiseBuilder<WorleyNoiseResult<Vector>> worley(long seed, @NotNull DistanceFunction distanceFunction, @NotNull IntToLongFunction fpFunction) {
+        public JNoiseBuilder<WorleyNoiseResult<Vector>> worley(long seed, DistanceFunction distanceFunction, IntToLongFunction fpFunction) {
             this.source = WorleyNoiseGenerator.newBuilder().setSeed(seed).setDistanceFunction(distanceFunction).setFeaturePointAmountFunction(fpFunction).build();
             return (JNoiseBuilder<WorleyNoiseResult<Vector>>) this;
         }
 
-        @NotNull
-        public JNoiseBuilder<WorleyNoiseResult<Vector>> worley(@NotNull WorleyNoiseGenerator.WorleyNoiseBuilder builder) {
+        public JNoiseBuilder<WorleyNoiseResult<Vector>> worley(WorleyNoiseGenerator.WorleyNoiseBuilder builder) {
             this.source = builder.build();
             return (JNoiseBuilder<WorleyNoiseResult<Vector>>) this;
         }
 
-        @NotNull
-        public JNoiseBuilder<WorleyNoiseResult<Vector>> worley(@NotNull WorleyNoiseGenerator generator) {
+        public JNoiseBuilder<WorleyNoiseResult<Vector>> worley(WorleyNoiseGenerator generator) {
             this.source = generator;
             return (JNoiseBuilder<WorleyNoiseResult<Vector>>) this;
         }
 
-        @NotNull
         public JNoiseBuilder<?> constant(double constant) {
             return setNoiseSource(ConstantNoiseGenerator.newBuilder().setConstant(constant).build());
         }
 
-        @NotNull
-        public JNoiseBuilder<?> constant(@NotNull ConstantNoiseGenerator.ConstantNoiseBuilder builder) {
+        public JNoiseBuilder<?> constant(ConstantNoiseGenerator.ConstantNoiseBuilder builder) {
             return setNoiseSource(builder);
         }
 
-        @NotNull
-        public JNoiseBuilder<?> constant(@NotNull ConstantNoiseGenerator generator) {
+        public JNoiseBuilder<?> constant(ConstantNoiseGenerator generator) {
             return setNoiseSource(generator);
         }
 
         // MODIFIERS
-        @NotNull
-        public JNoiseBuilder<T> addModifier(@NotNull NoiseModifier noiseModifier) {
+        public JNoiseBuilder<T> addModifier(NoiseModifier noiseModifier) {
             modifiers.add(noiseModifier);
             return this;
         }
 
-        @NotNull
         public JNoiseBuilder<T> abs() {
             return addModifier(new AbsoluteValueModifier());
         }
 
-        @NotNull
         public JNoiseBuilder<T> clamp(double a, double b) {
             return addModifier(new ClampModifier(a, b));
         }
 
-        @NotNull
         public JNoiseBuilder<T> invert() {
             return addModifier(new InvertModifier());
         }
 
         @Override
-        @NotNull
         public JNoise build() {
             if (source == null) {
                 throw new IllegalArgumentException("Source must be defined.");
@@ -463,7 +421,6 @@ public class JNoise implements NoiseSource {
             );
         }
 
-        @NotNull
         public JNoiseDetailed<T> buildDetailed() {
             if (source == null) {
                 throw new IllegalArgumentException("Source must be defined.");
