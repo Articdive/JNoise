@@ -1,6 +1,6 @@
 allprojects {
     group = "de.articdive"
-    version = "4.1.0-SNAPSHOT"
+    version = "4.1.0"
     description = "A Library that allows you to generate noise using different algorithms."
 }
 
