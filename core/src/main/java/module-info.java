@@ -1,3 +1,8 @@
+/**
+ * The core JNoise module. 
+ * 
+ * Requires JSpecify.
+ */
 module de.articdive.jnoise.core {
   exports de.articdive.jnoise.core.api.functions;
   exports de.articdive.jnoise.core.api.modifiers;

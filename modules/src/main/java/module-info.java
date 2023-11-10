@@ -1,3 +1,8 @@
+/**
+ * The "modules" JNoise module. 
+ * 
+ * Requires the core JNoise module.
+ */
 module de.articdive.jnoise.modules {
   exports de.articdive.jnoise.modules.blend;
   exports de.articdive.jnoise.modules.combination;

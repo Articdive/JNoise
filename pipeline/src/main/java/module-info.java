@@ -1,4 +1,10 @@
-module de.articdive.jnoise.pipelines {
+/**
+ * The "pipeline" JNoise module. 
+ * 
+ * Requires the "core", "transformers", "generators", 
+ * "modules" and "modifiers" JNoise module.
+ */
+module de.articdive.jnoise.pipeline {
   exports de.articdive.jnoise.pipeline;
 
   requires transitive de.articdive.jnoise.core;

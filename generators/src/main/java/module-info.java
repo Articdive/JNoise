@@ -1,3 +1,8 @@
+/**
+ * The "generators" JNoise module. 
+ * 
+ * Requires the core JNoise module.
+ */
 module de.articdive.jnoise.generators {
   exports de.articdive.jnoise.generators.noise_parameters.distance_functions;
   exports de.articdive.jnoise.generators.noise_parameters.fade_functions;
