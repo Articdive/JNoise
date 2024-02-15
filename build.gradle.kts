@@ -15,8 +15,10 @@ val exportedProjects = arrayListOf(
 
 tasks {
     register<Javadoc>("global-javadoc") {
-        source = files(exportedProjects.map { project(it).the<SourceSetContainer>()["main"].allJava.asFileTree }).asFileTree
+        source = files(exportedProjects.map { project(it).the<SourceSetContainer>()["main"].allJava.asFileTree }).filter {
+            !it.name.equals("module-info.java")
+        }.asFileTree
         classpath = files(exportedProjects.map { project(it).the<SourceSetContainer>()["main"].compileClasspath })
-        setDestinationDir(file("${buildDir}/docs/javadoc"))
+        setDestinationDir(file("${layout.buildDirectory.get()}/docs/javadoc"))
     }
 }

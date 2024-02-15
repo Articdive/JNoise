@@ -9,10 +9,6 @@ import de.articdive.jnoise.core.api.pipeline.NoiseSource;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
 import de.articdive.jnoise.core.api.transformers.DetailedTransformer;
 import de.articdive.jnoise.core.api.transformers.SimpleTransformer;
-import de.articdive.jnoise.core.util.vectors.Vector;
-import de.articdive.jnoise.core.util.vectors.Vector2D;
-import de.articdive.jnoise.core.util.vectors.Vector3D;
-import de.articdive.jnoise.core.util.vectors.Vector4D;
 import de.articdive.jnoise.generators.noise_parameters.distance_functions.DistanceFunction;
 import de.articdive.jnoise.generators.noise_parameters.fade_functions.FadeFunction;
 import de.articdive.jnoise.generators.noise_parameters.simplex_variants.Simplex2DVariant;
@@ -66,14 +62,15 @@ public class JNoise implements NoiseSource {
     }
 
     @Override
-    public double evaluateNoise(double x) {
+    public double evaluateNoise(final double x) {
+        double[] vec1D = new double[]{x};
         for (SimpleTransformer simpleTransformer : simpleTransformers) {
-            x = simpleTransformer.transformX(x);
+            vec1D[0] = simpleTransformer.transformX(vec1D[0]);
         }
         for (DetailedTransformer detailedTransformer : detailedTransformers) {
-            x = detailedTransformer.transform(x);
+            detailedTransformer.transform1D(vec1D);
         }
-        double output = source.evaluateNoise(x);
+        double output = source.evaluateNoise(vec1D[0]);
         for (NoiseModifier modifier : modifiers) {
             output = modifier.apply(output);
         }
@@ -81,17 +78,16 @@ public class JNoise implements NoiseSource {
     }
 
     @Override
-    public double evaluateNoise(double x, double y) {
+    public double evaluateNoise(final double x, final double y) {
+        double[] vec2D = new double[]{x, y};
         for (SimpleTransformer simpleTransformer : simpleTransformers) {
-            x = simpleTransformer.transformX(x);
-            y = simpleTransformer.transformY(y);
+            vec2D[0] = simpleTransformer.transformX(vec2D[0]);
+            vec2D[1] = simpleTransformer.transformY(vec2D[1]);
         }
         for (DetailedTransformer detailedTransformer : detailedTransformers) {
-            Vector2D vector2D = detailedTransformer.transform(x, y);
-            x = vector2D.x();
-            y = vector2D.y();
+            detailedTransformer.transform2D(vec2D);
         }
-        double output = source.evaluateNoise(x, y);
+        double output = source.evaluateNoise(vec2D[0], vec2D[1]);
         for (NoiseModifier modifier : modifiers) {
             output = modifier.apply(output);
         }
@@ -99,19 +95,17 @@ public class JNoise implements NoiseSource {
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z) {
+    public double evaluateNoise(final double x, final double y, final double z) {
+        double[] vec3D = new double[]{x, y, z};
         for (SimpleTransformer simpleTransformer : simpleTransformers) {
-            x = simpleTransformer.transformX(x);
-            y = simpleTransformer.transformY(y);
-            z = simpleTransformer.transformZ(z);
+            vec3D[0] = simpleTransformer.transformX(vec3D[0]);
+            vec3D[1] = simpleTransformer.transformY(vec3D[1]);
+            vec3D[2] = simpleTransformer.transformZ(vec3D[2]);
         }
         for (DetailedTransformer detailedTransformer : detailedTransformers) {
-            Vector3D vector3D = detailedTransformer.transform(x, y, z);
-            x = vector3D.x();
-            y = vector3D.y();
-            z = vector3D.z();
+            detailedTransformer.transform3D(vec3D);
         }
-        double output = source.evaluateNoise(x, y, z);
+        double output = source.evaluateNoise(vec3D[0], vec3D[1], vec3D[2]);
         for (NoiseModifier modifier : modifiers) {
             output = modifier.apply(output);
         }
@@ -119,21 +113,18 @@ public class JNoise implements NoiseSource {
     }
 
     @Override
-    public double evaluateNoise(double x, double y, double z, double w) {
+    public double evaluateNoise(final double x, final double y, final double z, final double w) {
+        double[] vec4D = new double[]{x, y, z, w};
         for (SimpleTransformer simpleTransformer : simpleTransformers) {
-            x = simpleTransformer.transformX(x);
-            y = simpleTransformer.transformY(y);
-            z = simpleTransformer.transformZ(z);
-            w = simpleTransformer.transformW(w);
+            vec4D[0] = simpleTransformer.transformX(vec4D[0]);
+            vec4D[1] = simpleTransformer.transformY(vec4D[1]);
+            vec4D[2] = simpleTransformer.transformZ(vec4D[2]);
+            vec4D[3] = simpleTransformer.transformZ(vec4D[2]);
         }
         for (DetailedTransformer detailedTransformer : detailedTransformers) {
-            Vector4D vector4D = detailedTransformer.transform(x, y, z, w);
-            x = vector4D.x();
-            y = vector4D.y();
-            z = vector4D.z();
-            w = vector4D.w();
+            detailedTransformer.transform4D(vec4D);
         }
-        double output = source.evaluateNoise(x, y, z, w);
+        double output = source.evaluateNoise(vec4D[0], vec4D[1], vec4D[2], vec4D[3]);
         for (NoiseModifier modifier : modifiers) {
             output = modifier.apply(output);
         }
@@ -363,19 +354,19 @@ public class JNoise implements NoiseSource {
             return setNoiseSource(generator);
         }
 
-        public JNoiseBuilder<WorleyNoiseResult<Vector>> worley(long seed, DistanceFunction distanceFunction, IntToLongFunction fpFunction) {
+        public JNoiseBuilder<WorleyNoiseResult> worley(long seed, DistanceFunction distanceFunction, IntToLongFunction fpFunction) {
             this.source = WorleyNoiseGenerator.newBuilder().setSeed(seed).setDistanceFunction(distanceFunction).setFeaturePointAmountFunction(fpFunction).build();
-            return (JNoiseBuilder<WorleyNoiseResult<Vector>>) this;
+            return (JNoiseBuilder<WorleyNoiseResult>) this;
         }
 
-        public JNoiseBuilder<WorleyNoiseResult<Vector>> worley(WorleyNoiseGenerator.WorleyNoiseBuilder builder) {
+        public JNoiseBuilder<WorleyNoiseResult> worley(WorleyNoiseGenerator.WorleyNoiseBuilder builder) {
             this.source = builder.build();
-            return (JNoiseBuilder<WorleyNoiseResult<Vector>>) this;
+            return (JNoiseBuilder<WorleyNoiseResult>) this;
         }
 
-        public JNoiseBuilder<WorleyNoiseResult<Vector>> worley(WorleyNoiseGenerator generator) {
+        public JNoiseBuilder<WorleyNoiseResult> worley(WorleyNoiseGenerator generator) {
             this.source = generator;
-            return (JNoiseBuilder<WorleyNoiseResult<Vector>>) this;
+            return (JNoiseBuilder<WorleyNoiseResult>) this;
         }
 
         public JNoiseBuilder<?> constant(double constant) {

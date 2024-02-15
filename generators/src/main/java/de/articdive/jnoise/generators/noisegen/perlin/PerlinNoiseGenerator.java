@@ -4,12 +4,12 @@ import de.articdive.jnoise.core.api.functions.Interpolation;
 import de.articdive.jnoise.core.api.noisegen.SeededNoiseGenerator;
 import de.articdive.jnoise.core.api.pipeline.NoiseSourceBuilder;
 import de.articdive.jnoise.core.util.HashUtil;
-import de.articdive.jnoise.core.util.vectors.Vector1D;
-import de.articdive.jnoise.core.util.vectors.Vector2D;
-import de.articdive.jnoise.core.util.vectors.Vector3D;
-import de.articdive.jnoise.core.util.vectors.Vector4D;
 import de.articdive.jnoise.generators.noise_parameters.fade_functions.FadeFunction;
 import org.jspecify.annotations.NullMarked;
+
+import static de.articdive.jnoise.core.util.MathUtil.dot2D;
+import static de.articdive.jnoise.core.util.MathUtil.dot3D;
+import static de.articdive.jnoise.core.util.MathUtil.dot4D;
 
 /**
  * Based on Ken Perlin's implementation of Perlin Noise.
@@ -19,50 +19,50 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class PerlinNoiseGenerator implements SeededNoiseGenerator {
-    private static final Vector1D[] VECTOR_1D = new Vector1D[]{
-        new Vector1D(1), new Vector1D(-1)
+    private static final double[] VECTOR_1D = new double[]{
+        1, -1
     };
-    private static final Vector2D[] VECTOR_2D = new Vector2D[]{
-        new Vector2D(1, 1), new Vector2D(-1, 1), new Vector2D(1, -1), new Vector2D(-1, -1),
+    private static final double[][] VECTOR_2D = new double[][]{
+        new double[]{1, 1}, new double[]{-1, 1}, new double[]{1, -1}, new double[]{-1, -1},
 
-        new Vector2D(0, 1), new Vector2D(0, -1), new Vector2D(1, 0), new Vector2D(-1, 0)
+        new double[]{0, 1}, new double[]{0, -1}, new double[]{1, 0}, new double[]{-1, 0}
     };
-    private static final Vector3D[] VECTOR_3D = new Vector3D[]{
-        new Vector3D(1, 1, 1), new Vector3D(-1, 1, 1),
-        new Vector3D(1, -1, 1), new Vector3D(-1, -1, 1),
-        new Vector3D(1, 1, -1), new Vector3D(-1, 1, -1),
-        new Vector3D(1, -1, -1), new Vector3D(-1, -1, -1),
+    private static final double[][] VECTOR_3D = new double[][]{
+        new double[]{1, 1, 1}, new double[]{-1, 1, 1},
+        new double[]{1, -1, 1}, new double[]{-1, -1, 1},
+        new double[]{1, 1, -1}, new double[]{-1, 1, -1},
+        new double[]{1, -1, -1}, new double[]{-1, -1, -1},
 
-        new Vector3D(0, 1, 1), new Vector3D(0, -1, 1), new Vector3D(0, 1, -1), new Vector3D(0, -1, -1),
-        new Vector3D(1, 0, 1), new Vector3D(-1, 0, 1), new Vector3D(1, 0, -1), new Vector3D(-1, 0, -1),
-        new Vector3D(1, 1, 0), new Vector3D(-1, 1, 0), new Vector3D(1, -1, 0), new Vector3D(-1, -1, 0)
+        new double[]{0, 1, 1}, new double[]{0, -1, 1}, new double[]{0, 1, -1}, new double[]{0, -1, -1},
+        new double[]{1, 0, 1}, new double[]{-1, 0, 1}, new double[]{1, 0, -1}, new double[]{-1, 0, -1},
+        new double[]{1, 1, 0}, new double[]{-1, 1, 0}, new double[]{1, -1, 0}, new double[]{-1, -1, 0}
     };
-    private static final Vector4D[] VECTOR_4D = new Vector4D[]{
-        new Vector4D(1, 1, 1, 1), new Vector4D(1, 1, -1, 1),
-        new Vector4D(1, -1, 1, 1), new Vector4D(1, -1, -1, 1),
-        new Vector4D(-1, 1, 1, 1), new Vector4D(-1, 1, -1, 1),
-        new Vector4D(-1, -1, 1, 1), new Vector4D(-1, -1, -1, 1),
-        new Vector4D(1, 1, 1, -1), new Vector4D(1, 1, -1, -1),
-        new Vector4D(1, -1, 1, -1), new Vector4D(1, -1, -1, -1),
-        new Vector4D(-1, 1, 1, -1), new Vector4D(-1, 1, -1, -1),
-        new Vector4D(-1, -1, 1, -1), new Vector4D(-1, -1, -1, -1),
+    private static final double[][] VECTOR_4D = new double[][]{
+        new double[]{1, 1, 1, 1}, new double[]{1, 1, -1, 1},
+        new double[]{1, -1, 1, 1}, new double[]{1, -1, -1, 1},
+        new double[]{-1, 1, 1, 1}, new double[]{-1, 1, -1, 1},
+        new double[]{-1, -1, 1, 1}, new double[]{-1, -1, -1, 1},
+        new double[]{1, 1, 1, -1}, new double[]{1, 1, -1, -1},
+        new double[]{1, -1, 1, -1}, new double[]{1, -1, -1, -1},
+        new double[]{-1, 1, 1, -1}, new double[]{-1, 1, -1, -1},
+        new double[]{-1, -1, 1, -1}, new double[]{-1, -1, -1, -1},
 
-        new Vector4D(0, 1, 1, 1), new Vector4D(0, 1, -1, 1),
-        new Vector4D(0, -1, 1, 1), new Vector4D(0, -1, -1, 1),
-        new Vector4D(0, 1, 1, -1), new Vector4D(0, 1, -1, -1),
-        new Vector4D(0, -1, 1, -1), new Vector4D(0, -1, -1, -1),
-        new Vector4D(1, 0, 1, 1), new Vector4D(1, 0, -1, 1),
-        new Vector4D(-1, 0, 1, 1), new Vector4D(-1, 0, -1, 1),
-        new Vector4D(1, 0, 1, -1), new Vector4D(1, 0, -1, -1),
-        new Vector4D(-1, 0, 1, -1), new Vector4D(-1, 0, -1, -1),
-        new Vector4D(1, 1, 0, 1), new Vector4D(1, -1, 0, 1),
-        new Vector4D(-1, 1, 0, 1), new Vector4D(-1, -1, 0, 1),
-        new Vector4D(1, 1, 0, -1), new Vector4D(1, -1, 0, -1),
-        new Vector4D(-1, 1, 0, -1), new Vector4D(-1, -1, 0, -1),
-        new Vector4D(1, 1, 1, 0), new Vector4D(1, -1, 1, 0),
-        new Vector4D(-1, 1, 1, 0), new Vector4D(-1, -1, 1, 0),
-        new Vector4D(1, 1, -1, 0), new Vector4D(1, -1, -1, 0),
-        new Vector4D(-1, 1, -1, 0), new Vector4D(-1, -1, -1, 0)
+        new double[]{0, 1, 1, 1}, new double[]{0, 1, -1, 1},
+        new double[]{0, -1, 1, 1}, new double[]{0, -1, -1, 1},
+        new double[]{0, 1, 1, -1}, new double[]{0, 1, -1, -1},
+        new double[]{0, -1, 1, -1}, new double[]{0, -1, -1, -1},
+        new double[]{1, 0, 1, 1}, new double[]{1, 0, -1, 1},
+        new double[]{-1, 0, 1, 1}, new double[]{-1, 0, -1, 1},
+        new double[]{1, 0, 1, -1}, new double[]{1, 0, -1, -1},
+        new double[]{-1, 0, 1, -1}, new double[]{-1, 0, -1, -1},
+        new double[]{1, 1, 0, 1}, new double[]{1, -1, 0, 1},
+        new double[]{-1, 1, 0, 1}, new double[]{-1, -1, 0, 1},
+        new double[]{1, 1, 0, -1}, new double[]{1, -1, 0, -1},
+        new double[]{-1, 1, 0, -1}, new double[]{-1, -1, 0, -1},
+        new double[]{1, 1, 1, 0}, new double[]{1, -1, 1, 0},
+        new double[]{-1, 1, 1, 0}, new double[]{-1, -1, 1, 0},
+        new double[]{1, 1, -1, 0}, new double[]{1, -1, -1, 0},
+        new double[]{-1, 1, -1, 0}, new double[]{-1, -1, -1, 0}
     };
 
     private final long seed;
@@ -88,8 +88,8 @@ public final class PerlinNoiseGenerator implements SeededNoiseGenerator {
         };
         double[] dots = new double[]{
             // (VECTOR_1D.length - 1) = 1.
-            new Vector1D(x).dot(VECTOR_1D[HashUtil.hash1D(seed, iX) & 1]),
-            new Vector1D(x - 1).dot(VECTOR_1D[HashUtil.hash1D(seed, iX + 1) & 1])
+            x * VECTOR_1D[HashUtil.hash1D(seed, iX) & 1],
+            (x - 1) * VECTOR_1D[HashUtil.hash1D(seed, iX + 1) & 1]
         };
 
         return interpolation.lerp(fractals, dots);
@@ -111,10 +111,10 @@ public final class PerlinNoiseGenerator implements SeededNoiseGenerator {
         };
         double[] dots = new double[]{
             // (VECTOR_2D.length - 1) = 7.
-            new Vector2D(x, y).dot(VECTOR_2D[HashUtil.hash2D(seed, iX, iY) & 7]),
-            new Vector2D(x - 1, y).dot(VECTOR_2D[HashUtil.hash2D(seed, iX + 1, iY) & 7]),
-            new Vector2D(x, y - 1).dot(VECTOR_2D[HashUtil.hash2D(seed, iX, iY + 1) & 7]),
-            new Vector2D(x - 1, y - 1).dot(VECTOR_2D[HashUtil.hash2D(seed, iX + 1, iY + 1) & 7])
+            dot2D(new double[]{x, y}, VECTOR_2D[HashUtil.hash2D(seed, iX, iY) & 7]),
+            dot2D(new double[]{x - 1, y}, VECTOR_2D[HashUtil.hash2D(seed, iX + 1, iY) & 7]),
+            dot2D(new double[]{x, y - 1}, VECTOR_2D[HashUtil.hash2D(seed, iX, iY + 1) & 7]),
+            dot2D(new double[]{x - 1, y - 1}, VECTOR_2D[HashUtil.hash2D(seed, iX + 1, iY + 1) & 7]),
         };
 
         return interpolation.lerp(fractals, dots);
@@ -138,22 +138,14 @@ public final class PerlinNoiseGenerator implements SeededNoiseGenerator {
         };
         double[] dots = new double[]{
             // (VECTOR_3D.length - 1) = 19.
-            new Vector3D(x, y, z)
-                .dot(VECTOR_3D[HashUtil.hash3D(seed, iX, iY, iZ) & 19]),
-            new Vector3D(x - 1, y, z)
-                .dot(VECTOR_3D[HashUtil.hash3D(seed, iX + 1, iY, iZ) & 19]),
-            new Vector3D(x, y - 1, z)
-                .dot(VECTOR_3D[HashUtil.hash3D(seed, iX, iY + 1, iZ) & 19]),
-            new Vector3D(x - 1, y - 1, z)
-                .dot(VECTOR_3D[HashUtil.hash3D(seed, iX + 1, iY + 1, iZ) & 19]),
-            new Vector3D(x, y, z - 1)
-                .dot(VECTOR_3D[HashUtil.hash3D(seed, iX, iY, iZ + 1) & 19]),
-            new Vector3D(x - 1, y, z - 1)
-                .dot(VECTOR_3D[HashUtil.hash3D(seed, iX + 1, iY, iZ + 1) & 19]),
-            new Vector3D(x, y - 1, z - 1)
-                .dot(VECTOR_3D[HashUtil.hash3D(seed, iX, iY + 1, iZ + 1) & 19]),
-            new Vector3D(x - 1, y - 1, z - 1)
-                .dot(VECTOR_3D[HashUtil.hash3D(seed, iX + 1, iY + 1, iZ + 1) & 19])
+            dot3D(new double[]{x, y, z}, VECTOR_3D[HashUtil.hash3D(seed, iX, iY, iZ) & 19]),
+            dot3D(new double[]{x - 1, y, z}, VECTOR_3D[HashUtil.hash3D(seed, iX + 1, iY, iZ) & 19]),
+            dot3D(new double[]{x, y - 1, z}, VECTOR_3D[HashUtil.hash3D(seed, iX, iY + 1, iZ) & 19]),
+            dot3D(new double[]{x - 1, y - 1, z}, VECTOR_3D[HashUtil.hash3D(seed, iX + 1, iY + 1, iZ) & 19]),
+            dot3D(new double[]{x, y, z - 1}, VECTOR_3D[HashUtil.hash3D(seed, iX, iY, iZ + 1) & 19]),
+            dot3D(new double[]{x - 1, y, z - 1}, VECTOR_3D[HashUtil.hash3D(seed, iX + 1, iY, iZ + 1) & 19]),
+            dot3D(new double[]{x, y - 1, z - 1}, VECTOR_3D[HashUtil.hash3D(seed, iX, iY + 1, iZ + 1) & 19]),
+            dot3D(new double[]{x - 1, y - 1, z - 1}, VECTOR_3D[HashUtil.hash3D(seed, iX + 1, iY + 1, iZ + 1) & 19])
         };
         return interpolation.lerp(fractals, dots);
     }
@@ -179,38 +171,22 @@ public final class PerlinNoiseGenerator implements SeededNoiseGenerator {
         };
         double[] dots = new double[]{
             // (VECTOR_4D.length - 1) = 19.
-            new Vector4D(x, y, z, w)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX, iY, iZ, iW) & 47]),
-            new Vector4D(x - 1, y, z, w)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY, iZ, iW) & 47]),
-            new Vector4D(x, y - 1, z, w)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX, iY + 1, iZ, iW) & 47]),
-            new Vector4D(x - 1, y - 1, z, w)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY + 1, iZ, iW) & 47]),
-            new Vector4D(x, y, z - 1, w)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX, iY, iZ + 1, iW) & 47]),
-            new Vector4D(x - 1, y, z - 1, w)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY, iZ + 1, iW) & 47]),
-            new Vector4D(x, y - 1, z - 1, w)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX, iY + 1, iZ + 1, iW) & 47]),
-            new Vector4D(x - 1, y - 1, z - 1, w)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY + 1, iZ + 1, iW) & 47]),
-            new Vector4D(x, y, z, w - 1)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX, iY, iZ, iW + 1) & 47]),
-            new Vector4D(x - 1, y, z, w - 1)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY, iZ, iW + 1) & 47]),
-            new Vector4D(x, y - 1, z, w - 1)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX, iY + 1, iZ, iW + 1) & 47]),
-            new Vector4D(x - 1, y - 1, z, w - 1)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY + 1, iZ, iW + 1) & 47]),
-            new Vector4D(x, y, z - 1, w - 1)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX, iY, iZ + 1, iW + 1) & 47]),
-            new Vector4D(x - 1, y, z - 1, w - 1)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY, iZ + 1, iW + 1) & 47]),
-            new Vector4D(x, y - 1, z - 1, w - 1)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX, iY + 1, iZ + 1, iW + 1) & 47]),
-            new Vector4D(x - 1, y - 1, z - 1, w - 1)
-                .dot(VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY + 1, iZ + 1, iW + 1) & 47])
+            dot4D(new double[]{x, y, z, w}, VECTOR_4D[HashUtil.hash4D(seed, iX, iY, iZ, iW) & 47]),
+            dot4D(new double[]{x - 1, y, z, w}, VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY, iZ, iW) & 47]),
+            dot4D(new double[]{x, y - 1, z, w}, VECTOR_4D[HashUtil.hash4D(seed, iX, iY + 1, iZ, iW) & 47]),
+            dot4D(new double[]{x - 1, y - 1, z, w}, VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY + 1, iZ, iW) & 47]),
+            dot4D(new double[]{x, y, z - 1, w}, VECTOR_4D[HashUtil.hash4D(seed, iX, iY, iZ + 1, iW) & 47]),
+            dot4D(new double[]{x - 1, y, z - 1, w}, VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY, iZ + 1, iW) & 47]),
+            dot4D(new double[]{x, y - 1, z - 1, w}, VECTOR_4D[HashUtil.hash4D(seed, iX, iY + 1, iZ + 1, iW) & 47]),
+            dot4D(new double[]{x - 1, y - 1, z - 1, w}, VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY + 1, iZ + 1, iW) & 47]),
+            dot4D(new double[]{x, y, z, w - 1}, VECTOR_4D[HashUtil.hash4D(seed, iX, iY, iZ, iW + 1) & 47]),
+            dot4D(new double[]{x - 1, y, z, w - 1}, VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY, iZ, iW + 1) & 47]),
+            dot4D(new double[]{x, y - 1, z, w - 1}, VECTOR_4D[HashUtil.hash4D(seed, iX, iY + 1, iZ, iW + 1) & 47]),
+            dot4D(new double[]{x - 1, y - 1, z, w - 1}, VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY + 1, iZ, iW + 1) & 47]),
+            dot4D(new double[]{x, y, z - 1, w - 1}, VECTOR_4D[HashUtil.hash4D(seed, iX, iY, iZ + 1, iW + 1) & 47]),
+            dot4D(new double[]{x - 1, y, z - 1, w - 1}, VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY, iZ + 1, iW + 1) & 47]),
+            dot4D(new double[]{x, y - 1, z - 1, w - 1}, VECTOR_4D[HashUtil.hash4D(seed, iX, iY + 1, iZ + 1, iW + 1) & 47]),
+            dot4D(new double[]{x - 1, y - 1, z - 1, w - 1}, VECTOR_4D[HashUtil.hash4D(seed, iX + 1, iY + 1, iZ + 1, iW + 1) & 47])
         };
         return interpolation.lerp(fractals, dots);
     }

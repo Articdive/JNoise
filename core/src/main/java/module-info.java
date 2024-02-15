@@ -1,6 +1,6 @@
 /**
- * The core JNoise module. 
- * 
+ * The core JNoise module.
+ *
  * Requires JSpecify.
  */
 module de.articdive.jnoise.core {
@@ -12,7 +12,7 @@ module de.articdive.jnoise.core {
   exports de.articdive.jnoise.core.api.transformers;
 
   exports de.articdive.jnoise.core.util;
-  exports de.articdive.jnoise.core.util.vectors;
+  exports de.articdive.jnoise.core.api.annotations;
 
   requires transitive org.jspecify;
 }

@@ -1,8 +1,9 @@
 package de.articdive.jnoise.core.api.transformers;
 
-import de.articdive.jnoise.core.util.vectors.Vector2D;
-import de.articdive.jnoise.core.util.vectors.Vector3D;
-import de.articdive.jnoise.core.util.vectors.Vector4D;
+import de.articdive.jnoise.core.api.annotations.Vector1D;
+import de.articdive.jnoise.core.api.annotations.Vector2D;
+import de.articdive.jnoise.core.api.annotations.Vector3D;
+import de.articdive.jnoise.core.api.annotations.Vector4D;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -14,40 +15,30 @@ import org.jspecify.annotations.NullMarked;
 @NullMarked
 public interface DetailedTransformer {
     /**
-     * Transforms an x coordinate before noise evaluation.
+     * Transforms an x coordinate before noise evaluation via a side-effect.
      *
-     * @param x coordinate to transform.
-     * @return transformed x coordinate.
+     * @param vec1D a double array representing a 1D vector containing the x coordinate to transform.
      */
-    double transform(double x);
+    void transform1D(@Vector1D double[] vec1D);
 
     /**
-     * Transforms an x and y coordinate before noise evaluation.
+     * Transforms an x and y coordinate before noise evaluation via a side-effect.
      *
-     * @param x X coordinate to transform.
-     * @param y Y coordinate to transform.
-     * @return {@link Vector2D} containing the transformed x and y coordinates.
+     * @param vec2D a double array representing a 2D vector containing the x and y coordinate to transform.
      */
-    Vector2D transform(double x, double y);
+    void transform2D(@Vector2D double[] vec2D);
 
     /**
-     * Transforms an x, y and z coordinate before noise evaluation.
+     * Transforms an x, y and z coordinate before noise evaluation via a side-effect.
      *
-     * @param x X coordinate to transform.
-     * @param y Y coordinate to transform.
-     * @param z Z coordinate to transform.
-     * @return {@link Vector3D} containing the transformed x, y and z coordinates.
+     * @param vec3D a double array representing a 3D vector containing the x, y and z coordinate to transform.
      */
-    Vector3D transform(double x, double y, double z);
+    void transform3D(@Vector3D double[] vec3D);
 
     /**
-     * Transforms an x, y, z and w coordinate before noise evaluation.
+     * Transforms an x, y, z and w coordinate before noise evaluation via a side-effect.
      *
-     * @param x X coordinate to transform.
-     * @param y Y coordinate to transform.
-     * @param z Z coordinate to transform.
-     * @param w W coordinate to transform.
-     * @return {@link Vector4D} containing the transformed x, y, z and w coordinates.
+     * @param vec4D a double array representing a 4D vector containing the x, y, z and w coordinate to transform.
      */
-    Vector4D transform(double x, double y, double z, double w);
+    void transform4D(@Vector4D double[] vec4D);
 }

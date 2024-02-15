@@ -5,9 +5,6 @@ import de.articdive.jnoise.core.api.noisegen.NoiseResult;
 import de.articdive.jnoise.core.api.pipeline.ExplicitNoiseSource;
 import de.articdive.jnoise.core.api.transformers.DetailedTransformer;
 import de.articdive.jnoise.core.api.transformers.SimpleTransformer;
-import de.articdive.jnoise.core.util.vectors.Vector2D;
-import de.articdive.jnoise.core.util.vectors.Vector3D;
-import de.articdive.jnoise.core.util.vectors.Vector4D;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -30,14 +27,15 @@ public class JNoiseDetailed<NR extends NoiseResult> extends JNoise implements Ex
     }
 
     @Override
-    public NR evaluateNoiseResult(double x) {
+    public NR evaluateNoiseResult(final double x) {
+        double[] vec1D = new double[]{x};
         for (SimpleTransformer simpleTransformer : simpleTransformers) {
-            x = simpleTransformer.transformX(x);
+            vec1D[0] = simpleTransformer.transformX(vec1D[0]);
         }
         for (DetailedTransformer detailedTransformer : detailedTransformers) {
-            x = detailedTransformer.transform(x);
+            detailedTransformer.transform1D(vec1D);
         }
-        NR output = source.evaluateNoiseResult(x);
+        NR output = source.evaluateNoiseResult(vec1D[0]);
         for (NoiseModifier modifier : modifiers) {
             output.setValue(modifier.apply(output.getValue()));
         }
@@ -45,17 +43,16 @@ public class JNoiseDetailed<NR extends NoiseResult> extends JNoise implements Ex
     }
 
     @Override
-    public NR evaluateNoiseResult(double x, double y) {
+    public NR evaluateNoiseResult(final double x, final double y) {
+        double[] vec2D = new double[]{x, y};
         for (SimpleTransformer simpleTransformer : simpleTransformers) {
-            x = simpleTransformer.transformX(x);
-            y = simpleTransformer.transformY(y);
+            vec2D[0] = simpleTransformer.transformX(vec2D[0]);
+            vec2D[1] = simpleTransformer.transformY(vec2D[1]);
         }
         for (DetailedTransformer detailedTransformer : detailedTransformers) {
-            Vector2D vector2D = detailedTransformer.transform(x, y);
-            x = vector2D.x();
-            y = vector2D.y();
+            detailedTransformer.transform2D(vec2D);
         }
-        NR output = source.evaluateNoiseResult(x, y);
+        NR output = source.evaluateNoiseResult(vec2D[0], vec2D[1]);
         for (NoiseModifier modifier : modifiers) {
             output.setValue(modifier.apply(output.getValue()));
         }
@@ -63,19 +60,17 @@ public class JNoiseDetailed<NR extends NoiseResult> extends JNoise implements Ex
     }
 
     @Override
-    public NR evaluateNoiseResult(double x, double y, double z) {
+    public NR evaluateNoiseResult(final double x, final double y, final double z) {
+        double[] vec3D = new double[]{x, y, z};
         for (SimpleTransformer simpleTransformer : simpleTransformers) {
-            x = simpleTransformer.transformX(x);
-            y = simpleTransformer.transformY(y);
-            z = simpleTransformer.transformZ(z);
+            vec3D[0] = simpleTransformer.transformX(vec3D[0]);
+            vec3D[1] = simpleTransformer.transformY(vec3D[1]);
+            vec3D[2] = simpleTransformer.transformZ(vec3D[2]);
         }
         for (DetailedTransformer detailedTransformer : detailedTransformers) {
-            Vector3D vector3D = detailedTransformer.transform(x, y, z);
-            x = vector3D.x();
-            y = vector3D.y();
-            z = vector3D.z();
+            detailedTransformer.transform3D(vec3D);
         }
-        NR output = source.evaluateNoiseResult(x, y, z);
+        NR output = source.evaluateNoiseResult(vec3D[0], vec3D[1], vec3D[2]);
         for (NoiseModifier modifier : modifiers) {
             output.setValue(modifier.apply(output.getValue()));
         }
@@ -83,21 +78,18 @@ public class JNoiseDetailed<NR extends NoiseResult> extends JNoise implements Ex
     }
 
     @Override
-    public NR evaluateNoiseResult(double x, double y, double z, double w) {
+    public NR evaluateNoiseResult(final double x, final double y, final double z, final double w) {
+        double[] vec4D = new double[]{x, y, z, w};
         for (SimpleTransformer simpleTransformer : simpleTransformers) {
-            x = simpleTransformer.transformX(x);
-            y = simpleTransformer.transformY(y);
-            z = simpleTransformer.transformZ(z);
-            w = simpleTransformer.transformW(w);
+            vec4D[0] = simpleTransformer.transformX(vec4D[0]);
+            vec4D[1] = simpleTransformer.transformY(vec4D[1]);
+            vec4D[2] = simpleTransformer.transformZ(vec4D[2]);
+            vec4D[3] = simpleTransformer.transformZ(vec4D[2]);
         }
         for (DetailedTransformer detailedTransformer : detailedTransformers) {
-            Vector4D vector4D = detailedTransformer.transform(x, y, z, w);
-            x = vector4D.x();
-            y = vector4D.y();
-            z = vector4D.z();
-            w = vector4D.w();
+            detailedTransformer.transform4D(vec4D);
         }
-        NR output = source.evaluateNoiseResult(x, y, z, w);
+        NR output = source.evaluateNoiseResult(vec4D[0], vec4D[1], vec4D[2], vec4D[3]);
         for (NoiseModifier modifier : modifiers) {
             output.setValue(modifier.apply(output.getValue()));
         }

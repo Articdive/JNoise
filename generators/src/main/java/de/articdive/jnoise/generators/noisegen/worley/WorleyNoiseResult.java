@@ -2,7 +2,6 @@ package de.articdive.jnoise.generators.noisegen.worley;
 
 import de.articdive.jnoise.core.api.modifiers.NoiseModifier;
 import de.articdive.jnoise.core.api.noisegen.NoiseResult;
-import de.articdive.jnoise.core.util.vectors.Vector;
 import org.jspecify.annotations.Nullable;
 
 /**
@@ -10,12 +9,12 @@ import org.jspecify.annotations.Nullable;
  *
  * @author Articdive
  */
-public final class WorleyNoiseResult<V extends Vector> implements NoiseResult {
-    private final @Nullable V closestPoint;
+public final class WorleyNoiseResult implements NoiseResult {
+    private final @Nullable double[] closestPoint;
     private final double unmodifiedValue;
     private double value;
 
-    WorleyNoiseResult(double value, @Nullable V closestPoint) {
+    WorleyNoiseResult(double value, @Nullable double[] closestPoint) {
         this.unmodifiedValue = value;
         this.value = value;
         this.closestPoint = closestPoint;
@@ -53,10 +52,10 @@ public final class WorleyNoiseResult<V extends Vector> implements NoiseResult {
     /**
      * Returns the feature point to the specified noise coordinates.
      *
-     * @return {@link V} containing the closest point.
+     * @return array of double representing the location vector of the closest point.
      */
     @Nullable
-    public V getClosestPoint() {
+    public double[] getClosestPoint() {
         return closestPoint;
     }
 }

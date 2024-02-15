@@ -1,7 +1,6 @@
 package de.articdive.jnoise.transformers.scale;
 
 import de.articdive.jnoise.core.api.transformers.SimpleTransformer;
-import de.articdive.jnoise.core.util.vectors.Vector4D;
 import org.jspecify.annotations.NullMarked;
 
 /**
@@ -11,20 +10,16 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 public final class ScaleTransformer implements SimpleTransformer {
-    private final Vector4D scale;
+    private final double scaleX;
+    private final double scaleY;
+    private final double scaleZ;
+    private final double scaleW;
 
     /**
      * @param scale scale value for all dimensions.
      */
     public ScaleTransformer(double scale) {
         this(scale, scale, scale, scale);
-    }
-
-    /**
-     * @param scaleVector Vector containing the scale value for all dimensions.
-     */
-    public ScaleTransformer(Vector4D scaleVector) {
-        this(scaleVector.x(), scaleVector.y(), scaleVector.z(), scaleVector.w());
     }
 
     /**
@@ -37,26 +32,29 @@ public final class ScaleTransformer implements SimpleTransformer {
         if (scaleX == 0 || scaleY == 0 || scaleZ == 0 || scaleW == 0) {
             throw new IllegalArgumentException("A scale value must be a non-zero value");
         }
-        this.scale = new Vector4D(scaleX, scaleY, scaleZ, scaleW);
+        this.scaleX = scaleX;
+        this.scaleY = scaleY;
+        this.scaleZ = scaleZ;
+        this.scaleW = scaleW;
     }
 
     @Override
     public double transformX(double x) {
-        return x * scale.x();
+        return x * scaleX;
     }
 
     @Override
     public double transformY(double y) {
-        return y * scale.y();
+        return y * scaleY;
     }
 
     @Override
     public double transformZ(double z) {
-        return z * scale.z();
+        return z * scaleZ;
     }
 
     @Override
     public double transformW(double w) {
-        return w * scale.w();
+        return w * scaleW;
     }
 }

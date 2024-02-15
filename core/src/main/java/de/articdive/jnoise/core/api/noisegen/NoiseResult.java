@@ -1,10 +1,8 @@
 package de.articdive.jnoise.core.api.noisegen;
 
-import de.articdive.jnoise.core.util.vectors.Vector;
-
 /**
  * Interface that denotes a noise result, which is used to wrap the results of an entire noise generation step.
- * Useful when there are multiple result types, i.e. not only a double but e.g. a {@link Vector}.
+ * Useful when there are multiple result types, i.e. not only a double but e.g. a vector.
  *
  * @author Articdive
  */

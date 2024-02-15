@@ -117,15 +117,15 @@ All Noise Implementations support 1D, 2D, 3D and 4D noise.
 Example: Getting 2D Perlin-Noise:
 
 ```java
-    // 1D Noise at x = 1.0 and y = 0.5 in a 2D plane.
-    return perlinLinear.evaluateNoise(1.0,0.5);
+// 1D Noise at x = 1.0 and y = 0.5 in a 2D plane.
+return perlinLinear.evaluateNoise(1.0,0.5);
 ```
 
 Example: Getting 3D Perlin-Noise:
 
 ```java
-    // 1D Noise at x = 1.0, y = 0.5 and z = 1.22 in a 3D plane.
-    return perlinLinear.evaluateNoise(1.0,0.5,1.22);
+// 1D Noise at x = 1.0, y = 0.5 and z = 1.22 in a 3D plane.
+return perlinLinear.evaluateNoise(1.0,0.5,1.22);
 ```
 
 ### Advantages of the JNoise Pipeline
@@ -264,7 +264,7 @@ differentely. By using the method evaluateNoiseResult(...) defined in JNoiseDeta
 containing more than just the numeric value.
 
 ```java
-public JNoiseDetailed<WorleyNoiseResult<Vector>>worleyNoise=JNoise.newBuilder().worley(WorleyNoiseGenerator.newBuilder().[...].build()).buildDetailed();
+public JNoiseDetailed<WorleyNoiseResult> worleyNoise=JNoise.newBuilder().worley(WorleyNoiseGenerator.newBuilder().[...].build()).buildDetailed();
     {
     worleyNoise.evaluateNoiseResult(x,y).getClosestPoint();
     worleyNoise.evaluateNoiseResult(x,y).getValue()
