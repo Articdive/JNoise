@@ -292,4 +292,4 @@ See [the contributing file](CONTRIBUTING.md)!
 
 ## License
 
-[GNU General Public License v3.0 or later © Articdive ](../LICENSE)
+[MIT License © Articdive ](../LICENSE)

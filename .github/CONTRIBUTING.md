@@ -19,7 +19,7 @@
 * Feel free to do so! Just make sure to conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification when editing the README.md.
 
 ## General Contribution Rules
-* By contributing to the JNoise project your code/contribution will be licensed under the [GNU GPL v3.0](../LICENSE) license.
+* By contributing to the JNoise project your code/contribution will be licensed under the [MIT License](../LICENSE) license.
 * Exempt from this rule are the actual algorithms e.g. OpenSimplex Noise, they must keep their original licenses.
 
 JNoise is a community project. We encourage you to contribute! :)
